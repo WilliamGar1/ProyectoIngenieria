@@ -1,46 +1,47 @@
-
+//conexion base de datos
 const MySQLBD = require("../config/mysql.config");
+//encripter
 const bcrypt = require('bcrypt');
-
-//get token
+//get token_Config
 const {getToken,getTokenData} = require('../config/jwt.config');
-//mailconfig
+//mailconfig_Config
 const {getTemplate,sendEmailVerify} = require('../config/email.config');
 
 
 const insertNewUser = async (req, res) => {
 
+//CAPTURA DE DATOS
+const {nombre,apellido,email,passw,municipio,departamento,telefono,direccion} = req.body;
 
-const {id,user,pass} = req.body;
+ // INICIAR CONEXION
+const conectBD = MySQLBD.conectar();
+    //CONSULTA
+    conectBD.query(`SELECT * FROM users WHERE email = '${email}'`, (err, oldUser) => {
 
-  
-    const conectBD = MySQLBD.conectar();
-    conectBD.query(`SELECT * FROM users WHERE id = ${id}`, (err, oldUser) => {
-
+        //COMPROBAR SI EXISTE USUSARIO
         if (!oldUser.length) {
 
-            bcrypt.hash(pass, 10, (err, hashedPassword) => {
+            //ENCRIPTAR CONTRASEÑA
+            bcrypt.hash(passw, 10, (err, hashedPassword) => {
 
                 if (err) {
                     res.send('Error de encriptado');
-                  
-
-
                 }
                 else {
-                    conectBD.query(`INSERT INTO users(username,passw) VALUES ("${user}","${hashedPassword}")`, (err, result) => {
+                    //INSERCION EN LA BASE DE DATOS
+                    conectBD.query(`INSERT INTO users(nombre,apellido,email,passw,municipio,departamento,telefono,direccion) VALUES 
+                    ("${nombre}","${apellido}","${email}","${hashedPassword}","${municipio}","${departamento}","${telefono}","${direccion}")`, (err, result) => {
 
+                           //GENERAR TOKEN DE IDENTIFICACION
+                             const token = getToken(email);
 
-                           //generar token
-                             const token = getToken(user);
+                           //TEMPLATE -> ESTRUCUTRA DEL CORREO DE CONFIRMACION
+                            const template = getTemplate(nombre+' '+apellido,token);
 
-                           //template
-                            const template = getTemplate(user,token);
+                            //ENVIAR EMAIL
+                            sendEmailVerify(email,'PREUBA DE ENVIO',template);
 
-                            //enviar email
-                            sendEmailVerify(user,'PREUBA DE ENVIO',template);
-
-                        res.send('save');
+                        res.send('save user');
                    
 
                     });
@@ -55,10 +56,8 @@ const {id,user,pass} = req.body;
 
 
         } else {
-
-
-
-            res.send('username: ' + oldUser[0].username);
+            console.log(oldUser[0]);
+            res.send('El usuario con el correo <' + oldUser[0].email+'> ya existe');
             console.log("Close Connection");
             conectBD.end();
 
@@ -67,6 +66,61 @@ const {id,user,pass} = req.body;
 
     });
 };
+
+
+const verifyUser = async (req, res) => {
+
+     //OPTENER TOKEN
+     const token = req.params.token;
+     //VERIFICAR DATA
+     const data = getTokenData(token);
+
+     if(!data){
+        res.status(500).send('Error en data');
+        console.log("Error en data");
+      };
+
+      //OPTENER CORREO DEL USUARIO
+      const email = data.data;
+
+      //CONECTAR CON BD
+      const conectBD = MySQLBD.conectar();
+      //CONSULTA DE BUSQUEDA
+      conectBD.query(`SELECT * FROM users WHERE email = '${email}'`, (err, User) => {
+
+     
+        //COMPROBAR SI EXISTE EL USUARIO
+        if (!User.length) {
+  
+            res.send('Usuario no existe');
+            console.log("Close Connection");
+            conectBD.end();
+
+        }else{
+            //CONSULTA DE VERIFICACION
+            conectBD.query(`UPDATE users SET estado = 'VERIFICADO' WHERE email = '${User[0].email}'`, (err, result) => {
+
+                if(err){
+            
+                    res.send('ERROR AL VERIFICAR');
+
+                }
+                else{
+                    console.log({"Usuario":User[0],"Ahora":"VERIFICADO"});
+                    res.send('VERIFICADO');
+                };
+
+                console.log("Close Connection");
+                conectBD.end();
+
+            });
+        }
+
+      });
+    
+      
+};
+
 
 const LoginUser = async (req, res) => {
 
@@ -104,54 +158,6 @@ const LoginUser = async (req, res) => {
 
 
 };
-
-const verifyUser = async (req, res) => {
-
-     //token
-     const token = req.params.token;
-     //verficar data
-     const data = getTokenData(token);
-
-     if(!data){
-        res.status(500).send('Error en data');
-        console.log("Error en data");
-      };
-
-      const email = data.data;
-
-      const conectBD = MySQLBD.conectar();
-      conectBD.query(`SELECT * FROM users WHERE username = '${email}'`, (err, User) => {
-
-    
-        if (!User.length) {
-  
-            res.send('Usuario no existe');
-            console.log("Close Connection");
-            conectBD.end();
-
-        }else{
-            conectBD.query(`UPDATE users SET estado = 'VERIFICADO' WHERE id = ${User[0].id}`, (err, result) => {
-
-                if(err){
-                    res.send('ERRO AL VERIFICAR');
-
-                }
-                else{
-
-                    res.send('verificado');
-                };
-
-                console.log("Close Connection");
-                conectBD.end();
-
-            });
-        }
-
-      });
-    
-      
-};
-
 
 module.exports = {
     insertNewUser,
