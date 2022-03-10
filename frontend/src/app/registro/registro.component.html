@@ -1,7 +1,7 @@
 <h1 class="text-center">Crear Cuenta</h1>
 <br>
 <br>
-<form class="row g-3">
+<form class="row g-3" method="POST">
     <div class="mb-4 row">
         <div class="col-md-2">
             <label for="nombre" class="col-sm-1 col-form-label">Nombre</label>
@@ -13,7 +13,7 @@
             <label for="apellido" class="col-sm-1 col-form-label">Apellido</label>
         </div>
         <div class="col-md-4">
-            <input type="text" class="form-control" id="apellido" value="" required>
+            <input type="text" class="form-control" id="apellido" [formControl] = "apellido" value="" required>
         </div>
     </div>
     <div class="mb-4 row">
@@ -22,7 +22,7 @@
         </div>
         <div class="col-md-4">
             <div class="input-group">
-                <input type="text" class="form-control" id="correo" aria-describedby="correo" required>
+                <input type="text" class="form-control" id="correo" [formControl] = "correo" aria-describedby="correo" required>
                 <span class="input-group-text" id="correo">@</span>
             </div>
         </div>
@@ -30,23 +30,25 @@
             <label for="password" class="col-sm-1 col-form-label">Contraseña</label>
         </div>
         <div class="col-md-4">
-            <input type="password" class="form-control" id="password" value="" required>
+            <input type="password" class="form-control" id="password" [formControl] = "password" value="" required>
         </div>
     </div>
     <div class="mb-4 row">
         <div class="col-md-2">
-            <label for="ciudad" class="form-label">Municipio</label>
+            <label for="municipio" class="form-label">Municipio</label>
         </div>
         <div class="col-md-4">
-            <input type="text" class="form-control" id="ciudad" required>
+            <input type="text" class="form-control" id="municipio" [formControl] = "municipio" required>
         </div>
         <div class="col-md-2">
             <label for="departamento" class="form-label">Departamento</label>
         </div>
         <div class="col-md-4">
-            <select class="form-select" id="departamento" required>
+            <select class="form-select" id="departamento" [formControl] = "departamento" required>
                 <option selected disabled value="">Elegir...</option>
-                <option>...</option>
+                <option>Comayagua</option>
+                <option>Francisco Morazan</option>
+                <option>Yoro</option>
             </select>
         </div>
     </div>
@@ -55,7 +57,7 @@
             <label for="telefono" class="form-label">Telefono</label>
         </div>
         <div class="col-md-4">
-            <input type="text" class="form-control" id="telefono" required>
+            <input type="text" class="form-control" id="telefono" [formControl] = "telefono" required>
         </div>
 
         <div class="col-md-2">
@@ -63,7 +65,7 @@
         </div>
 
         <div class="col-md-4">
-            <textarea class="form-control" id="direccion" rows="2"></textarea>
+            <textarea class="form-control" id="direccion" rows="2" [formControl] = "direccion"></textarea>
         </div>
     </div>
     
@@ -75,7 +77,8 @@
             </label>
         </div>
     </div>
-    <div class="col-12 position-relative mb-4">
-        <button class="btn btn-dark position-absolute top-100 start-50 translate-middle" type="submit">Inscribirse</button>
-    </div>
+    
 </form>
+<div class="col-12 position-relative mb-4">
+    <button class="btn btn-dark position-absolute top-100 start-50 translate-middle" (click)="guardar()">Inscribirse</button>
+</div>
