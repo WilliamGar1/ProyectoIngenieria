@@ -21,17 +21,19 @@ router.get('/',(req,res)=>{
 
 router.get('/angular',(req,res)=>{
 
-  nodeS = { server :"Node_Angular GET " };
-
-   res.json(nodeS);
+  nodeS = { server :"Node_Angular -> GET " };
+  console.log(nodeS);
+   res.send(nodeS);
   
 
 });
 
 router.post('/angular',(req,res)=>{
 
+  nodeS = { respuesta :"Node_Angular -> POST " };
   console.log(req.body);
-  
+  console.log(nodeS);
+  res.send(nodeS);
 
 });
 

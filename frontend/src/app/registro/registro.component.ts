@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { NodeServerService } from 'src/app/services/node-server.service';
+
 
 @Component({
   selector: 'app-registro',
@@ -8,17 +10,49 @@ import { FormControl } from '@angular/forms';
 })
 export class RegistroComponent implements OnInit {
 
-  nombre = new FormControl('David');
+  user={};
+  nodeRES = '[vacio]';
 
+  nombre = new FormControl();
+  apellido= new FormControl();
 
+  
 
-  constructor() { }
+  constructor(private _nodeServer: NodeServerService ) { }
 
-  guardar(){
+  postPrueba(){
 
+    this.user ={
+      nombre: this.nombre.value,
+      apellido: this.apellido.value
+     };
+
+     console.log(this.user);
+
+     this._nodeServer.postNodeServer(this.user).subscribe(result=>{
+
+      console.log(result);
+      this.nodeRES ='\n ' + result.respuesta;
+
+     },err =>console.log(err));
+  
+  };
+
+  getPrueba(){
+
+    this._nodeServer.getNodeServer().subscribe(data=>{
+      console.log(data);
+      this.nodeRES ='\n ' + data.server;
+    },err =>console.log(err));
   }
+
 
   ngOnInit(): void {
+
+   this.getPrueba();
   }
+
+
+
 
 }
