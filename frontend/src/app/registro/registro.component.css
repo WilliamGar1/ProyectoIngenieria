@@ -1,0 +1,11 @@
+input,
+select,
+textarea,
+button{
+    border: 1px solid black;
+    border-radius: 0;
+}
+
+button{
+    width: 150px;
+}
