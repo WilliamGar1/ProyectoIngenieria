@@ -13,6 +13,7 @@ import { InicioComponent } from './components/inicio/inicio.component';
 import { LoginComponent } from './components/login/login.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RegistroComponent } from './components/registro/registro.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { RegistroComponent } from './components/registro/registro.component';
   ],
   imports: [
     BrowserModule,
-    app_routing
+    app_routing,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

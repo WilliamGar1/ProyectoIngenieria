@@ -9,6 +9,8 @@ import { FormControl } from '@angular/forms';
 })
 export class RegistroComponent implements OnInit {
 
+  nombre = new FormControl('David');
+
   constructor() { }
 
   ngOnInit(): void {

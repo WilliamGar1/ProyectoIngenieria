@@ -7,7 +7,7 @@
             <label for="nombre" class="col-sm-1 col-form-label">Nombre</label>
         </div>
         <div class="col-md-4">
-            <input type="text" class="form-control" id="nombre" value="" required>
+            <input type="text" class="form-control" id="nombre" [formControl] = "nombre" value="" required>
         </div>
         <div class="col-md-2">
             <label for="apellido" class="col-sm-1 col-form-label">Apellido</label>
