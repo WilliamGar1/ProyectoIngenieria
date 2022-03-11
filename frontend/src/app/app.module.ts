@@ -7,7 +7,7 @@ import {HttpClientModule} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RegistroComponent } from './registro/registro.component';
+import { RegistroComponent } from './components/registro/registro.component';
 
 //Ruta
 import { app_routing } from './app.routes';
@@ -34,8 +34,8 @@ import { FooterComponent } from './components/footer/footer.component';
     AppRoutingModule,
     ReactiveFormsModule,
     //
-    HttpClientModule
-    app_routing,
+    HttpClientModule,
+    app_routing
   ],
   providers: [],
   bootstrap: [AppComponent]

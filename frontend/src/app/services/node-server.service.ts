@@ -7,7 +7,9 @@ import { Observable } from 'rxjs';
 })
 export class NodeServerService {
   
-  url='http://localhost:3000/angular/';
+  url='http://localhost:3000/insertNewUser/';
+  //PROXIMAMENTE
+  verifyUrl='http://localhost:3000/confirm/:token';
 
   constructor(private http:HttpClient) { }
 
