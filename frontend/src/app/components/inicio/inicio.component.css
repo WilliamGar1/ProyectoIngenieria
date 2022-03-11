@@ -1,0 +1,20 @@
+.container-fluid{
+    color: #9a6b5b;
+    border-top: 2px  solid;
+    border-right: 2px solid;
+}
+#imagenI{
+    border-radius: 100px;
+}
+
+.carrusel{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        align-content: stretch;
+    }
+#letra{
+    color:black;
+}
