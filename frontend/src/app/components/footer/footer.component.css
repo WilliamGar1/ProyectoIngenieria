@@ -1,0 +1,29 @@
+.footer{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+        align-items: flex-end;
+        align-content: stretch;
+        margin-top: 40px;
+        margin-bottom: 10px;
+}
+
+#redes{
+    font-size:  50px;
+    padding: 10px;
+    color: #247EF1;
+}
+#redes1{
+    font-size:  50px;
+    padding: 10px;
+    color: #BA468C;
+}
+#redes2{
+    font-size:  50px;
+    padding: 10px;
+    color: #247EF1;
+}
+p{
+    color: #9a6b5b;
+}
