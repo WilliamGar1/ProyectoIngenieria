@@ -39,7 +39,7 @@ const conectBD = MySQLBD.conectar();
                             const template = getTemplate(nombre+' '+apellido,token);
 
                             //ENVIAR EMAIL
-                            sendEmailVerify(email,'PREUBA DE ENVIO',template);
+                         sendEmailVerify(email,'PREUBA DE ENVIO',template);
 
                         res.send('save user');
                    
