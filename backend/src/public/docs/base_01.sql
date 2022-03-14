@@ -1,3 +1,17 @@
+use bavvsia83xxkjbvtnugt;
+
+
+DROP TABLE IF EXISTS  Telefonos;
+DROP TABLE IF EXISTS  ImagenPerfilUsuario;
+DROP TABLE IF EXISTS DireccionesUsuarios;
+DROP TABLE IF EXISTS DatosInicioSesion;
+DROP TABLE IF EXISTS Usuarios;
+DROP TABLE IF EXISTS Direcciones;
+DROP TABLE IF EXISTS Municipios;
+DROP TABLE IF EXISTS Departamentos;
+
+
+
 CREATE TABLE Departamentos(
 Id INTEGER PRIMARY KEY,
 numero VARCHAR(2) NOT NULL,
@@ -29,7 +43,7 @@ nombre VARCHAR(30) NOT NULL,
 apellido VARCHAR(30) NOT NULL,
 email VARCHAR(30) UNIQUE ,
 estadoHabilitacion BOOLEAN DEFAULT FALSE,
-contrato BOOL NOT NULL,
+contrato  BOOLEAN NOT NULL,
 creacion TIMESTAMP DEFAULT NOW(),
 actualizacion TIMESTAMP DEFAULT NOW() ON UPDATE NOW()
 );
@@ -42,12 +56,17 @@ estado  BOOLEAN DEFAULT TRUE
 );
 
 CREATE TABLE DireccionesUsuarios(
-Id INTEGER PRIMARY KEY,
+Id INTEGER  AUTO_INCREMENT PRIMARY KEY,
 personaId INTEGER NOT NULL REFERENCES Usuarios(Id),
 direccionId INTEGER NOT NULL REFERENCES Direcciones(Id),
 estado BOOL DEFAULT TRUE
 );
 
+CREATE TABLE Telefonos(
+Id INTEGER  AUTO_INCREMENT  PRIMARY KEY,
+personaId INTEGER NOT NULL REFERENCES Persona(Id),
+telefono VARCHAR(16) NOT NULL
+);
 
 CREATE TABLE ImagenPerfilUsuario(
 Id INTEGER  AUTO_INCREMENT PRIMARY KEY,
@@ -59,7 +78,7 @@ personaId INTEGER NOT NULL REFERENCES Usuarios(Id)
 
 --reserva
 
-CREATE TABLE users(
+CREATE TABLE IF NOT EXISTS users(
  id  int auto_increment PRIMARY KEY,
  nombre         varchar(30)   ,
  apellido      varchar(30)   ,
@@ -72,3 +91,19 @@ CREATE TABLE users(
  estado  enum('SINVERIFICAR','VERIFICADO','BANEADO')  DEFAULT 'SINVERIFICAR'
 
 );
+
+
+CREATE TABLE  IF NOT EXISTS test(
+     id  int auto_increment PRIMARY KEY,
+     n varchar(10)
+);
+
+
+SELECT * FROM Telefonos;
+SELECT * FROM ImagenPerfilUsuario;
+SELECT * FROM DireccionesUsuarios;
+SELECT * FROM DatosInicioSesion;
+SELECT * FROM Usuarios;
+SELECT * FROM Direcciones;
+SELECT * FROM Municipios;
+SELECT * FROM Departamentos;

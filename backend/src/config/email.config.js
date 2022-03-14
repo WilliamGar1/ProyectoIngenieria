@@ -49,7 +49,7 @@ var transporter = nodemailer.createTransport(({
     }
 };
 
-  const getTemplate = (name,token)=>{
+  const getVerifyTemplate = (name,token)=>{
       return `
       <!DOCTYPE html>
       <html lang="en">
@@ -61,7 +61,6 @@ var transporter = nodemailer.createTransport(({
       </head>
       <body>
           <div class="container" id="email_content">
-          <img src=" https://cdn.pixabay.com/photo/2016/10/04/23/52/cow-1715829_960_720.jpg" width="180" height="200">
           <h2>Hola ${name}</h2>
       <p>Para confirmar tu cuenta , ingresa al siguiente enlace</p>
       <a href="http://localhost:3000/confirm/${token}"> confirmar cuenta </a>
@@ -77,5 +76,5 @@ var transporter = nodemailer.createTransport(({
   module.exports ={
       sendEmailVerify,
       sendEmailPdf,
-      getTemplate
+      getVerifyTemplate
   };
