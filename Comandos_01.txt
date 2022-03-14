@@ -1,0 +1,72 @@
+-- npm run dev ->para ejecutar todo el proyecto
+
+EXTRA_CADENA DE CONEXION
+    mysql -h bavvsia83xxkjbvtnugt-mysql.services.clever-cloud.com -u umobi57mt7ynmn2t -p
+    tYpFy9XU62D8Mam2PC9p
+
+    use bavvsia83xxkjbvtnugt;
+    select * from users;
+
+Node_Server
+- Crear archivo ".gitignore"
+    node_modules ->en el interior
+-Inicializar
+    npm init -y
+-Incluir en package.json
+    "scripts": {
+
+    "dev": "nodemon src/index",
+    "start": " src/index"
+
+     }
+
+-Modulos requeridos
+    npm i express cors ejs bcrypt multer jsonwebtoken nodemailer  mysql  pdfmake
+    npm express-session -> en caso de administrar las sessiones en el backend
+     
+        Nota: "cors" es el modulo necesario para la integracion con angular en el frontend
+
+-Arrancar servidor 
+npm run dev -> correr en local
+npm run start -> alojamiento en servidores
+
+
+Angular_Cliente
+-Intalar si no lo tienes
+    npm install -g @angular/cli
+
+-Nuevo proyecto
+ng new Angular_Cliente -> creara un carpeta con el proyecto
+
+-Iniciar
+    ng serve -> http://localhost:4200/
+
+-Crear componenetes
+    ng g c components/index_comun -> la carpeta components se crea dentro de app previamente, se genera un carpeta con el nombre de componenetes
+
+-Crear Servicio
+    ng g s services/Node_Server -> igual a componenete, creo un servicio para conectar
+
+-Integrar al backend
+    app.module.ts
+           //Integracion con en backend Node Express
+        import {HttpClientModule} from '@angular/common/http';
+
+        imports: [
+  
+        //Integracion con en backend Node Express
+            HttpClientModule
+         ]
+
+-Modulo para iniciar varios servidores a la vez
+    npm i concurrently 
+- carpetaPrincipal npm init  -> en la carpeta que contine frontend y backend
+ "scripts": {
+    "client": "cd frontend && npm run start",
+    "start": "concurrently \" backend/src/index.js  \" \" npm run client \"  ",
+    "dev": "concurrently \" nodemon backend/src/index.js  \" \" npm run client \"  "
+  }
+
+
+-- cabiar repositorio
+$ git remote set-url origin https://github.com/USERNAME/REPOSITORY.git
