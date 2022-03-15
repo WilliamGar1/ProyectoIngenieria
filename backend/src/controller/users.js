@@ -11,8 +11,7 @@ const {getVerifyTemplate,sendEmailVerify} = require('../config/email.config');
 const insertNewUser = async (req, res) => {
 
 //CAPTURA DE DATOS,saque municipio
-const {nombre,apellido,email,passw,departamento,telefono,direccion} = req.body;
-const municipio =1;
+const {nombre,apellido,email,passw,municipio,telefono,direccion} = req.body;
 const contrato = 1;
  // INICIAR CONEXION
 const conectBD = MySQLBD.conectar();
@@ -76,10 +75,11 @@ conectBD.query(`SELECT * FROM Usuarios WHERE email = '${email}'`, (err, oldUser)
   
                                     //ENVIAR EMAIL
                                     sendEmailVerify(email,'PREUBA DE ENVIO',template);
+                                    res.send('Usuario insertado');
 
                                     }
-                                    res.send('Usuario insertado');
-                                    console.log("Close Connection_Usuario_Insertado");
+                                    
+                                    console.log("Close Connection");
                                     conectBD.end();
                                 });
                                 }
@@ -92,38 +92,6 @@ conectBD.query(`SELECT * FROM Usuarios WHERE email = '${email}'`, (err, oldUser)
                 });
                 }
             });
-
-            /*/ENCRIPTAR CONTRASEÑA
-             bcrypt.hash(passw, 10, (err, hashedPassword) => {
-
-                if (err) {
-                    res.send('Error de encriptado');
-                }
-                else {
-                    //INSERCION EN LA BASE DE DATOS
-                    conectBD.query(`INSERT INTO users(nombre,apellido,email,passw,municipio,departamento,telefono,direccion) VALUES 
-                    ("${nombre}","${apellido}","${email}","${hashedPassword}","${municipio}","${departamento}","${telefono}","${direccion}")`, (err, result) => {
-
-                           //GENERAR TOKEN DE IDENTIFICACION
-                             const token = getToken(email);
-
-                           //TEMPLATE -> ESTRUCUTRA DEL CORREO DE CONFIRMACION
-                            const template = getVerifyTemplate(nombre+' '+apellido,token);
-
-                            //ENVIAR EMAIL
-                            sendEmailVerify(email,'PREUBA DE ENVIO',template);
-
-                        res.send('save user');
-                   
-
-                    });
-
-                }
-
-                console.log("Close Connection");
-                conectBD.end();}); 
-*/
-
 
 
         } else {
@@ -215,9 +183,10 @@ const LoginUser = async (req, res) => {
             bcrypt.compare(contrasenia, ContraseniaRes[0].contrasenia, (err, result) => {
 
                 if (result) {
-                    res.send('contraseña correcta');
+                    res.send({"mensaje":"contraseña correcta","usuario":UsuarioRes[0]});
 
                 }else {
+                 
                     res.send('contraseña incorrecta');
                 };
 
