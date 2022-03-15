@@ -9,7 +9,7 @@
         <label for="password" class="col-sm-1 col-form-label">Contraseña</label>
         <input type="password" class="form-control" id="password" [formControl] = "passw" value="" required>
     </div>
-    <a class="nav-link" href="#">Restaurar Contraseña</a>
+    <a class="nav-link" [routerLink]="['recuperar']">Restaurar Contraseña</a>
     
     <a class="nav-link" [routerLink]="['registro']">¿No tiene una cuanta?</a>
 
