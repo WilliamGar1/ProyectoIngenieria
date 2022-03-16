@@ -17,6 +17,13 @@ router.post('/log', users.LoginUser);
 
 router.get('/confirm/:token',users.verifyUser);
 
+//RESET PASSWORD
+router.post('/resetPasswordSolicitud',users.resetPasswordSolicitud);
+
+router.get('/resetPasswordForm/:token',users.resetPasswordForm);
+
+//->RUTA REUTILIZADA PARA GUARDAR LA CONTRASEÑA, NO DEBERIA DAR PROBLEMAS
+router.post('/resetPasswordForm',users.resetPasswordGuardar);
 
 //DIRECCIONES
 router.get('/datosregistro',direcciones.getAll_departamentos_municipios);

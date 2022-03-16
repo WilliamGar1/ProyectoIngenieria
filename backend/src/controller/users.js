@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 //get token_Config
 const {getToken,getTokenData} = require('../config/jwt.config');
 //mailconfig_Config
-const {getVerifyTemplate,sendEmailVerify} = require('../config/email.config');
+const {getVerifyTemplate,sendEmailVerify,sendEmailSolicitudCambioPass,getCambioPassTemplate} = require('../config/email.config');
 
 
 const insertNewUser = async (req, res) => {
@@ -202,6 +202,91 @@ const LoginUser = async (req, res) => {
 
 };
 
+//RESET PASSWORD
+const  resetPasswordSolicitud = async (req, res) => {
+    const {email} = req.body;
+
+    const conectBD = MySQLBD.conectar();
+    //CONSULTA SI EL USUSARIO EXISTE
+    conectBD.query(`SELECT * FROM Usuarios WHERE email = '${email}'`, (err, User) => {
+        if (!User.length) {
+  
+            res.send('Usuario no existe');
+            console.log("Close Connection");
+            conectBD.end();
+
+        }else{
+
+            //GENERAR TOKEN DE IDENTIFICACION
+            const token = getToken(email);
+
+            //TEMPLATE -> ESTRUCUTRA DEL CORREO DE CONFIRMACION
+             const template = getCambioPassTemplate(User[0].nombre+' '+User[0].apellido,token);
+
+            //ENVIAR EMAIL
+            sendEmailSolicitudCambioPass(email,'CAMBIO DE CONTRASEÑA',template);
+
+            res.send({mensaje:'SOLICITUD DE CAMBIO DE CONTRASEÑA ENVIADA'});
+
+
+        }
+    }); 
+
+    
+    console.log("Close Connection");
+     conectBD.end();
+
+};
+
+//->>>>>>>>>>>DAVID
+const  resetPasswordForm = async (req, res) => {
+//NOTA EN ESTA RUTA SE COMPRUEBA EL USUSARIO MEDIANTE EL EMAIL, NO ESTA TERMINADA PORQUE NO ES MI PARTE
+    //OPTENER TOKEN
+    const token = req.params.token;
+    //VERIFICAR DATA
+    const data = getTokenData(token);
+
+    if(!data){
+       res.status(500).send('Error en data');
+       console.log("Error en data");
+     };
+
+     //OPTENER CORREO DEL USUARIO
+     const email = data.data;
+
+     //CONECTAR CON BD
+     const conectBD = MySQLBD.conectar();
+     conectBD.query(`SELECT * FROM Usuarios WHERE email = '${email}'`, (err, User) => {
+
+        if (!User.length) {
+  
+            res.send('Usuario no existe');
+         
+
+        }else{
+  //ENVIO AL FORMULARIO FRONTEND,EN ESTE CASO EL ID e email
+        res.send({id:User[0].Id,email});
+        
+        }
+
+        console.log("Close Connection");
+        conectBD.end();
+     });
+   
+
+   
+ 
+
+};
+
+const  resetPasswordGuardar = async (req, res) => {
+
+    //NOTA SE NECESITA ALGO PARA REALIZAR LA BUSQUETA EN LA BASE DE DATOS, YA SEA ID DE USUSARIO O EMAIL
+    const { nuevaContrasenia, usuarioId} = req.body;
+     res.send('se debe capturar en encriptar la contraseña enviada del front end');
+};
+
+
 
 const test = async (req, res) => {
 
@@ -236,6 +321,9 @@ module.exports = {
     insertNewUser,
     LoginUser,
     verifyUser,
+    resetPasswordSolicitud,
+    resetPasswordForm,
+    resetPasswordGuardar,
     test
 };
 
