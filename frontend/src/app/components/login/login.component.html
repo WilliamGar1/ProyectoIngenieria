@@ -1,6 +1,6 @@
 <h1 class="text-center mb-4">Inicio de Sesión</h1>
 <h3 class="text-center mb-4">Inicie para continuar</h3>
-<form class="col-4">
+<form id="form">
     <div class="form-group">
         <label for="correo" class="col-sm-1 col-form-label">Correo</label>
         <input type="email" class="form-control" id="correo" [formControl] = "email" value="" required>
@@ -11,9 +11,7 @@
     </div>
     <a class="nav-link" [routerLink]="['recuperar']">Restaurar Contraseña</a>
     
-    <a class="nav-link" [routerLink]="['registro']">¿No tiene una cuanta?</a>
+    <a class="nav-link" [routerLink]="['registro']">¿No tiene una cuenta?</a>
 
-    <button class="btn btn-dark" type="submit">Inscribirse</button>
-
-    <div>prueba</div>
+    <button class="btn btn-dark" type="submit">Iniciar</button>
 </form>

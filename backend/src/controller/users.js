@@ -187,7 +187,7 @@ const LoginUser = async (req, res) => {
 
                 }else {
                  
-                    res.send('contraseña incorrecta');
+                    res.send({"mensaje":"contraseña incorrecta"});
                 };
 
                 console.log("Close Connection");

@@ -8,4 +8,30 @@ button{
 
 button{
     width: 150px;
+    font-size: 22px;
+}
+
+#form{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    align-content: stretch;
+}
+
+label{
+    font-size: 22px;
+}
+
+a {
+    color: #000000;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+a:hover {
+    color:#000000;
+    text-decoration: underline;
+    cursor:pointer;
 }
