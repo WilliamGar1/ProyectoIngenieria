@@ -19,6 +19,7 @@ import { InicioComponent } from './components/inicio/inicio.component';
 import { LoginComponent } from './components/login/login.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RecuperarComponent } from './components/recuperar/recuperar.component';
+import { FormContraseComponent } from './components/form-contrase/form-contrase.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { RecuperarComponent } from './components/recuperar/recuperar.component';
     LoginComponent,
     FooterComponent,
     RegistroComponent,
-    RecuperarComponent
+    RecuperarComponent,
+    FormContraseComponent
   ],
   imports: [
     BrowserModule,
