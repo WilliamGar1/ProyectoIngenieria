@@ -5,6 +5,7 @@ import { EmailValidator, FormControl, FormGroup, Validators } from '@angular/for
 import { NodeServerService } from 'src/app/services/node-server.service';
 import { passwordMatchValidator } from './passw.helper';
 import { esEmailValido } from './email.helper';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -42,14 +43,14 @@ export class RegistroComponent implements OnInit {
       apellido: usuario.apellido,
       email: usuario.email,
       passw: usuario.passw,
-      municipio: usuario.municipio,
+      municipio: `${usuario.municipio}`,
       departamento: usuario.departamento,
       telefono: usuario.telefono,
-      direccion: usuario.direccion
+      direccion: `${usuario.direccion}`
 
     };
 
-    //console.log(this.user);
+    console.log(JSON.stringify(this.user));
 
     if (this.registroForm.valid && this.emailValido) {
 
@@ -60,7 +61,11 @@ export class RegistroComponent implements OnInit {
   
       }, err => console.log(err));
     }else{
-      alert('Ingrese todos los datos necesarios');
+      Swal.fire(
+        'Error!',
+        'Por favor completar el registro con todo los datos',
+        'warning',
+      );
     }
 
 
@@ -85,15 +90,15 @@ export class RegistroComponent implements OnInit {
 
   crearRegistroForm(): void{
     this.registroForm = new FormGroup({
-      nombre: new FormControl('', Validators.required),
-      apellido: new FormControl('', Validators.required),
-      email: new FormControl('', Validators.required),
-      passw: new FormControl('', Validators.required),
-      municipio: new FormControl('', Validators.required),
-      departamento: new FormControl('', Validators.required),
-      telefono: new FormControl('', Validators.required),
-      direccion: new FormControl('', Validators.required),
-      passw2: new FormControl('', Validators.required)
+      nombre: new FormControl("", Validators.required),
+      apellido: new FormControl("", Validators.required),
+      email: new FormControl("", Validators.required),
+      passw: new FormControl("", Validators.required),
+      municipio: new FormControl("", Validators.required),
+      departamento: new FormControl("", Validators.required),
+      telefono: new FormControl("", Validators.required),
+      direccion: new FormControl("", Validators.required),
+      passw2: new FormControl("", Validators.required)
     }, passwordMatchValidator)
   }
 

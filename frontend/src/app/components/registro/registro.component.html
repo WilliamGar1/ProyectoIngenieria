@@ -1,7 +1,7 @@
 <h1 class="text-center">Crear Cuenta</h1>
 <br>
 <br>
-<form class="row g-3" [formGroup]="registroForm">
+<form class="row g-3" novalidate [formGroup]="registroForm" (ngSubmit)="postPrueba()">
     <div class="mb-4 row">
         <div class="col-md-2">
             <label for="nombre" class="col-sm-1 col-form-label">Nombre</label>
@@ -91,7 +91,7 @@
         </div>
     </div>
     <div class="col-12 position-relative mb-4">
-        <button class="btn btn-dark position-absolute top-100 start-50 translate-middle" type="submit" (click)="postPrueba()">Crear</button>
+        <button class="btn btn-dark position-absolute top-100 start-50 translate-middle" type="submit">Crear</button>
     </div>
 </form>
 
