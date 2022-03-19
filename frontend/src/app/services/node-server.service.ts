@@ -7,34 +7,11 @@ import { Observable } from 'rxjs';
 })
 export class NodeServerService {
   
-  url='http://localhost:3000';
-
+  url='http://localhost:3000/insertNewUser/';
+  //PROXIMAMENTE
+  verifyUrl='http://localhost:3000/confirm/:token';
 
   constructor(private http:HttpClient) { }
-
-
-  getDatosRegistro():Observable<any> {
-
-    return this.http.get(this.url+'/datosregistro');
-  };
-
-  postInsertNewUser( req_body : any ):Observable<any> {
-
-    return this.http.post(this.url+'/insertNewUser',req_body);
-  };
-
-  postconfirmarCuenta( req_body : any ):Observable<any> {
-
-    return this.http.post(this.url+'/confirmarcuenta',req_body);
-  };
-
-  postLoginUsuario( req_body : any ):Observable<any> {
-
-    return this.http.post(this.url+'/loginUsuario',req_body);
-  };
-
-
-
 
   //prueba get
   getNodeServer():Observable<any> {

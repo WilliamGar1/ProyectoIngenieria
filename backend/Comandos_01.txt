@@ -1,7 +1,6 @@
--- npm run dev ->para ejecutar todo el proyecto
-
 EXTRA_CADENA DE CONEXION
-    mysql -h bavvsia83xxkjbvtnugt-mysql.services.clever-cloud.com -u umobi57mt7ynmn2t -ptYpFy9XU62D8Mam2PC9p
+    mysql -h bavvsia83xxkjbvtnugt-mysql.services.clever-cloud.com -u umobi57mt7ynmn2t -p
+    tYpFy9XU62D8Mam2PC9p
 
     use bavvsia83xxkjbvtnugt;
     select * from users;
@@ -56,16 +55,3 @@ ng new Angular_Cliente -> creara un carpeta con el proyecto
         //Integracion con en backend Node Express
             HttpClientModule
          ]
-
--Modulo para iniciar varios servidores a la vez
-    npm i concurrently 
-- carpetaPrincipal npm init  -> en la carpeta que contine frontend y backend
- "scripts": {
-    "client": "cd frontend && npm run start",
-    "start": "concurrently \" backend/src/index.js  \" \" npm run client \"  ",
-    "dev": "concurrently \" nodemon backend/src/index.js  \" \" npm run client \"  "
-  }
-
-
--- cabiar repositorio
-$ git remote set-url origin https://github.com/USERNAME/REPOSITORY.git

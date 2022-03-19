@@ -18,8 +18,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { LoginComponent } from './components/login/login.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { RecuperarComponent } from './components/recuperar/recuperar.component';
-import { FormContraseComponent } from './components/form-contrase/form-contrase.component';
 
 
 @NgModule({
@@ -29,9 +27,7 @@ import { FormContraseComponent } from './components/form-contrase/form-contrase.
     InicioComponent,
     LoginComponent,
     FooterComponent,
-    RegistroComponent,
-    RecuperarComponent,
-    FormContraseComponent
+    RegistroComponent
   ],
   imports: [
     BrowserModule,
