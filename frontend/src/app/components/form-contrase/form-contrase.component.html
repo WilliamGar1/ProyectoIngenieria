@@ -1,14 +1,15 @@
 <h1 class="text-center">Recuperar Contraseña</h1>
 <br>
 <br>
-<form class="recu_contra" >
+<form class="recu_contra" novalidate [formGroup]="formulario" (ngSubmit)="postvalidar()">
     <div class="form-group">
-        <label for="contraseña" class="form-label">Ingrese Contraseña</label>
-        <input formControlName="contraseña" type="password" class="form-control" id="contra" [formControl] = "contra" >
+        <label for="contraseña" class="form-label">Ingrese Contraseña</label> &nbsp;&nbsp;<i class="fa-solid fa-circle-info info" (click)="informacion()"></i>
+        <input formControlName="contraseña" class="form-control" type="password"  class="form-control" id="contra">
+        <small *ngIf="!contraValida">Ingrese una contraseña correcta</small><br><br>
         <label for="contraseña2" class="form-label">Confirme Contraseña</label>
-        <input formControlName="contraseña" type="password" class="form-control" id="contra2" [formControl] = "contra2" >
+        <input formControlName="contraseña2" type="password"   class="form-control" id="contra2"  >
     </div>
     <div>
-        <button class="btn btn-dark mt-5" (click)="validar()" type="button">Enviar</button>
+        <button class="btn btn-dark mt-5" type="submit">Enviar</button>
     </div>
 </form>
