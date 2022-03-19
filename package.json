@@ -1,15 +1,15 @@
 {
   "dependencies": {
-    "concurrently": "^7.0.0"
+    "concurrently": "^7.0.0",
+    "sweetalert2": "^11.4.5"
   },
   "name": "proyectoingenieria",
   "description": "",
   "version": "1.0.0",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
     "client": "cd frontend && npm run start",
-   "dev": "concurrently \" nodemon backend/src/index.js  \" \" npm run client \"  "
+    "dev": "concurrently \" nodemon backend/src/index.js  \" \" npm run client \"  "
   },
   "repository": {
     "type": "git",

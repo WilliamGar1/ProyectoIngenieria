@@ -75,7 +75,7 @@ conectBD.query(`SELECT * FROM Usuarios WHERE email = '${email}'`, (err, oldUser)
   
                                     //ENVIAR EMAIL
                                     sendEmailVerify(email,'PREUBA DE ENVIO',template);
-                                    res.send('Usuario insertado');
+                                    res.send({mensaje:'Usuario insertado',guardado:1});
 
                                     }
                                     
@@ -109,7 +109,7 @@ conectBD.query(`SELECT * FROM Usuarios WHERE email = '${email}'`, (err, oldUser)
 const verifyUser = async (req, res) => {
 
      //OPTENER TOKEN
-     const token = req.params.token;
+     const {token} = req.body;
      //VERIFICAR DATA
      const data = getTokenData(token);
 
@@ -183,11 +183,11 @@ const LoginUser = async (req, res) => {
             bcrypt.compare(contrasenia, ContraseniaRes[0].contrasenia, (err, result) => {
 
                 if (result) {
-                    res.send({"mensaje":"contraseña correcta","usuario":UsuarioRes[0]});
+                    res.send({"mensaje":"contraseña correcta","usuario":UsuarioRes[0],acceso:1},);
 
                 }else {
                  
-                    res.send({"mensaje":"contraseña incorrecta"});
+                    res.send({"mensaje":"contraseña incorrecta",acceso:0});
                 };
 
                 console.log("Close Connection");

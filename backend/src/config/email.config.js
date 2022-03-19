@@ -78,7 +78,7 @@ var transporter = nodemailer.createTransport(({
           <div class="container" id="email_content">
           <h2>Hola ${name}</h2>
       <p>Para confirmar tu cuenta , ingresa al siguiente enlace</p>
-      <a href="http://localhost:3000/confirm/${token}"> confirmar cuenta </a>
+      <a href="http://localhost:4200/confirmarCuenta/${token}"> confirmar cuenta </a>
       
           </div>
           

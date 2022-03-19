@@ -13,9 +13,9 @@ router.get('/',(req,res)=>{nodeS = { server :"Node server online" }; res.render(
 //USERS
 router.post('/insertNewUser',users.insertNewUser);
 
-router.post('/log', users.LoginUser);
+router.post('/loginUsuario', users.LoginUser);
 
-router.get('/confirm/:token',users.verifyUser);
+router.post('/confirmarCuenta',users.verifyUser);
 
 //RESET PASSWORD
 router.post('/resetPasswordSolicitud',users.resetPasswordSolicitud);

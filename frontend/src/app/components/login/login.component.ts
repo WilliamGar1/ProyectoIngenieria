@@ -14,6 +14,28 @@ export class LoginComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
+
+
   }
 
+  datos={ email: "",
+
+contraseña=""}
+
+  this._nodeServer.postlogin(this.datos).subscribe(result => {
+  
+    if(!result.acceso){
+
+      console.log(result.mensaje);
+      this._router.navigate(['inicio']);
+
+    }else{
+
+      console.log(result.mensaje);
+      this._router.navigate(['registro']);
+    }
+
+
+  }, err => console.log(err));
 }
