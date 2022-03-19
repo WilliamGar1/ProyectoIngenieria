@@ -33,9 +33,14 @@ export class NodeServerService {
     return this.http.post(this.url+'/loginUsuario',req_body);
   };
 
+  postRecuperar( req_body : any ):Observable<any> {
+
+    return this.http.post(this.url+'/resetPasswordSolicitud',req_body);
+  };
 
 
 
+  
   //prueba get
   getNodeServer():Observable<any> {
 

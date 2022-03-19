@@ -1,14 +1,14 @@
 <h1 class="text-center">Recuperar Contraseña</h1>
 <br>
 <br>
-<form class="recuperar" >
-    <div class="form-group">
+<form class="recuperar" (ngSubmit)="recuperar()">
+    <div>
         <label for="email" class="form-label">Correo Electrónico</label>
-        <input formControlName="correo" type="email" class="form-control" id="correo" [formControl] = "correo" placeholder="juanperez@example.com">
+        <input type="email" class="form-control" id="correo" [formControl] = "correo" placeholder="juanperez@example.com" value="" required>
         <div id="correo" class="form-text">Se le enviará un correo para recuperar su contraseña</div>
     </div>
     <div>
-        <button class="btn btn-dark mt-5" type="submit">Enviar</button>
+        <button class="btn btn-dark mt-5" type="button" (click)="recuperar()">Enviar</button>
     </div>
 </form>
 
