@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "concurrently": "^7.0.0",
+    "sweetalert2": "^11.4.5"
+  },
+  "name": "proyectoingenieria",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "client": "cd frontend && npm run start",
+    "dev": "concurrently \" nodemon backend/src/index.js  \" \" npm run client \"  "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WilliamGar1/ProyectoIngenieria.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WilliamGar1/ProyectoIngenieria/issues"
+  },
+  "homepage": "https://github.com/WilliamGar1/ProyectoIngenieria#readme"
+}
