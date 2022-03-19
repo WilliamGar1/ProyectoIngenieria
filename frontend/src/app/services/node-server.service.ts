@@ -38,6 +38,18 @@ export class NodeServerService {
     return this.http.post(this.url+'/resetPasswordSolicitud',req_body);
   };
 
+  
+  postCambiarContraseniaToken( req_body : any ):Observable<any> {
+
+    return this.http.post(this.url+'/resetPasswordForm/token',req_body);
+  };
+
+  postCambiarContraseniaGuardar( req_body : any ):Observable<any> {
+
+    return this.http.post(this.url+'/resetPasswordForm/guardar',req_body);
+  };
+
+
 
 
   

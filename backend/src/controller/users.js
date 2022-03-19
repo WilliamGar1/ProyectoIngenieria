@@ -177,7 +177,7 @@ const LoginUser = async (req, res) => {
 
         } else {
         //BUSCAR CONTRASEÑA DEL USUARIO
-        conectBD.query(`SELECT * FROM DatosInicioSesion WHERE personaId = ${UsuarioRes[0].Id }`, (err, ContraseniaRes) => {
+        conectBD.query(`SELECT * FROM DatosInicioSesion WHERE personaId = ${UsuarioRes[0].Id } AND estado = TRUE`, (err, ContraseniaRes) => {
          
             //COMPARAR LA CONTRASEÑA
             bcrypt.compare(contrasenia, ContraseniaRes[0].contrasenia, (err, result) => {
@@ -238,11 +238,9 @@ const  resetPasswordSolicitud = async (req, res) => {
 
 };
 
-//->>>>>>>>>>>DAVID
 const  resetPasswordForm = async (req, res) => {
-//NOTA EN ESTA RUTA SE COMPRUEBA EL USUSARIO MEDIANTE EL EMAIL, NO ESTA TERMINADA PORQUE NO ES MI PARTE
-    //OPTENER TOKEN
-    const token = req.params.token;
+
+    const {token} = req.body;
     //VERIFICAR DATA
     const data = getTokenData(token);
 
@@ -264,7 +262,7 @@ const  resetPasswordForm = async (req, res) => {
          
 
         }else{
-  //ENVIO AL FORMULARIO FRONTEND,EN ESTE CASO EL ID e email
+ 
         res.send({id:User[0].Id,email});
         
         }
@@ -281,40 +279,54 @@ const  resetPasswordForm = async (req, res) => {
 
 const  resetPasswordGuardar = async (req, res) => {
 
-    //NOTA SE NECESITA ALGO PARA REALIZAR LA BUSQUETA EN LA BASE DE DATOS, YA SEA ID DE USUSARIO O EMAIL
     const { nuevaContrasenia, usuarioId} = req.body;
-     res.send('se debe capturar en encriptar la contraseña enviada del front end');
+   
+    const conectBD = MySQLBD.conectar();
 
+     //DESHABILITAR CONTRASEÑA ANTERIOR
+    conectBD.query(`UPDATE  DatosInicioSesion set estado= FALSE WHERE personaId = ${usuarioId}`, (err, ContraseniaRes) => {
 
+        if (err) {
+            res.send({mensaje:'Error al deshabilitar la contraseña anterior'});
+            console.log("Close Connection");
+            conectBD.end();
+        }
+        else{
 
-    //ENCRIPTAR CONTRASEÑA
+             //ENCRIPTAR CONTRASEÑA
     bcrypt.hash(nuevaContrasenia, 10, (err, hashedPassword) => {
 
         if (err) {
             res.send('Error de encriptado');
-            console.log("Close Connection");
-            conectBD.end();
+         
         }
         else {
 
-        //DESHABILITAR CONTRASEÑA ANTERIOR
-            conectBD.query(`UPDATE INTO DatosInicioSesion set estado= False WHERE personaId = ${usuarioId}`, (err, ContraseniaRes) => {
-
-                if (err) {
-                    res.send('Error al deshabilitar la contraseña anterior');
-                }
-            });
-            }
 
         //INSERTAR CONTRASEÑA
 
         conectBD.query(`INSERT INTO DatosInicioSesion(personaId,contrasenia) VALUES (${usuarioId},'${hashedPassword}')`, (err, ContraseniaRes) => {
 
             if (err) {
-                res.send('Error al actualizar contraseña'); 
+                res.send({mensaje:'Error al actualizar contraseña'}); 
+            }
+            else{
+
+                res.send({mensaje:'contraseña actualizada'}); 
             }
         });
+
+    }
+
+    console.log("Close Connection");
+    conectBD.end();
     });
+            
+        }
+    });
+
+
+   
 
 };
 
