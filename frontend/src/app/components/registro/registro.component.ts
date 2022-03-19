@@ -85,6 +85,7 @@ export class RegistroComponent implements OnInit {
 //Datos registro
 allDepartamentos=[];
 allMunicipios=[];
+
   getDatosRegistro() {
 
     this._nodeServer.getDatosRegistro().subscribe(data => {
