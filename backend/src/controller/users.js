@@ -284,6 +284,38 @@ const  resetPasswordGuardar = async (req, res) => {
     //NOTA SE NECESITA ALGO PARA REALIZAR LA BUSQUETA EN LA BASE DE DATOS, YA SEA ID DE USUSARIO O EMAIL
     const { nuevaContrasenia, usuarioId} = req.body;
      res.send('se debe capturar en encriptar la contraseña enviada del front end');
+
+
+
+    //ENCRIPTAR CONTRASEÑA
+    bcrypt.hash(nuevaContrasenia, 10, (err, hashedPassword) => {
+
+        if (err) {
+            res.send('Error de encriptado');
+            console.log("Close Connection");
+            conectBD.end();
+        }
+        else {
+
+        //DESHABILITAR CONTRASEÑA ANTERIOR
+            conectBD.query(`UPDATE INTO DatosInicioSesion set estado= False WHERE personaId = ${usuarioId}`, (err, ContraseniaRes) => {
+
+                if (err) {
+                    res.send('Error al deshabilitar la contraseña anterior');
+                }
+            });
+            }
+
+        //INSERTAR CONTRASEÑA
+
+        conectBD.query(`INSERT INTO DatosInicioSesion(personaId,contrasenia) VALUES (${usuarioId},'${hashedPassword}')`, (err, ContraseniaRes) => {
+
+            if (err) {
+                res.send('Error al actualizar contraseña'); 
+            }
+        });
+    });
+
 };
 
 
