@@ -46,7 +46,17 @@ export class RecuperarComponent implements OnInit {
     }else{
       this._nodeServer.postRecuperar(this.datos).subscribe(data => {
       console.log(data.mensaje);
-  
+      Swal.fire({
+        title: 'Petición recibida',
+        text: "Puede cambiar su contraseña desde el enlace enviado a su correo electronico",
+        icon: 'success',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'OK'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this._router.navigate(['login'])
+        }
+      });
       }, err => console.log(err));
     }
 

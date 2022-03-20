@@ -61,12 +61,26 @@ export class RegistroComponent implements OnInit {
         if(result.guardado){
 
           console.log(result.mensaje);
-          this._router.navigate(['login']);
+          Swal.fire({
+            title: 'Usuario registrado',
+            text: "Puede activar su usuario desde el enlace enviado a su correo electronico",
+            icon: 'success',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this._router.navigate(['login'])
+            }
+          });
 
         }else{
-
           console.log(result.mensaje);
           this._router.navigate(['registro']);
+          Swal.fire(
+            'Error!',
+            'Ya existe un usuario con ese correo electronico',
+            'warning',
+          );
         }
     
   

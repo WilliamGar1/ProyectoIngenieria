@@ -95,7 +95,7 @@ conectBD.query(`SELECT * FROM Usuarios WHERE email = '${email}'`, (err, oldUser)
 
 
         } else {
-            res.send('El usuario con el correo <' + oldUser[0].email+'> ya existe');
+            res.send({mensaje:'El usuario con el correo <' + oldUser[0].email+'> ya existe',guardado:0});
             console.log("Close Connection");
             conectBD.end();
 
