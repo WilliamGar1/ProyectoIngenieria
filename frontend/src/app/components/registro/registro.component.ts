@@ -26,18 +26,6 @@ export class RegistroComponent implements OnInit {
 
   postPrueba(): void {
 
-    /*this.user = {
-      nombre: this.nombre.value,
-      apellido: this.apellido.value,
-      email: this.email.value,
-      passw: this.passw.value,
-      municipio: this.municipio.value,
-      departamento: this.departamento.value,
-      telefono: this.telefono.value,
-      direccion: this.direccion.value
-
-    };*/
-
     var usuario = this.registroForm.value;
 
     this.user = {
@@ -45,10 +33,10 @@ export class RegistroComponent implements OnInit {
       apellido: usuario.apellido,
       email: usuario.email,
       passw: usuario.passw,
-      municipio: `${usuario.municipio}`,
+      municipio: usuario.municipio,
       departamento: usuario.departamento,
       telefono: usuario.telefono,
-      direccion: `${usuario.direccion}`
+      direccion: usuario.direccion
 
     };
 
@@ -60,7 +48,7 @@ export class RegistroComponent implements OnInit {
   
         if(result.guardado){
 
-          console.log(result.mensaje);
+          //console.log(result.mensaje);
           Swal.fire({
             title: 'Usuario registrado',
             text: "Puede activar su usuario desde el enlace enviado a su correo electronico",
@@ -96,6 +84,8 @@ export class RegistroComponent implements OnInit {
 
   };
 
+  
+
 //Datos registro
 allDepartamentos=[];
 allMunicipios=[];
@@ -106,8 +96,6 @@ allMunicipios=[];
    
       this.allDepartamentos = data.departamentos;
       this.allMunicipios = data.municipios;
-
-      console.log(this.allDepartamentos,this.allMunicipios);
 
     }, err => console.log(err));
   }
@@ -144,6 +132,17 @@ allMunicipios=[];
   }
 
   get emailValido(){
-    return esEmailValido(this.registroForm.get('email').value)
+    return esEmailValido(this.registroForm.get('email').value);
+  }
+
+  get filterMuni(){
+
+    var muni = this.allMunicipios.filter(e => {
+      return e.departamentoId == this.registroForm.get('departamento').value;
+    });
+
+    return muni;
   }
 }
+
+//this.registroForm.get('departamento').value

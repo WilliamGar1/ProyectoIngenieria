@@ -29,6 +29,15 @@
             <small *ngIf="!emailValido">Ingrese un correo correcto</small>
         </div>
         <div class="col-md-2">
+            <label for="telefono" class="form-label">Teléfono</label>
+        </div>
+        <div class="col-md-4">
+            <input type="text" class="form-control" id="telefono" formControlName = "telefono" placeholder="9587-7585">
+        </div>
+        
+    </div>
+    <div class="mb-4 row">
+        <div class="col-md-2">
             <label for="password" class="col-sm-1 col-form-label">Contraseña</label>
         </div>
         <div class="col-md-4">
@@ -36,14 +45,7 @@
             <small *ngIf="!PasswIsValid" class="form-text text-muted">Falta contraseña</small>
             <small *ngIf="this.registroForm?.errors?.['mismatch']">La contraseña no es igual</small>
         </div>
-    </div>
-    <div class="mb-4 row">
-        <div class="col-md-2">
-            <label for="telefono" class="form-label">Teléfono</label>
-        </div>
-        <div class="col-md-4">
-            <input type="text" class="form-control" id="telefono" formControlName = "telefono" placeholder="9587-7585">
-        </div>
+        
         <div class="col-md-2">
             <label for="password2" class="col-form-label">Confirmar Contraseña</label>
         </div>
@@ -54,20 +56,24 @@
     </div>
     <div class="mb-4 row">
         <div class="col-md-2">
-            <label for="ciudad" class="form-label">Municipio</label>
+            <label for="ciudad" class="form-label">Departamento</label>
         </div>
         <div class="col-md-4">
-            <input type="text" class="form-control" id="ciudad" formControlName = "municipio" required>
+            <select class="form-select" id="departamento" formControlName = "departamento">
+                <option selected disabled value="">Elegir...</option>
+                <option *ngFor="let depto of allDepartamentos" [ngValue]="depto.Id">{{depto.nombre}}</option>
+            </select>
         </div>
         <div class="col-md-2">
-            <label for="departamento" class="form-label">Departamento</label>
+            <label for="departamento" class="form-label">Municipio</label>
         </div>
         <div class="col-md-4">
-            <select class="form-select" id="departamento" formControlName = "departamento" required>
+            
+            <select class="form-select" id="ciudad" formControlName = "municipio">
                 <option selected disabled value="">Elegir...</option>
-                <option>Francisco Morazan</option>
-                <option>Comayagua</option>
-                <option>El Paraiso</option>
+
+                <option *ngFor="let muni of filterMuni" [ngValue]="muni.Id">{{muni.nombre}}</option>
+                
             </select>
         </div>
     </div>

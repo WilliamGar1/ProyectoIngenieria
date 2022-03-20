@@ -4,7 +4,7 @@ EXTRA_CADENA DE CONEXION
     mysql -h bavvsia83xxkjbvtnugt-mysql.services.clever-cloud.com -u umobi57mt7ynmn2t -ptYpFy9XU62D8Mam2PC9p
 
     use bavvsia83xxkjbvtnugt;
-    select * from users;
+    select * from Usuarios;
 
 Node_Server
 - Crear archivo ".gitignore"
