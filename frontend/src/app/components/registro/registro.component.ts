@@ -6,6 +6,7 @@ import { NodeServerService } from 'src/app/services/node-server.service';
 import { passwordMatchValidator } from './passw.helper';
 import { esEmailValido } from './email.helper';
 import Swal from 'sweetalert2';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -18,9 +19,10 @@ export class RegistroComponent implements OnInit {
   registroForm: FormGroup;
 
   user = {};
-  nodeRES = '[vacio]';
 
-  constructor(private _nodeServer: NodeServerService) {  }
+
+  constructor(private _nodeServer: NodeServerService
+    , private _router : Router) {  }
 
   postPrueba(): void {
 
@@ -54,10 +56,33 @@ export class RegistroComponent implements OnInit {
 
     if (this.registroForm.valid && this.emailValido) {
 
-      this._nodeServer.postNodeServer(this.user).subscribe(result => {
+      this._nodeServer.postInsertNewUser(this.user).subscribe(result => {
   
-        console.log(result);
-        this.nodeRES = '\n ' + result.respuesta;
+        if(result.guardado){
+
+          console.log(result.mensaje);
+          Swal.fire({
+            title: 'Usuario registrado',
+            text: "Puede activar su usuario desde el enlace enviado a su correo electronico",
+            icon: 'success',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this._router.navigate(['login'])
+            }
+          });
+
+        }else{
+          console.log(result.mensaje);
+          this._router.navigate(['registro']);
+          Swal.fire(
+            'Error!',
+            'Ya existe un usuario con ese correo electronico',
+            'warning',
+          );
+        }
+    
   
       }, err => console.log(err));
     }else{
@@ -71,11 +96,19 @@ export class RegistroComponent implements OnInit {
 
   };
 
-  getPrueba() {
+//Datos registro
+allDepartamentos=[];
+allMunicipios=[];
 
-    this._nodeServer.getNodeServer().subscribe(data => {
-      console.log(data);
-      this.nodeRES = data.server;
+  getDatosRegistro() {
+
+    this._nodeServer.getDatosRegistro().subscribe(data => {
+   
+      this.allDepartamentos = data.departamentos;
+      this.allMunicipios = data.municipios;
+
+      console.log(this.allDepartamentos,this.allMunicipios);
+
     }, err => console.log(err));
   }
 
@@ -83,8 +116,7 @@ export class RegistroComponent implements OnInit {
   ngOnInit(): void {
 
     this.crearRegistroForm();
-
-    //this.getPrueba();
+    this.getDatosRegistro();
   }
 
 

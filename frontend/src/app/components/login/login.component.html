@@ -1,13 +1,13 @@
 <h1 class="text-center mb-4">Inicio de Sesión</h1>
 <h3 class="text-center mb-4">Inicie para continuar</h3>
-<form id="form">
+<form id="form" novalidate [formGroup]="loginForm" (ngSubmit)="logIn()">
     <div class="form-group">
         <label for="correo" class="col-sm-1 col-form-label">Correo</label>
-        <input type="email" class="form-control" id="correo" [formControl] = "email" value="" required>
+        <input type="email" class="form-control" id="correo" formControlName = "email" placeholder="usuario@server.com" value="" required>
     </div>
     <div class="form-group">
         <label for="password" class="col-sm-1 col-form-label">Contraseña</label>
-        <input type="password" class="form-control" id="password" [formControl] = "passw" value="" required>
+        <input type="password" class="form-control" id="password" formControlName = "passw" value="" required>
     </div>
     <a class="nav-link" [routerLink]="['recuperar']">Restaurar Contraseña</a>
     

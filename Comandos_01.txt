@@ -1,8 +1,7 @@
 -- npm run dev ->para ejecutar todo el proyecto
 
 EXTRA_CADENA DE CONEXION
-    mysql -h bavvsia83xxkjbvtnugt-mysql.services.clever-cloud.com -u umobi57mt7ynmn2t -p
-    tYpFy9XU62D8Mam2PC9p
+    mysql -h bavvsia83xxkjbvtnugt-mysql.services.clever-cloud.com -u umobi57mt7ynmn2t -ptYpFy9XU62D8Mam2PC9p
 
     use bavvsia83xxkjbvtnugt;
     select * from users;

@@ -1,8 +1,8 @@
 const nodemailer = require("nodemailer");
 
 const mail ={
-    user:'bncompras2020@gmail.com',
-    pass:'20@s7rgjb42CgjRKR6'
+    user:'argorachina@gmail.com',
+    pass:'Pipo0030'
 };
 
 var transporter = nodemailer.createTransport(({
@@ -78,7 +78,7 @@ var transporter = nodemailer.createTransport(({
           <div class="container" id="email_content">
           <h2>Hola ${name}</h2>
       <p>Para confirmar tu cuenta , ingresa al siguiente enlace</p>
-      <a href="http://localhost:3000/confirm/${token}"> confirmar cuenta </a>
+      <a href="http://localhost:4200/confirmarCuenta/${token}"> confirmar cuenta </a>
       
           </div>
           
@@ -102,7 +102,7 @@ var transporter = nodemailer.createTransport(({
         <div class="container" id="email_content">
         <h2>Buen Día ${name}</h2>
     <p>Para cambiar su contraseña, por favor ingrese al siguiente enlace</p>
-    <a href="http://localhost:3000/resetPasswordForm/${token}"> cambiar contraseña </a>
+    <a href="http://localhost:4200/resetPasswordForm/${token}"> cambiar contraseña </a>
     
         </div>
         

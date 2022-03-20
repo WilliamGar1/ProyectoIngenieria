@@ -13,17 +13,16 @@ router.get('/',(req,res)=>{nodeS = { server :"Node server online" }; res.render(
 //USERS
 router.post('/insertNewUser',users.insertNewUser);
 
-router.post('/log', users.LoginUser);
+router.post('/loginUsuario', users.LoginUser);
 
-router.get('/confirm/:token',users.verifyUser);
+router.post('/confirmarCuenta',users.verifyUser);
 
 //RESET PASSWORD
 router.post('/resetPasswordSolicitud',users.resetPasswordSolicitud);
 
-router.get('/resetPasswordForm/:token',users.resetPasswordForm);
+router.post('/resetPasswordForm/token',users.resetPasswordForm);
 
-//->RUTA REUTILIZADA PARA GUARDAR LA CONTRASEÑA, NO DEBERIA DAR PROBLEMAS
-router.post('/resetPasswordForm',users.resetPasswordGuardar);
+router.post('/resetPasswordForm/guardar',users.resetPasswordGuardar);
 
 //DIRECCIONES
 router.get('/datosregistro',direcciones.getAll_departamentos_municipios);
