@@ -74,7 +74,7 @@ conectBD.query(`SELECT * FROM Usuarios WHERE email = '${email}'`, (err, oldUser)
                                      const template = getVerifyTemplate(nombre+' '+apellido,token);
   
                                     //ENVIAR EMAIL
-                                    sendEmailVerify(email,'PREUBA DE ENVIO',template);
+                                    sendEmailVerify(email,'Confirmar Cuenta',template);
                                     res.send({mensaje:'Usuario insertado',guardado:1});
 
                                     }
@@ -171,7 +171,7 @@ const LoginUser = async (req, res) => {
         //REVISAR SI SE ENCONTRO EL USUARIO
         if (!UsuarioRes.length) {
 
-            res.send('Usuario no existe');
+            res.send({"mensaje":"Usuario No existe",acceso:0});
             console.log("Close Connection");
             conectBD.end();
 
@@ -183,7 +183,13 @@ const LoginUser = async (req, res) => {
             bcrypt.compare(contrasenia, ContraseniaRes[0].contrasenia, (err, result) => {
 
                 if (result) {
+
+                    if(UsuarioRes[0].estadoHabilitacion){
                     res.send({"mensaje":"contraseña correcta","usuario":UsuarioRes[0],acceso:1},);
+                        }else{
+
+                     res.send({"mensaje":"El usuario no ha confirmado su cuenta",acceso:0},); 
+                        }
 
                 }else {
                  
