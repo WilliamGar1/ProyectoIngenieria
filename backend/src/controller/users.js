@@ -114,8 +114,8 @@ const verifyUser = async (req, res) => {
      const data = getTokenData(token);
 
      if(!data){
-        res.status(500).send('Error en data');
-        console.log("Error en data");
+        res.send({mensaje:'Error en data token'});
+        console.log("Error en data token");
       };
 
       //OPTENER CORREO DEL USUARIO
@@ -130,7 +130,7 @@ const verifyUser = async (req, res) => {
         //COMPROBAR SI EXISTE EL USUARIO
         if (!User.length) {
   
-            res.send('Usuario no existe');
+            res.send({mensaje:'Usuario no existe'});
             console.log("Close Connection");
             conectBD.end();
 
@@ -140,12 +140,12 @@ const verifyUser = async (req, res) => {
 
                 if(err){
             
-                    res.send('ERROR AL Habilitar');
+                    res.send({mensaje:'Error al habilitar usuario'});
 
                 }
                 else{
                     console.log({"Usuario":User[0],"Ahora":"HABILITADO"});
-                    res.send('USUSARIO HABILITADO');
+                    res.send({mensaje:'Usuario habilitado'});
                 };
 
                 console.log("Close Connection");
@@ -217,7 +217,7 @@ const  resetPasswordSolicitud = async (req, res) => {
     conectBD.query(`SELECT * FROM Usuarios WHERE email = '${email}'`, (err, User) => {
         if (!User.length) {
   
-            res.send('Usuario no existe');
+            res.send({mensaje:'Usuario no existe'});
             console.log("Close Connection");
             conectBD.end();
 
@@ -232,7 +232,7 @@ const  resetPasswordSolicitud = async (req, res) => {
             //ENVIAR EMAIL
             sendEmailSolicitudCambioPass(email,'CAMBIO DE CONTRASEÑA',template);
 
-            res.send({mensaje:'SOLICITUD DE CAMBIO DE CONTRASEÑA ENVIADA'});
+            res.send({mensaje:'Solicitud de cambio de contraseña enviada'});
 
 
         }
@@ -251,8 +251,8 @@ const  resetPasswordForm = async (req, res) => {
     const data = getTokenData(token);
 
     if(!data){
-       res.status(500).send('Error en data');
-       console.log("Error en data");
+       res.send({mensaje:'Error en data token'});
+       console.log("Error en data token");
      };
 
      //OPTENER CORREO DEL USUARIO
@@ -264,12 +264,12 @@ const  resetPasswordForm = async (req, res) => {
 
         if (!User.length) {
   
-            res.send('Usuario no existe');
+            res.send({mensaje:'Usuario no existe'});
          
 
         }else{
  
-        res.send({id:User[0].Id,email});
+        res.send({mensaje:'Usuario encontrado',id:User[0].Id,email});
         
         }
 
@@ -303,7 +303,7 @@ const  resetPasswordGuardar = async (req, res) => {
     bcrypt.hash(nuevaContrasenia, 10, (err, hashedPassword) => {
 
         if (err) {
-            res.send('Error de encriptado');
+            res.send({mensaje:'Error de encriptado'});
          
         }
         else {
