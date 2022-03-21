@@ -3,7 +3,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EmailValidator, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NodeServerService } from 'src/app/services/node-server.service';
-import { passwordMatchValidator } from './passw.helper';
+import { passwordMatchValidator, esContraValida } from './passw.helper';
 import { esEmailValido } from './email.helper';
 import Swal from 'sweetalert2';
 import {Router} from '@angular/router';
@@ -42,7 +42,7 @@ export class RegistroComponent implements OnInit {
 
     console.log(JSON.stringify(this.user));
 
-    if (this.registroForm.valid && this.emailValido) {
+    if (this.registroForm.valid && this.emailValido && this.contraValida) {
 
       this._nodeServer.postInsertNewUser(this.user).subscribe(result => {
   
@@ -142,6 +142,10 @@ allMunicipios=[];
     });
 
     return muni;
+  }
+
+  get contraValida(){
+    return esContraValida(this.registroForm.get('passw').value);
   }
 }
 

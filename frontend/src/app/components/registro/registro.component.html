@@ -7,14 +7,15 @@
             <label for="nombre" class="col-sm-1 col-form-label">Nombre</label>
         </div>
         <div class="col-md-4">
-            <input type="text" class="form-control" id="nombre" formControlName = "nombre" value="" ngRequired="true" ng-pattern=" ^[a-z]+[a-z0-9._-]+@[a-z]+\.[a-z.]{2,5}$">
+            <input type="text" class="form-control" id="nombre" formControlName="nombre" value="" placeholder="Juan">
             <small *ngIf=""></small>
         </div>
         <div class="col-md-2">
             <label for="apellido" class="col-sm-1 col-form-label">Apellido</label>
         </div>
         <div class="col-md-4">
-            <input type="text" class="form-control" id="apellido"  formControlName = "apellido" value="">
+            <input type="text" class="form-control" id="apellido" formControlName="apellido" value=""
+                placeholder="Martinez">
         </div>
     </div>
     <div class="mb-4 row">
@@ -23,7 +24,8 @@
         </div>
         <div class="col-md-4">
             <div class="input-group">
-                <input type="email" class="form-control" id="correo" formControlName = "email" placeholder="usuario@server.com" aria-describedby="correo">
+                <input type="email" class="form-control" id="correo" formControlName="email"
+                    placeholder="usuario@server.com" aria-describedby="correo">
                 <span class="input-group-text" id="correo" style="border: 1px solid black;">@</span>
             </div>
             <small *ngIf="!emailValido">Ingrese un correo correcto</small>
@@ -32,26 +34,29 @@
             <label for="telefono" class="form-label">Teléfono</label>
         </div>
         <div class="col-md-4">
-            <input type="text" class="form-control" id="telefono" formControlName = "telefono" placeholder="9587-7585">
+            <input type="text" class="form-control" id="telefono" formControlName="telefono" placeholder="9587-7585">
         </div>
-        
+
     </div>
     <div class="mb-4 row">
         <div class="col-md-2">
             <label for="password" class="col-sm-1 col-form-label">Contraseña</label>
         </div>
         <div class="col-md-4">
-            <input type="password" class="form-control" id="password" formControlName = "passw" value="">
-            <small *ngIf="!PasswIsValid" class="form-text text-muted">Falta contraseña</small>
-            <small *ngIf="this.registroForm?.errors?.['mismatch']">La contraseña no es igual</small>
+            <input type="password" class="form-control" id="password" formControlName="passw" value="">
+            <small *ngIf="!contraValida" class="form-text text-muted">Mínimo 8 caracteres, una letra mayúscula, un número y un caracter especial (/#$%!) </small>
+            
         </div>
-        
+
         <div class="col-md-2">
             <label for="password2" class="col-form-label">Confirmar Contraseña</label>
         </div>
         <div class="col-md-4">
-            <input type="password" class="form-control" id="password2" formControlName = "passw2" value="">
-            <small *ngIf="!passw2ConfirmIsValid" class="form-text text-muted">Repetir la contraseña</small>
+            <input type="password" class="form-control" id="password2" formControlName="passw2" value="">
+            <small *ngIf="!passw2ConfirmIsValid; else contra" class="form-text text-muted">Repetir la contraseña</small>
+            <ng-template #contra>
+                <small *ngIf="this.registroForm?.errors?.['mismatch']">La contraseña no es igual</small>
+            </ng-template>
         </div>
     </div>
     <div class="mb-4 row">
@@ -59,7 +64,7 @@
             <label for="ciudad" class="form-label">Departamento</label>
         </div>
         <div class="col-md-4">
-            <select class="form-select" id="departamento" formControlName = "departamento">
+            <select class="form-select" id="departamento" formControlName="departamento">
                 <option selected disabled value="">Elegir...</option>
                 <option *ngFor="let depto of allDepartamentos" [ngValue]="depto.Id">{{depto.nombre}}</option>
             </select>
@@ -68,12 +73,12 @@
             <label for="departamento" class="form-label">Municipio</label>
         </div>
         <div class="col-md-4">
-            
-            <select class="form-select" id="ciudad" formControlName = "municipio">
+
+            <select class="form-select" id="ciudad" formControlName="municipio">
                 <option selected disabled value="">Elegir...</option>
 
                 <option *ngFor="let muni of filterMuni" [ngValue]="muni.Id">{{muni.nombre}}</option>
-                
+
             </select>
         </div>
     </div>
@@ -84,17 +89,19 @@
         </div>
 
         <div class="col-md-4">
-            <textarea class="form-control" id="direccion" formControlName = "direccion" rows="2"></textarea>
+            <textarea class="form-control" id="direccion" formControlName="direccion" rows="2" placeholder="Dirección exacta"></textarea>
         </div>
     </div>
-    
+
     <div class="col-12 mb-4">
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="termino" required>
-            <label class="form-check-label" for="termino">
-                Acepto los términos y condiciones
-            </label>
-        </div>
+        <ng-template>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="termino" required>
+                <label class="form-check-label" for="termino">
+                    Acepto los términos y condiciones
+                </label>
+            </div>
+        </ng-template>
     </div>
     <div class="col-12 position-relative mb-4">
         <button class="btn btn-dark position-absolute top-100 start-50 translate-middle" type="submit">Crear</button>
