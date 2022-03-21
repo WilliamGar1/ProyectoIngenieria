@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
           console.log(data.acceso);
           Swal.fire(
             'Error!',
-            'Usuario o contraseña incorrecta',
+            data.mensaje,
             'warning',
           );
         }
