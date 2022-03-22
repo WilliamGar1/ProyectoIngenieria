@@ -327,6 +327,12 @@ const  resetPasswordGuardar = async (req, res) => {
 
 };
 
+const insertImagenPerfil = async (req, res) => {
+
+    console.log(req.body);
+    res.send(req.body);
+
+};
 
 
 
@@ -408,6 +414,7 @@ module.exports = {
     resetPasswordSolicitud,
     resetPasswordForm,
     resetPasswordGuardar,
+    insertImagenPerfil,
     test
 };
 
