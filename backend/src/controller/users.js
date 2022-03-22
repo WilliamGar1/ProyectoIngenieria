@@ -208,9 +208,8 @@ const  resetPasswordSolicitud = async (req, res) => {
     conectBD.query(`SELECT * FROM Usuarios WHERE email = '${email}'`, (err, User) => {
         if (!User.length) {
   
-            res.send({mensaje:'Usuario no existe'});
-            console.log("Close Connection");
-            conectBD.end();
+            res.send({mensaje:'Usuario no existe',enviado:0});
+       
 
         }else{
 
@@ -223,7 +222,7 @@ const  resetPasswordSolicitud = async (req, res) => {
             //ENVIAR EMAIL
             sendEmailSolicitudCambioPass(email,'CAMBIO DE CONTRASEÑA',template);
 
-            res.send({mensaje:'Solicitud de cambio de contraseña enviada'});
+            res.send({mensaje:'Solicitud de cambio de contraseña enviada',enviado:1});
 
 
         }
