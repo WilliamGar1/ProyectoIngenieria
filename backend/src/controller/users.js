@@ -107,7 +107,7 @@ const verifyUser = async (req, res) => {
      if(!data){
         res.send({mensaje:'Error en data token'});
         console.log("Error en data token");
-      };
+      }else{
 
       //OPTENER CORREO DEL USUARIO
       const email = data.data;
@@ -147,7 +147,7 @@ const verifyUser = async (req, res) => {
 
       });
     
-      
+    }
 };
 
 
@@ -243,7 +243,7 @@ const  resetPasswordForm = async (req, res) => {
     if(!data){
        res.send({mensaje:'Error en data token'});
        console.log("Error en data token");
-     };
+     }else{
 
      //OPTENER CORREO DEL USUARIO
      const email = data.data;
@@ -269,7 +269,7 @@ const  resetPasswordForm = async (req, res) => {
    
 
    
- 
+    }
 
 };
 
@@ -283,7 +283,7 @@ const  resetPasswordGuardar = async (req, res) => {
     conectBD.query(`UPDATE  DatosInicioSesion set estado= FALSE WHERE personaId = ${usuarioId}`, (err, ContraseniaRes) => {
 
         if (err) {
-            res.send({mensaje:'Error al deshabilitar la contraseña anterior'});
+            res.send({mensaje:'Error al deshabilitar la contraseña anterior',guardado:0});
             console.log("Close Connection");
             conectBD.end();
         }
@@ -293,7 +293,7 @@ const  resetPasswordGuardar = async (req, res) => {
     bcrypt.hash(nuevaContrasenia, 10, (err, hashedPassword) => {
 
         if (err) {
-            res.send({mensaje:'Error de encriptado'});
+            res.send({mensaje:'Error de encriptado',guardado:0});
          
         }
         else {
@@ -304,11 +304,11 @@ const  resetPasswordGuardar = async (req, res) => {
         conectBD.query(`INSERT INTO DatosInicioSesion(personaId,contrasenia) VALUES (${usuarioId},'${hashedPassword}')`, (err, ContraseniaRes) => {
 
             if (err) {
-                res.send({mensaje:'Error al actualizar contraseña'}); 
+                res.send({mensaje:'Error al actualizar contraseña',guardado:0}); 
             }
             else{
 
-                res.send({mensaje:'contraseña actualizada'}); 
+                res.send({mensaje:'contraseña actualizada',guardado:1}); 
             }
         });
 
