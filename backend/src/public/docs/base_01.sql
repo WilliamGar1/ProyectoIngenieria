@@ -32,8 +32,8 @@ CREATE TABLE Direcciones(
 Id INTEGER AUTO_INCREMENT PRIMARY KEY,
 calle VARCHAR(30) NULL,
 avenida VARCHAR(30) NULL,
-referencia VARCHAR(50) NOT NULL,
-municipiosId INTEGER NOT NULL REFERENCES Municipios(Id)
+referencia VARCHAR(50)  NULL,
+municipiosId integer
 );
 
 CREATE TABLE Usuarios(
@@ -43,6 +43,8 @@ apellido VARCHAR(30) NOT NULL,
 email VARCHAR(30) UNIQUE ,
 estadoHabilitacion BOOLEAN DEFAULT FALSE,
 contrato  BOOLEAN  DEFAULT TRUE,
+municipioId INTEGER  ,
+direccion  VARCHAR(200) ,
 creacion TIMESTAMP DEFAULT NOW(),
 actualizacion TIMESTAMP DEFAULT NOW() ON UPDATE NOW()
 );
@@ -53,8 +55,10 @@ CREATE TABLE IF NOT EXISTS users(
  nombre        VARCHAR(30)   ,
  apellido      VARCHAR(30)   ,
  email         VARCHAR(30)  UNIQUE  ,
- municipio     VARCHAR(30)   ,
+ contrato  BOOLEAN  DEFAULT TRUE,
+ municipioId INTEGER NOT NULL REFERENCES Municipios(Id) ,
  direccion     VARCHAR(200) ,
+ estadoHabilitacion BOOLEAN DEFAULT FALSE,
  creacion TIMESTAMP DEFAULT NOW(),
  actualizacion TIMESTAMP DEFAULT NOW() ON UPDATE NOW()
 );
@@ -76,7 +80,7 @@ estado BOOL DEFAULT TRUE
 
 CREATE TABLE Telefonos(
 Id INTEGER  AUTO_INCREMENT  PRIMARY KEY,
-personaId INTEGER NOT NULL REFERENCES Persona(Id),
+personaId INTEGER NOT NULL REFERENCES Usuarios(Id),
 telefono VARCHAR(16) NOT NULL
 );
 
