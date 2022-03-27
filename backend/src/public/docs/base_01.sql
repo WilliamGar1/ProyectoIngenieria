@@ -152,6 +152,12 @@ FROM
     *
 FROM
     ImagenesProducto;
+    
+    SELECT p.*,i.productoImagen,i.contentType, c.nombre cat FROM Productos p 
+    INNER JOIN ImagenesProducto i ON p.Id = i.productoId
+    INNER JOIN Categorias c ON c.Id = p.categoriaId
+    AND estadoHabilitacion = TRUE
+    GROUP BY p.Id;
 /*
 DROP TABLE IF EXISTS Direcciones;
 

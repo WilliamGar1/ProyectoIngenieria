@@ -83,7 +83,8 @@ const getProductoMuestra = async (req,res) =>{
     conectBD.query(`SELECT p.*,i.productoImagen,i.contentType, c.nombre cat FROM Productos p 
     INNER JOIN ImagenesProducto i ON p.Id = i.productoId
     INNER JOIN Categorias c ON c.Id = p.categoriaId
-    AND estadoHabilitacion = TRUE`, (err, ProductoRes) => {
+    AND estadoHabilitacion = TRUE
+    GROUP BY p.Id`, (err, ProductoRes) => {
 
 
         res.render('img.html',{  pds: ProductoRes,
