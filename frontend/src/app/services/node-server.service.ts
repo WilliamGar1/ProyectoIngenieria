@@ -51,7 +51,15 @@ export class NodeServerService {
   };
 
 
+  getDatosRegistroProducto():Observable<any> {
 
+    return this.http.get(this.url+'/datosregistroProducto');
+  };
+
+  postInsertNewProducto( req_body : any, id: number):Observable<any> {
+
+    return this.http.post(this.url+`/insertNewProducto/${id}`,req_body);
+  };
 
   
   //prueba get
