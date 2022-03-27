@@ -39,6 +39,8 @@ router.get('/datosregistroProducto',categorias.getAll_categorias);
 //PRODUCTO
 router.post('/insertNewProducto/:id',multer.cargarImagen.array('imagenesProducto',4),productos.insertNewProducto);
 
+router.get('/getProductoMuestra',productos.getProductoMuestra);
+
 //array('imagenes',12)
 //testeo de base de datos
 router.get('/test',users.test);

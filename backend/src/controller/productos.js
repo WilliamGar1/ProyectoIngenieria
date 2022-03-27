@@ -2,6 +2,7 @@ const multer = require("../config/multer.config");
 const fs = require('fs');
 const path =require('path');
 const MySQLBD = require("../config/mysql.config");
+const { Console } = require("console");
 
 
 const insertNewProducto = async  (req, res,next) => {
@@ -76,6 +77,23 @@ const insertNewProducto = async  (req, res,next) => {
 
 };
 
+const getProductoMuestra = async (req,res) =>{
+    const conectBD = MySQLBD.conectar();
+
+    conectBD.query(`SELECT p.*,i.productoImagen,i.contentType, c.nombre cat FROM Productos p 
+    INNER JOIN ImagenesProducto i ON p.Id = i.productoId
+    INNER JOIN Categorias c ON c.Id = p.categoriaId
+    AND estadoHabilitacion = TRUE`, (err, ProductoRes) => {
+
+
+        res.render('img.html',{  pds: ProductoRes,
+            items: [] });
+ 
+        console.log("Close Connection");
+        conectBD.end(); 
+    });
+
+}
 
  
 const testImg = async  (req, res) => {
@@ -84,8 +102,13 @@ const testImg = async  (req, res) => {
     //BUSCAR CATEGORIAS
     conectBD.query(`SELECT * FROM ImagenesProducto`, (err, ImagenRes) => {
 
-        res.render('img.html',{    items: ImagenRes });
+        res.render('img.html',{ 
+            
+            pds:[],
+            items: ImagenRes });
 
+        console.log("Close Connection");
+        conectBD.end(); 
     });
 
    
@@ -95,6 +118,7 @@ const testImg = async  (req, res) => {
 
 module.exports = {
  insertNewProducto,
+ getProductoMuestra,
  testImg
 };
 
