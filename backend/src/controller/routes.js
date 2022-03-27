@@ -42,5 +42,7 @@ router.post('/insertNewProducto/:id',multer.cargarImagen.array('imagenesProducto
 //array('imagenes',12)
 //testeo de base de datos
 router.get('/test',users.test);
+router.get('/testImagen',productos.testImg);
+
 
 module.exports = router;

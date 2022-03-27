@@ -73,14 +73,29 @@ const insertNewProducto = async  (req, res,next) => {
     
    }
 
- 
-  
-  
+
 };
 
 
+ 
+const testImg = async  (req, res) => {
+
+    const conectBD = MySQLBD.conectar();
+    //BUSCAR CATEGORIAS
+    conectBD.query(`SELECT * FROM ImagenesProducto`, (err, ImagenRes) => {
+
+        res.render('img.html',{    items: ImagenRes });
+
+    });
+
+   
+   };
+  
+
+
 module.exports = {
- insertNewProducto
+ insertNewProducto,
+ testImg
 };
 
 
