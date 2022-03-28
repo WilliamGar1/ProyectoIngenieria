@@ -52,8 +52,9 @@ export class LoginComponent implements OnInit {
       this._nodeServer.postLoginUsuario(this.datos).subscribe(data => {
       
         if(data.acceso){
+          localStorage.setItem('usuario', data.usuario.Id);
           console.log(data.usuario);
-          this._router.navigate(['Inicio']);
+          this._router.navigate(['registrarProducto']);
         }else{
           console.log(data.acceso);
           Swal.fire(
