@@ -41,7 +41,6 @@ import { RegistrarProductoComponent } from './components/registrar-producto/regi
     AppRoutingModule,
     ReactiveFormsModule,
     NgxDropzoneModule,
-    //
     HttpClientModule,
     app_routing
   ],
