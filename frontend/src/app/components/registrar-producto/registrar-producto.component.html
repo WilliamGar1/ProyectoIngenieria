@@ -13,7 +13,7 @@
             <label for="precio" class="form-label">Precio de Venta</label>
         </div>
         <div class="col-md-4">
-            <input formControlName="precio" type="number"   class="form-control" id="precio">
+            <input formControlName="precio" type="number" min="0"  class="form-control" id="precio">
         </div> 
     </div>
     <div class="mb-4 row">
@@ -29,7 +29,7 @@
         <div class="col-md-4">
             <select class="form-select" id="categorias" formControlName="categorias">
                 <option selected disabled value="">Elegir...</option>
-                <option value="otros">Otros</option>
+                <option *ngFor="let ctg of allCategorias" [ngValue]="ctg.Id">{{ctg.nombre}}</option>
             </select>
         </div> 
     </div>
@@ -49,5 +49,4 @@
     <div class="boton">
         <button class="btn btn-dark mt-5" type="submit">Registrar</button>
     </div>
-
 </form>

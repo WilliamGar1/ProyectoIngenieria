@@ -18,11 +18,12 @@ export class RegistrarProductoComponent implements OnInit {
     categorias: new FormControl('', Validators.required),
   });
   constructor(private router: Router, private location: Location,
-    private _nodeServer: NodeServerService) { }
+    private _nodeServer: NodeServerService, private _router : Router) { }
 
   ngOnInit(): void {
 
     this.getDatosRegistroProducto();
+    this.comprobarUsuario();
   }
   files = [];
   onSelect(event) {
@@ -36,16 +37,30 @@ export class RegistrarProductoComponent implements OnInit {
   }
 
 
-  producto = {
-    nombre: 'pruebaProducto',
-    precio: 20.5,
-    descripcion: 'esta es una prueba',
-    categoria: 1,
-    usuarioId: 1
+  producto = {}
+
+  prueba(){
+    var product = this.formulario.value;
+    this.producto = {
+      nombre: product.nombre,
+      precio: product.precio,
+      descripcion: product.descripcion,
+      categoria: product.categorias,
+      usuarioId: localStorage.getItem('usuario')
+    }
+    console.log(this.producto);
   }
 
   validar() {
-
+    var product = this.formulario.value;
+    this.producto = {
+      nombre: product.nombre,
+      precio: product.precio,
+      descripcion: product.descripcion,
+      categoria: product.categorias,
+      usuarioId: 1
+    }
+    console.log(this.producto);
     if (!this.formulario.valid || !this.files.length) {
       Swal.fire(
         'ERROR!',
@@ -120,6 +135,18 @@ export class RegistrarProductoComponent implements OnInit {
       }
 
     }, err => console.log(err));
+  }
+
+  comprobarUsuario(){
+    if(!localStorage.getItem('usuario')){
+      console.log("Usuario no encontrado");
+      Swal.fire(
+        'ERROR!',
+        'No ha iniciado sesión',
+        'warning',
+      );
+      this._router.navigate(['Inicio']);
+    }
   }
 
 }
