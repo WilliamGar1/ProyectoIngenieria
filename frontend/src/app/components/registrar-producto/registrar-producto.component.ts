@@ -47,6 +47,8 @@ export class RegistrarProductoComponent implements OnInit {
       console.log(this.files)
     }
     this.formulario.reset();
-    this.files.pop();
+    while(this.files.length){
+      this.files.pop();
+    }
   }
 }
