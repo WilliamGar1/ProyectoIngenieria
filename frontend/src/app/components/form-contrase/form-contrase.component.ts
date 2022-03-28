@@ -78,13 +78,21 @@ export class FormContraseComponent implements OnInit {
     this._nodeServer.postCambiarContraseniaGuardar(this.data).subscribe(result=>{
 
       console.log(result);
-  
-      },err =>console.log(err));
+      if(!result.guardado){
+        
+       Swal.fire(
+         'Contraseña invalida',
+          result.mensaje,
+         'warning',
+       );
+    
+      }
+      else{
       
-    this.router.navigate(['login'])
+                     this.router.navigate(['login'])
     Swal.fire({
       title: 'Contraseña actualizada',
-      text: "su contraseña fue actualizada, puede iniciar sesion",
+      text: result.mensaje +" puede iniciar sesion",
       icon: 'success',
       confirmButtonColor: '#3085d6',
       confirmButtonText: 'Iniciar sesión'
@@ -93,6 +101,12 @@ export class FormContraseComponent implements OnInit {
         this.router.navigate(['login'])
       }
     });
+     
+      }
+  
+      },err =>console.log(err));
+      
+
       
     }
     

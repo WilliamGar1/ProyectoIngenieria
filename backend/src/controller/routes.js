@@ -24,6 +24,9 @@ router.post('/resetPasswordForm/token',users.resetPasswordForm);
 
 router.post('/resetPasswordForm/guardar',users.resetPasswordGuardar);
 
+//IMAGEN DE PERFIL
+router.post('/insertImagenPerfil',users.insertImagenPerfil);
+
 //DIRECCIONES
 router.get('/datosregistro',direcciones.getAll_departamentos_municipios);
 

@@ -11,6 +11,7 @@ import { RegistroComponent } from './components/registro/registro.component';
 
 //Ruta
 import { app_routing } from './app.routes';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 
 //Componentes 
@@ -20,6 +21,7 @@ import { LoginComponent } from './components/login/login.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RecuperarComponent } from './components/recuperar/recuperar.component';
 import { FormContraseComponent } from './components/form-contrase/form-contrase.component';
+import { RegistrarProductoComponent } from './components/registrar-producto/registrar-producto.component';
 
 
 @NgModule({
@@ -31,13 +33,14 @@ import { FormContraseComponent } from './components/form-contrase/form-contrase.
     FooterComponent,
     RegistroComponent,
     RecuperarComponent,
-    FormContraseComponent
+    FormContraseComponent,
+    RegistrarProductoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    //
+    NgxDropzoneModule,
     HttpClientModule,
     app_routing
   ],

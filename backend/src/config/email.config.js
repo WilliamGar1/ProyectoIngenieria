@@ -1,13 +1,22 @@
 const nodemailer = require("nodemailer");
 
+const urlBase ='http://localhost:4200';
+//const urlBase ='https://app-frontendingenieria.herokuapp.com';
+
 const mail ={
-    user:'bncompras2020@gmail.com',
-    pass:'20@s7rgjb42CgjRKR6'
+    user:'pruebas.mrcoffee@hotmail.com',
+    pass:'@TEST_DE_CORREO_2022'
 };
 
 var transporter = nodemailer.createTransport(({
-    service: 'gmail',
-    host: 'smtp.gmail.com',
+    host: "smtp-mail.outlook.com", // hostname
+    secureConnection: false, // TLS requires secureConnection to be false
+    port: 587, // port for secure SMTP
+    tls: {
+       ciphers:'SSLv3'
+    },
+    //service: 'gmail',
+    //host: 'smtp.gmail.com',
     auth: {
       user: mail.user,
       pass: mail.pass
@@ -78,7 +87,7 @@ var transporter = nodemailer.createTransport(({
           <div class="container" id="email_content">
           <h2>Hola ${name}</h2>
       <p>Para confirmar tu cuenta , ingresa al siguiente enlace</p>
-      <a href="http://localhost:4200/confirmarCuenta/${token}"> confirmar cuenta </a>
+      <a href="${urlBase}/confirmarCuenta/${token}"> confirmar cuenta </a>
       
           </div>
           
@@ -102,7 +111,7 @@ var transporter = nodemailer.createTransport(({
         <div class="container" id="email_content">
         <h2>Buen Día ${name}</h2>
     <p>Para cambiar su contraseña, por favor ingrese al siguiente enlace</p>
-    <a href="http://localhost:4200/resetPasswordForm/${token}"> cambiar contraseña </a>
+    <a href="${urlBase}/resetPasswordForm/${token}"> cambiar contraseña </a>
     
         </div>
         
