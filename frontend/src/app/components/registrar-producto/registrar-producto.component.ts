@@ -39,18 +39,6 @@ export class RegistrarProductoComponent implements OnInit {
 
   producto = {}
 
-  prueba(){
-    var product = this.formulario.value;
-    this.producto = {
-      nombre: product.nombre,
-      precio: product.precio,
-      descripcion: product.descripcion,
-      categoria: product.categorias,
-      usuarioId: localStorage.getItem('usuario')
-    }
-    console.log(this.producto);
-  }
-
   validar() {
     var product = this.formulario.value;
     this.producto = {
@@ -58,7 +46,7 @@ export class RegistrarProductoComponent implements OnInit {
       precio: product.precio,
       descripcion: product.descripcion,
       categoria: product.categorias,
-      usuarioId: 1
+      usuarioId: localStorage.getItem('usuario')
     }
     console.log(this.producto);
     if (!this.formulario.valid || !this.files.length) {
