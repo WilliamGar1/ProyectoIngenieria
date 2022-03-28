@@ -326,10 +326,10 @@ const  resetPasswordGuardar = async (req, res) => {
 
 };
 
-const insertImagenPerfil = async (req, res) => {
+const insertImagenPerfil = async (req, res,next) => {
 
-    console.log(req.body);
-    res.send(req.body);
+    const file = req.file;
+    console.log(file);
 
 };
 
