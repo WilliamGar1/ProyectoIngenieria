@@ -43,6 +43,7 @@ export class RegistrarProductoComponent implements OnInit {
     categoria:1,
     usuarioId:1
   }
+  
   validar(){
    
     if(!this.formulario.valid || !this.files.length){
@@ -51,22 +52,14 @@ export class RegistrarProductoComponent implements OnInit {
         'Porfavor completar todos los campos',
         'warning',
       );
-    }
-   
-   
-      else{
-
-     
-    
+    }else{
         const formData = new FormData();
 
         for(let img of this.files ){
 
           formData.append('imagenesProducto',img);
-        }
-
-    
-        this._nodeServer.postInsertNewProducto({producto:this.producto},0).subscribe(result => {
+        }    
+     this._nodeServer.postInsertNewProducto({producto:this.producto},0).subscribe(result => {
      ////////////////////////  
      if(result.exito) { 
       this._nodeServer.postInsertNewProducto(formData,result.productoId).subscribe(result => {
@@ -105,6 +98,9 @@ export class RegistrarProductoComponent implements OnInit {
     }
     this.formulario.reset();
    // this.files.pop();
+    while(this.files.length){
+      this.files.pop();
+    }
 
   
   }

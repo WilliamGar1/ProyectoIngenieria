@@ -44,8 +44,9 @@
         </div>
         <div class="col-md-4">
             <input type="password" class="form-control" id="password" formControlName="passw" value="">
-            <small *ngIf="!contraValida" class="form-text text-muted">Mínimo 8 caracteres, una letra mayúscula, un número y un caracter especial (/#$%!) </small>
-            
+            <small *ngIf="!contraValida" class="form-text text-muted">Mínimo 8 caracteres, una letra mayúscula, un
+                número y un caracter especial (/#$%!) </small>
+
         </div>
 
         <div class="col-md-2">
@@ -89,24 +90,74 @@
         </div>
 
         <div class="col-md-4">
-            <textarea class="form-control" id="direccion" formControlName="direccion" rows="2" placeholder="Dirección exacta"></textarea>
+            <textarea class="form-control" id="direccion" formControlName="direccion" rows="2"
+                placeholder="Dirección exacta"></textarea>
         </div>
     </div>
 
     <div class="col-12 mb-4">
-        <ng-template>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="termino" required>
-                <label class="form-check-label" for="termino">
-                    Acepto los términos y condiciones
-                </label>
-            </div>
-        </ng-template>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="termino" formControlName="termino">
+            <label class="form-check-label" data-bs-toggle="modal" data-bs-target="#modalTerminos"
+                style="text-decoration: underline; cursor: pointer;">
+                Acepto los términos y condiciones
+            </label>
+            <p class="error" *ngIf="this.registroForm.controls['termino'].errors?.['required']">
+                Marque la casilla para aceptar los términos y condiciones.
+            </p>
+        </div>
     </div>
     <div class="col-12 position-relative mb-4">
         <button class="btn btn-dark position-absolute top-100 start-50 translate-middle" type="submit">Crear</button>
     </div>
 </form>
+
+<div class="modal" id="modalTerminos" tabindex="-1" aria-labelledby="modalTerminosLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTerminosLabel">Términos y Condiciones</h5>
+                <!--<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+            </div>
+            <div class="modal-body">
+                <h4>INFORMACIÓN RELEVANTE</h4>
+
+                Es requisito necesario para la adquisición de los productos que se ofrecen en este sitio, que lea y
+                acepte los siguientes Términos y Condiciones que a continuación se redactan. El uso de nuestros
+                servicios así como la compra de nuestros productos implicará que usted ha leído y aceptado los Términos
+                y Condiciones de Uso en el presente documento. Todas los productos que son ofrecidos por nuestro sitio
+                web pudieran ser creadas, cobradas, enviadas o presentadas por una página web tercera y en tal caso
+                estarían sujetas a sus propios Términos y Condiciones. En algunos casos, para adquirir un producto, será
+                necesario el registro por parte del usuario, con ingreso de datos personales fidedignos y definición de
+                una contraseña.
+
+                El usuario puede elegir y cambiar la clave para su acceso de administración de la cuenta en cualquier
+                momento, en caso de que se haya registrado y que sea necesario para la compra de alguno de nuestros
+                productos. honduran_market.hn no asume la responsabilidad en caso de que entregue dicha clave a
+                terceros.
+
+                Todas las compras y transacciones que se lleven a cabo por medio de este sitio web, están sujetas a un
+                proceso de confirmación y verificación, el cual podría incluir la verificación del stock y
+                disponibilidad de producto, validación de la forma de pago, validación de la factura (en caso de
+                existir) y el cumplimiento de las condiciones requeridas por el medio de pago seleccionado. En algunos
+                casos puede que se requiera una verificación por medio de correo electrónico.
+
+                Los precios de los productos ofrecidos en esta Tienda Online es válido solamente en las compras
+                realizadas en este sitio web.
+
+                <h4>LICENCIA</h4>
+
+                Honduran Marketplace a través de su sitio web concede una licencia para que los usuarios utilicen los
+                productos que son vendidos en este sitio web de acuerdo a los Términos y Condiciones que se describen en
+                este documento.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" (click)="marcar()">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <!--<h1><h2 >{{nodeRES}}</h2></h1>-->
