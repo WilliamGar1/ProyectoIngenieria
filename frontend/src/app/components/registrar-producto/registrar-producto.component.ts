@@ -40,7 +40,8 @@ export class RegistrarProductoComponent implements OnInit {
     nombre:'pruebaProducto',
     precio:20.5,
     descripcion:'esta es una prueba',
-    categoria:1
+    categoria:1,
+    usuarioId:1
   }
   validar(){
    

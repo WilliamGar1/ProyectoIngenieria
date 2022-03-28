@@ -84,6 +84,7 @@ precio DOUBLE NOT NULL,
 descripcion VARCHAR(100) NOT NULL,
 estadoHabilitacion BOOLEAN DEFAULT TRUE,
 categoriaId INTEGER NOT NULL REFERENCES Categorias(Id),
+personaId INTEGER NOT NULL REFERENCES Usuarios(Id),
 creacion TIMESTAMP DEFAULT NOW(),
 actualizacion TIMESTAMP DEFAULT NOW() ON UPDATE NOW()
 );

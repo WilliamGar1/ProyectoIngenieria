@@ -1,8 +1,7 @@
-const multer = require("../config/multer.config");
 const fs = require('fs');
 const path =require('path');
 const MySQLBD = require("../config/mysql.config");
-const { Console } = require("console");
+
 
 
 const insertNewProducto = async  (req, res,next) => {
@@ -14,8 +13,8 @@ const insertNewProducto = async  (req, res,next) => {
     
     const {producto} = req.body;   
 
-    conectBD.query(`INSERT INTO Productos(nombre,precio,descripcion,categoriaId) VALUES
-    ('${producto.nombre}',${producto.precio},'${producto.descripcion}',${producto.categoria})  `, (err, ProductoRes) => {
+    conectBD.query(`INSERT INTO Productos(nombre,precio,descripcion,categoriaId,personaId) VALUES
+    ('${producto.nombre}',${producto.precio},'${producto.descripcion}',${producto.categoria},${producto.usuarioId})  `, (err, ProductoRes) => {
         
             if(err){
                 res.send({mensaje:'Error al insertar producto',exito:0});
