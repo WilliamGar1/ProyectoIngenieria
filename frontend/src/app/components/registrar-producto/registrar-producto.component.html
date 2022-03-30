@@ -1,0 +1,52 @@
+<h1 class="text-center">Registrar Producto</h1>
+<br>
+<br>
+<form class="row g-3" novalidate [formGroup]="formulario" (ngSubmit)="validar()">
+    <div class="mb-4 row">
+        <div class="col-md-2"> 
+            <label for="nombre" class="form-label">Nombre del Producto</label>
+        </div>
+        <div class="col-md-4">
+            <input formControlName="nombre" class="form-control" type="text"  class="form-control" id="text">
+        </div> 
+        <div class="col-md-2"> 
+            <label for="precio" class="form-label">Precio de Venta</label>
+        </div>
+        <div class="col-md-4">
+            <input formControlName="precio" type="number" min="0"  class="form-control" id="precio">
+        </div> 
+    </div>
+    <div class="mb-4 row">
+        <div class="col-md-2"> 
+            <label for="decripcion" class="form-label">Descripción</label>
+        </div>
+        <div class="col-md-4">
+            <textarea name="textarea" formControlName="descripcion"  class="form-control" rows="3" cols="30" id="descripcion"></textarea>
+        </div> 
+        <div class="col-md-2"> 
+            <label for="categorias" class="form-label">Categorias</label>
+        </div>
+        <div class="col-md-4">
+            <select class="form-select" id="categorias" formControlName="categorias">
+                <option selected disabled value="">Elegir...</option>
+                <option *ngFor="let ctg of allCategorias" [ngValue]="ctg.Id">{{ctg.nombre}}</option>
+            </select>
+        </div> 
+    </div>
+    <div class="col-md-2">
+        <label for="formFileLg" class="form-label">Imágenes del Producto</label>
+    </div>
+    <div class="col-md-8">
+            <ngx-dropzone (change)="onSelect($event)" accept="image/*">
+                <ngx-dropzone-label>
+                        <a type="button" class="btn btn-secondary">Selecciona una Imagen <br> o Arrastra y suelta las imagenes </a>
+                </ngx-dropzone-label>
+                <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+                    <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                </ngx-dropzone-preview>
+            </ngx-dropzone>
+    </div>
+    <div class="boton">
+        <button class="btn btn-dark mt-5" type="submit">Registrar</button>
+    </div>
+</form>

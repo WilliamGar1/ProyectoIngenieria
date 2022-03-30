@@ -1,24 +1,27 @@
 use bavvsia83xxkjbvtnugt;
 
 
-DROP TABLE IF EXISTS  Telefonos;
-DROP TABLE IF EXISTS  ImagenPerfilUsuario;
-DROP TABLE IF EXISTS DireccionesUsuarios;
-DROP TABLE IF EXISTS DatosInicioSesion;
-DROP TABLE IF EXISTS Usuarios;
-DROP TABLE IF EXISTS Direcciones;
 DROP TABLE IF EXISTS Municipios;
 DROP TABLE IF EXISTS Departamentos;
-DROP TABLE IF EXISTS users;
+
+DROP TABLE IF EXISTS  Telefonos;
+DROP TABLE IF EXISTS  ImagenPerfilUsuario;
+DROP TABLE IF EXISTS DatosInicioSesion;
+DROP TABLE IF EXISTS Usuarios;
+
+DROP TABLE IF EXISTS ImagenesProducto;
+DROP TABLE IF EXISTS Productos;
+
+DROP TABLE IF EXISTS Categorias;
+
 DROP TABLE IF EXISTS test;
 
 
-
+/*--direcciones*/
 CREATE TABLE Departamentos(
 Id INTEGER PRIMARY KEY,
 nombre VARCHAR(100) NOT NULL
 );
-
 
 
 CREATE TABLE Municipios(
@@ -28,33 +31,17 @@ departamentoId INTEGER NOT NULL REFERENCES Departamentos(Id)
 );
 
 
-CREATE TABLE Direcciones(
-Id INTEGER AUTO_INCREMENT PRIMARY KEY,
-calle VARCHAR(30) NULL,
-avenida VARCHAR(30) NULL,
-referencia VARCHAR(50) NOT NULL,
-municipiosId INTEGER NOT NULL REFERENCES Municipios(Id)
-);
 
+/*--usuario*/
 CREATE TABLE Usuarios(
-Id INTEGER AUTO_INCREMENT PRIMARY KEY,
-nombre VARCHAR(30) NOT NULL,
-apellido VARCHAR(30) NOT NULL,
-email VARCHAR(30) UNIQUE ,
-estadoHabilitacion BOOLEAN DEFAULT FALSE,
-contrato  BOOLEAN  DEFAULT TRUE,
-creacion TIMESTAMP DEFAULT NOW(),
-actualizacion TIMESTAMP DEFAULT NOW() ON UPDATE NOW()
-);
-
-
-CREATE TABLE IF NOT EXISTS users(
  Id INTEGER AUTO_INCREMENT PRIMARY KEY,
  nombre        VARCHAR(30)   ,
  apellido      VARCHAR(30)   ,
  email         VARCHAR(30)  UNIQUE  ,
- municipio     VARCHAR(30)   ,
+ contrato  BOOLEAN  DEFAULT TRUE,
+ municipioId INTEGER NOT NULL REFERENCES Municipios(Id) ,
  direccion     VARCHAR(200) ,
+ estadoHabilitacion BOOLEAN DEFAULT FALSE,
  creacion TIMESTAMP DEFAULT NOW(),
  actualizacion TIMESTAMP DEFAULT NOW() ON UPDATE NOW()
 );
@@ -67,16 +54,9 @@ contrasenia VARCHAR(200) NOT NULL,
 estado  BOOLEAN DEFAULT TRUE
 );
 
-CREATE TABLE DireccionesUsuarios(
-Id INTEGER  AUTO_INCREMENT PRIMARY KEY,
-personaId INTEGER NOT NULL REFERENCES Usuarios(Id),
-direccionId INTEGER NOT NULL REFERENCES Direcciones(Id),
-estado BOOL DEFAULT TRUE
-);
-
 CREATE TABLE Telefonos(
 Id INTEGER  AUTO_INCREMENT  PRIMARY KEY,
-personaId INTEGER NOT NULL REFERENCES Persona(Id),
+personaId INTEGER NOT NULL REFERENCES Usuarios(Id),
 telefono VARCHAR(16) NOT NULL
 );
 
@@ -87,6 +67,34 @@ contentType VARCHAR(30),
 personaId INTEGER NOT NULL REFERENCES Usuarios(Id)
 );
 
+
+/*--CATEGORIAS*/
+CREATE TABLE Categorias(
+Id INTEGER PRIMARY KEY,
+nombre VARCHAR(100) NOT NULL
+);
+INSERT INTO Categorias VALUES (1,'CATEGORIA_P1');
+INSERT INTO Categorias VALUES (2,'CATEGORIA_P2');
+
+/*--PRODUCTO*/
+CREATE TABLE Productos(
+Id INTEGER AUTO_INCREMENT PRIMARY KEY,
+nombre VARCHAR(100) NOT NULL,
+precio DOUBLE NOT NULL,
+descripcion VARCHAR(100) NOT NULL,
+estadoHabilitacion BOOLEAN DEFAULT TRUE,
+categoriaId INTEGER NOT NULL REFERENCES Categorias(Id),
+personaId INTEGER NOT NULL REFERENCES Usuarios(Id),
+creacion TIMESTAMP DEFAULT NOW(),
+actualizacion TIMESTAMP DEFAULT NOW() ON UPDATE NOW()
+);
+
+CREATE TABLE ImagenesProducto(
+Id INTEGER AUTO_INCREMENT PRIMARY KEY,
+productoId INTEGER NOT NULL REFERENCES Productos(Id),
+productoImagen LONGBLOB ,
+contentType VARCHAR(30)
+);
 
 
 INSERT INTO Departamentos VALUES(1, 'Atlantida');
@@ -136,12 +144,52 @@ CREATE TABLE  IF NOT EXISTS test(
      n varchar(10)
 );
 
+SELECT 
+    *
+FROM
+    Productos;
+    
+    SELECT 
+    *
+FROM
+    ImagenesProducto;
+    
+    SELECT p.*,i.productoImagen,i.contentType, c.nombre cat FROM Productos p 
+    INNER JOIN ImagenesProducto i ON p.Id = i.productoId
+    INNER JOIN Categorias c ON c.Id = p.categoriaId
+    AND estadoHabilitacion = TRUE
+    GROUP BY p.Id;
+/*
+DROP TABLE IF EXISTS Direcciones;
 
-SELECT * FROM Telefonos;
-SELECT * FROM ImagenPerfilUsuario;
-SELECT * FROM DireccionesUsuarios;
-SELECT * FROM DatosInicioSesion;
-SELECT * FROM Usuarios;
-SELECT * FROM Direcciones;
-SELECT * FROM Municipios;
-SELECT * FROM Departamentos;
+CREATE TABLE Direcciones(
+Id INTEGER AUTO_INCREMENT PRIMARY KEY,
+calle VARCHAR(30) NULL,
+avenida VARCHAR(30) NULL,
+referencia VARCHAR(50)  NULL,
+municipiosId INTEGER
+);
+
+DROP TABLE IF EXISTS users;
+CREATE TABLE users(
+Id INTEGER AUTO_INCREMENT PRIMARY KEY,
+nombre VARCHAR(30) NOT NULL,
+apellido VARCHAR(30) NOT NULL,
+email VARCHAR(30) UNIQUE ,
+estadoHabilitacion BOOLEAN DEFAULT FALSE,
+contrato  BOOLEAN  DEFAULT TRUE,
+municipioId INTEGER  ,
+direccion  VARCHAR(200) ,
+creacion TIMESTAMP DEFAULT NOW(),
+actualizacion TIMESTAMP DEFAULT NOW() ON UPDATE NOW()
+);
+
+DROP TABLE IF EXISTS DireccionesUsuarios;
+
+CREATE TABLE DireccionesUsuarios(
+Id INTEGER  AUTO_INCREMENT PRIMARY KEY,
+personaId INTEGER NOT NULL REFERENCES Usuarios(Id),
+direccionId INTEGER NOT NULL REFERENCES Direcciones(Id),
+estado BOOL DEFAULT TRUE
+);
+*/

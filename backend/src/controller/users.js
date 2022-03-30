@@ -12,41 +12,31 @@ const insertNewUser = async (req, res) => {
 
 //CAPTURA DE DATOS,saque municipio
 const {nombre,apellido,email,passw,municipio,telefono,direccion} = req.body;
-const contrato = 1;
+
  // INICIAR CONEXION
 const conectBD = MySQLBD.conectar();
     //CONSULTA
+
 conectBD.query(`SELECT * FROM Usuarios WHERE email = '${email}'`, (err, oldUser) => {
 
         //COMPROBAR SI EXISTE USUSARIO
         if (!oldUser.length) {
 
-            //INSERTAR DIRECCION Y RECUPERAR ID
-            conectBD.query(`INSERT INTO Direcciones(calle,avenida,referencia,municipiosId) VALUES ('nohay','nohay','${direccion}',${municipio})`, (err, DirreccionRes) => {
-                if (err) {
-                    res.send('Error al insertar direccion');
-                    console.log("Close Connection");
-                    conectBD.end();
-                }else{
                 //INSERTAR USUSARIO Y RECUPERAR ID
-                conectBD.query(`INSERT INTO Usuarios(nombre,apellido,email,contrato) VALUES ('${nombre}','${apellido}','${email}',${contrato})`, (err, UsuarioRes) => {
+                conectBD.query(`INSERT INTO Usuarios (nombre,apellido,email,municipioId,direccion) VALUES ('${nombre}','${apellido}','${email}',${municipio},'${direccion}')`, (err, UsuarioRes) => {
                     if (err) {
-                        res.send('Error al insertar usuario');
+                        res.send({mensaje:'Error al insertar el usuario',guardado:0});
                         console.log("Close Connection");
                         conectBD.end();
                     }else{
-                    //LLENAR TABLA DIRECCIONES USUARIOS
-                    conectBD.query(`INSERT INTO  DireccionesUsuarios(personaId,direccionId) VALUES (${UsuarioRes.insertId},${DirreccionRes.insertId})`, (err, UsuarioDireccionRes) => {
-                        if (err) {
-                            res.send('Error al emparejar ususario y direccion');
-                            console.log("Close Connection");
-                            conectBD.end();
-                        }else{
+
+                   
                         //INSERTAR TELEFONO
                         conectBD.query(`INSERT INTO Telefonos(personaId,telefono) VALUES (${UsuarioRes.insertId},'${telefono}')`, (err, TelefonoRes) => {
                             
                             if (err) {
-                                res.send('Error al insertar telefono');
+                                res.send({mensaje:'Error al insertar el telefono',guardado:0});
+                                insercionFallida({paso:1,id:UsuarioRes.insertId});
                                 console.log("Close Connection");
                                 conectBD.end();
                             }else{
@@ -54,7 +44,8 @@ conectBD.query(`SELECT * FROM Usuarios WHERE email = '${email}'`, (err, oldUser)
                             bcrypt.hash(passw, 10, (err, hashedPassword) => {
 
                                 if (err) {
-                                    res.send('Error de encriptado');
+                                    res.send({mensaje:'Error al encriptar contraseña',guardado:0});
+                                    insercionFallida({paso:2,id:UsuarioRes.insertId});
                                     console.log("Close Connection");
                                     conectBD.end();
                                 }
@@ -63,8 +54,8 @@ conectBD.query(`SELECT * FROM Usuarios WHERE email = '${email}'`, (err, oldUser)
                                 conectBD.query(`INSERT INTO DatosInicioSesion(personaId,contrasenia) VALUES (${UsuarioRes.insertId},'${hashedPassword}')`, (err, ContraseniaRes) => {
 
                                     if (err) {
-                                        res.send('Error en inserccion de contraseña');
-                                        
+                                        res.send({mensaje:'Error al guardar datos de session',guardado:0});
+                                        insercionFallida({paso:3,id:UsuarioRes.insertId});
                                     }
                                     else {
                                     //GENERAR TOKEN DE IDENTIFICACION
@@ -86,12 +77,12 @@ conectBD.query(`SELECT * FROM Usuarios WHERE email = '${email}'`, (err, oldUser)
                             });
                             }
                         });
-                        }
-                    });
+                        
+                    
                     }
                 });
-                }
-            });
+                
+            
 
 
         } else {
@@ -114,9 +105,9 @@ const verifyUser = async (req, res) => {
      const data = getTokenData(token);
 
      if(!data){
-        res.status(500).send('Error en data');
-        console.log("Error en data");
-      };
+        res.send({mensaje:'Error en data token'});
+        console.log("Error en data token");
+      }else{
 
       //OPTENER CORREO DEL USUARIO
       const email = data.data;
@@ -130,7 +121,7 @@ const verifyUser = async (req, res) => {
         //COMPROBAR SI EXISTE EL USUARIO
         if (!User.length) {
   
-            res.send('Usuario no existe');
+            res.send({mensaje:'Usuario no existe'});
             console.log("Close Connection");
             conectBD.end();
 
@@ -140,12 +131,12 @@ const verifyUser = async (req, res) => {
 
                 if(err){
             
-                    res.send('ERROR AL Habilitar');
+                    res.send({mensaje:'Error al habilitar usuario'});
 
                 }
                 else{
                     console.log({"Usuario":User[0],"Ahora":"HABILITADO"});
-                    res.send('USUSARIO HABILITADO');
+                    res.send({mensaje:'Usuario habilitado'});
                 };
 
                 console.log("Close Connection");
@@ -156,7 +147,7 @@ const verifyUser = async (req, res) => {
 
       });
     
-      
+    }
 };
 
 
@@ -217,9 +208,8 @@ const  resetPasswordSolicitud = async (req, res) => {
     conectBD.query(`SELECT * FROM Usuarios WHERE email = '${email}'`, (err, User) => {
         if (!User.length) {
   
-            res.send('Usuario no existe');
-            console.log("Close Connection");
-            conectBD.end();
+            res.send({mensaje:'Usuario no existe',enviado:0});
+       
 
         }else{
 
@@ -232,7 +222,7 @@ const  resetPasswordSolicitud = async (req, res) => {
             //ENVIAR EMAIL
             sendEmailSolicitudCambioPass(email,'CAMBIO DE CONTRASEÑA',template);
 
-            res.send({mensaje:'SOLICITUD DE CAMBIO DE CONTRASEÑA ENVIADA'});
+            res.send({mensaje:'Solicitud de cambio de contraseña enviada',enviado:1});
 
 
         }
@@ -251,9 +241,9 @@ const  resetPasswordForm = async (req, res) => {
     const data = getTokenData(token);
 
     if(!data){
-       res.status(500).send('Error en data');
-       console.log("Error en data");
-     };
+       res.send({mensaje:'Error en data token'});
+       console.log("Error en data token");
+     }else{
 
      //OPTENER CORREO DEL USUARIO
      const email = data.data;
@@ -264,12 +254,12 @@ const  resetPasswordForm = async (req, res) => {
 
         if (!User.length) {
   
-            res.send('Usuario no existe');
+            res.send({mensaje:'Usuario no existe'});
          
 
         }else{
  
-        res.send({id:User[0].Id,email});
+        res.send({mensaje:'Usuario encontrado',id:User[0].Id,email});
         
         }
 
@@ -279,7 +269,7 @@ const  resetPasswordForm = async (req, res) => {
    
 
    
- 
+    }
 
 };
 
@@ -293,7 +283,7 @@ const  resetPasswordGuardar = async (req, res) => {
     conectBD.query(`UPDATE  DatosInicioSesion set estado= FALSE WHERE personaId = ${usuarioId}`, (err, ContraseniaRes) => {
 
         if (err) {
-            res.send({mensaje:'Error al deshabilitar la contraseña anterior'});
+            res.send({mensaje:'Error al deshabilitar la contraseña anterior',guardado:0});
             console.log("Close Connection");
             conectBD.end();
         }
@@ -303,7 +293,7 @@ const  resetPasswordGuardar = async (req, res) => {
     bcrypt.hash(nuevaContrasenia, 10, (err, hashedPassword) => {
 
         if (err) {
-            res.send('Error de encriptado');
+            res.send({mensaje:'Error de encriptado',guardado:0});
          
         }
         else {
@@ -314,11 +304,11 @@ const  resetPasswordGuardar = async (req, res) => {
         conectBD.query(`INSERT INTO DatosInicioSesion(personaId,contrasenia) VALUES (${usuarioId},'${hashedPassword}')`, (err, ContraseniaRes) => {
 
             if (err) {
-                res.send({mensaje:'Error al actualizar contraseña'}); 
+                res.send({mensaje:'Error al actualizar contraseña',guardado:0}); 
             }
             else{
 
-                res.send({mensaje:'contraseña actualizada'}); 
+                res.send({mensaje:'contraseña actualizada',guardado:1}); 
             }
         });
 
@@ -333,6 +323,13 @@ const  resetPasswordGuardar = async (req, res) => {
 
 
    
+
+};
+
+const insertImagenPerfil = async (req, res,next) => {
+
+    const file = req.file;
+    console.log(file);
 
 };
 
@@ -365,7 +362,49 @@ const test = async (req, res) => {
         console.log(resultado);
         res.send(resultado);
     });
+
+    console.log("Close Connection");
+    conectBD.end();
 };
+
+
+//funciones
+ function insercionFallida(dato){
+
+    console.log('Borrando datos');
+    const conectBD = MySQLBD.conectar();
+
+    if(dato.paso == 1){
+    conectBD.query(`DELETE FROM Usuarios WHERE Id = ${dato.id}`, (err, resultado) => { 
+
+        if(err){
+            console.log({mensaje:'Error al eliminar usuario mal insertado'})
+        }
+    });
+    
+}
+    if(dato.paso == 2 || dato.paso ==3){
+        conectBD.query(`DELETE FROM Telefonos WHERE personaId = ${dato.id}`, (err, resultado) => { 
+
+            if(err){
+                console.log({mensaje:'Error al eliminar telefono mal insertado'})
+            }
+            else{
+                conectBD.query(`DELETE FROM Usuarios WHERE Id= ${dato.id}`, (err, resultado) => { 
+
+                    if(err){
+                        console.log({mensaje:'Error al eliminar usuario mal insertado'})
+                    }
+                });
+            }
+        });
+    
+    }
+    console.log("Close Connection");
+    conectBD.end();
+
+ };
+
 
 module.exports = {
     insertNewUser,
@@ -374,6 +413,7 @@ module.exports = {
     resetPasswordSolicitud,
     resetPasswordForm,
     resetPasswordGuardar,
+    insertImagenPerfil,
     test
 };
 

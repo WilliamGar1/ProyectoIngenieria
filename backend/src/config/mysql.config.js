@@ -11,7 +11,7 @@ function conectar() {
 
 conexion.connect((err)=>{
     if(err) throw err;
-    console.log("Connected to databse");
+    console.log("Connected to database");
 });
 
 return conexion;
@@ -19,5 +19,6 @@ return conexion;
 
 
 module.exports = {
-  conectar
+  conectar,
+  mysql
 }

@@ -66,7 +66,7 @@ export class RegistroComponent implements OnInit {
           this._router.navigate(['registro']);
           Swal.fire(
             'Error!',
-            'Ya existe un usuario con ese correo electronico',
+            result.mensaje,
             'warning',
           );
         }
@@ -118,8 +118,14 @@ allMunicipios=[];
       departamento: new FormControl("", Validators.required),
       telefono: new FormControl("", Validators.required),
       direccion: new FormControl("", Validators.required),
-      passw2: new FormControl("", Validators.required)
+      passw2: new FormControl("", Validators.required),
+      termino: new FormControl(false, Validators.requiredTrue)
     }, passwordMatchValidator)
+  }
+
+  marcar(){
+    console.log('presionando');
+    this.registroForm.get('termino').setValue(true);
   }
 
 
