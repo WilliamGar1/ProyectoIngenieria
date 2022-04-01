@@ -1,3 +1,5 @@
+const fs = require('fs');
+const path =require('path');
 //conexion base de datos
 const MySQLBD = require("../config/mysql.config");
 //encripter
@@ -127,7 +129,7 @@ const verifyUser = async (req, res) => {
 
         }else{
             //CONSULTA DE VERIFICACION
-            conectBD.query(`UPDATE Usuarios SET estadoHabilitacion = 1 WHERE email = '${User[0].email}'`, (err, result) => {
+            conectBD.query(`UPDATE Usuarios SET estadoHabilitacion = TRUE WHERE email = '${User[0].email}'`, (err, result) => {
 
                 if(err){
             
@@ -135,7 +137,7 @@ const verifyUser = async (req, res) => {
 
                 }
                 else{
-                    console.log({"Usuario":User[0],"Ahora":"HABILITADO"});
+     
                     res.send({mensaje:'Usuario habilitado'});
                 };
 
@@ -157,12 +159,12 @@ const LoginUser = async (req, res) => {
 
     const conectBD = MySQLBD.conectar();
     //BUSCAR USUARIO
-    conectBD.query(`SELECT * FROM Usuarios WHERE email = '${email}'`, (err, UsuarioRes) => {
+    conectBD.query(`SELECT * FROM Usuarios WHERE email = '${email}' AND estadoHabilitacion = TRUE `, (err, UsuarioRes) => {
       
         //REVISAR SI SE ENCONTRO EL USUARIO
         if (!UsuarioRes.length) {
 
-            res.send({"mensaje":"Usuario No existe",acceso:0});
+            res.send({"mensaje":"Usuario No existe O se encuentra deshabilitado",acceso:0});
             console.log("Close Connection");
             conectBD.end();
 
@@ -308,7 +310,7 @@ const  resetPasswordGuardar = async (req, res) => {
             }
             else{
 
-                res.send({mensaje:'contraseña actualizada',guardado:1}); 
+                res.send({mensaje:'Contraseña actualizada',guardado:1}); 
             }
         });
 
@@ -328,8 +330,64 @@ const  resetPasswordGuardar = async (req, res) => {
 
 const insertImagenPerfil = async (req, res,next) => {
 
-    const file = req.file;
-    console.log(file);
+    const usuarioId= req.params.id;    
+    const imagen = req.file;
+
+
+    const conectBD = MySQLBD.conectar();
+    conectBD.query(`SELECT * FROM Usuarios WHERE Id = ${usuarioId} AND estadoHabilitacion = TRUE `, (err, UsuarioRes) => {
+      
+        //REVISAR SI SE ENCONTRO EL USUARIO
+        if (!UsuarioRes.length) {
+            res.send({mensaje:'El usuario no existe',exito:0});
+            console.log("Close Connection");
+            conectBD.end();
+
+        }else{
+
+            let imgQuery=" ";
+            let query ="";
+            
+           
+            const img=  fs.readFileSync(path.join( __dirname,'..','public','uploads',imagen.filename));
+
+            conectBD.query(` SELECT *  FROM ImagenPerfilUsuario WHERE personaId = ${usuarioId}`, (err, ImagenRes)  => {
+
+                if(ImagenRes.length){
+                  imgQuery ="UPDATE ImagenPerfilUsuario SET perfilImagen = ? ,contentType = ? WHERE personaId = ?"; 
+                  query = MySQLBD.mysql.format(imgQuery,[img,imagen.mimetype,usuarioId]);
+             
+                }else{
+
+                 imgQuery ="INSERT INTO ImagenPerfilUsuario(personaId,perfilImagen,contentType) VALUES (?,?,?)"; 
+                 query = MySQLBD.mysql.format(imgQuery,[usuarioId,img,imagen.mimetype]);
+                }
+
+           
+
+            setTimeout( () => {
+    
+                conectBD.query(query,(err, ImagenRes)=>{
+                   if(err) { res.send({mensaje:'Error al guardar imagen',exito:0});}
+                   else{
+
+                    console.log('save');
+                    res.send({mensaje:'Imagen Guardada',exito:1});
+
+                   }
+
+                console.log("Close Connection");
+                 conectBD.end();
+                 
+               });
+               
+               fs.unlinkSync((path.join( __dirname,'..','public','uploads',imagen.filename)));
+               }, 5)
+
+            });
+        }
+    });
+
 
 };
 
@@ -371,7 +429,7 @@ const test = async (req, res) => {
 //funciones
  function insercionFallida(dato){
 
-    console.log('Borrando datos');
+    console.log('Borrando datos de registro fallido');
     const conectBD = MySQLBD.conectar();
 
     if(dato.paso == 1){
