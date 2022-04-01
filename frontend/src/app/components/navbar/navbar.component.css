@@ -12,12 +12,16 @@
 .nav{
     background-color:#ebe8e5;
     padding: 10px;
-    font-size: 20px;
+    font-size: 17px;
 }
 
 .nav-link{
     color: #9a6b5b;
+    
 }
 .nav-link :active{
     color: #9a6b5b;
+}
+.nav-link:hover{
+    box-shadow: 2px 2px 5px #999;
 }

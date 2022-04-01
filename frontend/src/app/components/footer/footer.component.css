@@ -27,3 +27,7 @@
 p{
     color: #9a6b5b;
 }
+
+.links:hover{
+    cursor: pointer;
+}
