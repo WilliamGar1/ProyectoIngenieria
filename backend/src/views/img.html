@@ -17,8 +17,8 @@
 <% items.forEach(image => { %>
 
     <div>
-        <img src="data:<%= image.contentType %>;base64,
-             <%= image.productoImagen.toString('base64') %>">
+        <img src="data:<%= image.ImagenTipo %>;base64,
+             <%= image.Imagen.toString('base64') %>">
 
     </div>
 
@@ -30,12 +30,14 @@
     <% pds.forEach(pd => { %>
         <h2> ID DEL PRODUCTO <%= pd.Id %></h2>
         <div>
-            <img src="data:<%= pd.contentType %>;base64,
-             <%= pd.productoImagen.toString('base64') %> " width="100" height="100">
+            <img src="data:<%= pd.ImagenTipo %>;base64,
+             <%= pd.Imagen.toString('base64') %> " width="100" height="100">
 
              <h2><%= pd.nombre %></h2>
              <h3><%= pd.precio %></h3>
-             <h3><%= pd.cat %></h3>
+             <h3>categoria: <%= pd.categoria %></h3>
+             <h3>categoria id: <%= pd.categoriaId %></h3>
+
     
         </div>
     

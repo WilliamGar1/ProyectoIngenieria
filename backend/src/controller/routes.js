@@ -28,7 +28,7 @@ router.post('/resetPasswordForm/token',users.resetPasswordForm);
 router.post('/resetPasswordForm/guardar',users.resetPasswordGuardar);
 
 //IMAGEN DE PERFIL
-router.post('/insertImagenPerfil',multer.cargarImagen.single('imagenPerfil'),users.insertImagenPerfil);
+router.post('/insertImagenPerfil/:id',multer.cargarArchivo.single('imagenPerfil'),users.insertImagenPerfil);
 
 //DIRECCIONES
 router.get('/datosregistro',direcciones.getAll_departamentos_municipios);
@@ -37,12 +37,18 @@ router.get('/datosregistro',direcciones.getAll_departamentos_municipios);
 router.get('/datosregistroProducto',categorias.getAll_categorias);
 
 //PRODUCTO
-router.post('/insertNewProducto/:id',multer.cargarImagen.array('imagenesProducto',4),productos.insertNewProducto);
+router.post('/insertNewProducto/:id',multer.cargarArchivo.array('imagenesProducto',4),productos.insertNewProducto);
 
-router.get('/getProductoMuestra',productos.getProductoMuestra);
+router.get('/getProductosMuestra',productos.getProductosMuestra);
 
-//array('imagenes',12)
-//testeo de base de datos
+router.get('/getProductosCategoria',productos.getProductosCategoria);
+
+router.get('/getProductosUsuario',productos.getProductosUsuario);
+
+router.get('/getProductoDetalle',productos.getProductoDetalle);
+
+router.get('/setInhabilitarProducto',productos.setInhabilitarProducto);
+
 router.get('/test',users.test);
 router.get('/testImagen',productos.testImg);
 
