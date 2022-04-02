@@ -1,0 +1,17 @@
+.arriba2{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;;
+	align-items: baseline;
+	align-content: stretch;
+}
+
+i{
+    font-size: 25px;
+    color: #DC001A;
+}
+
+.intro{
+	font-size: 1.3rem;
+}

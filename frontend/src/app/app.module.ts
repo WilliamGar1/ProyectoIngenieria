@@ -22,6 +22,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { RecuperarComponent } from './components/recuperar/recuperar.component';
 import { FormContraseComponent } from './components/form-contrase/form-contrase.component';
 import { RegistrarProductoComponent } from './components/registrar-producto/registrar-producto.component';
+import { ProductosComponent } from './components/productos/productos.component';
+import { MisProductosComponent } from './components/mis-productos/mis-productos.component';
 
 
 @NgModule({
@@ -34,7 +36,9 @@ import { RegistrarProductoComponent } from './components/registrar-producto/regi
     RegistroComponent,
     RecuperarComponent,
     FormContraseComponent,
-    RegistrarProductoComponent
+    RegistrarProductoComponent,
+    ProductosComponent,
+    MisProductosComponent
   ],
   imports: [
     BrowserModule,

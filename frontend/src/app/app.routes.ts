@@ -5,6 +5,8 @@ import { RegistroComponent } from "./components/registro/registro.component";
 import { RecuperarComponent } from "./components/recuperar/recuperar.component";
 import  { FormContraseComponent } from "./components/form-contrase/form-contrase.component";
 import { RegistrarProductoComponent } from "./components/registrar-producto/registrar-producto.component";
+import {ProductosComponent} from "./components/productos/productos.component";
+import {MisProductosComponent} from "./components/mis-productos/mis-productos.component";
 
 
 const app_routes: Routes =[
@@ -14,6 +16,8 @@ const app_routes: Routes =[
     {path: 'login', component: LoginComponent},
     {path: 'login/recuperar', component: RecuperarComponent},
     {path: 'registrarProducto', component: RegistrarProductoComponent},
+    {path: 'Producto', component: ProductosComponent},
+    {path: 'misProductos', component: MisProductosComponent},
     {path:'**', pathMatch:'full', redirectTo:'inicio'}
 ];
 
