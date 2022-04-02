@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductosComponent implements OnInit {
 
+  id: number = 0;
+
   constructor() { }
 
   ngOnInit(): void {
