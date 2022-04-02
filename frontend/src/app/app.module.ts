@@ -24,6 +24,7 @@ import { FormContraseComponent } from './components/form-contrase/form-contrase.
 import { RegistrarProductoComponent } from './components/registrar-producto/registrar-producto.component';
 import { ProductosComponent } from './components/productos/productos.component';
 import { MisProductosComponent } from './components/mis-productos/mis-productos.component';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { MisProductosComponent } from './components/mis-productos/mis-productos.
     FormContraseComponent,
     RegistrarProductoComponent,
     ProductosComponent,
-    MisProductosComponent
+    MisProductosComponent,
+    ProductDetailComponent
   ],
   imports: [
     BrowserModule,

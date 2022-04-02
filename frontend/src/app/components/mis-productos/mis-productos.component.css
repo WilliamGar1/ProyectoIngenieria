@@ -7,9 +7,12 @@
 	align-content: stretch;
 }
 
-i{
-    font-size: 25px;
+i.del{
     color: #DC001A;
+}
+
+i{
+	font-size: 25px;
 }
 
 .intro{

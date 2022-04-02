@@ -7,6 +7,7 @@ import  { FormContraseComponent } from "./components/form-contrase/form-contrase
 import { RegistrarProductoComponent } from "./components/registrar-producto/registrar-producto.component";
 import {ProductosComponent} from "./components/productos/productos.component";
 import {MisProductosComponent} from "./components/mis-productos/mis-productos.component";
+import { ProductDetailComponent } from "./components/product-detail/product-detail.component";
 
 
 const app_routes: Routes =[
@@ -16,8 +17,9 @@ const app_routes: Routes =[
     {path: 'login', component: LoginComponent},
     {path: 'login/recuperar', component: RecuperarComponent},
     {path: 'registrarProducto', component: RegistrarProductoComponent},
-    {path: 'Producto', component: ProductosComponent},
+    {path: 'producto', component: ProductosComponent},
     {path: 'misProductos', component: MisProductosComponent},
+    {path: 'producto/detalle/:id', component: ProductDetailComponent},
     {path:'**', pathMatch:'full', redirectTo:'inicio'}
 ];
 
