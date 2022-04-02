@@ -20,6 +20,10 @@ i{
     color: #4a3121;
 }
 
+i:hover{
+	cursor: pointer;
+}
+
 .titulo{
     font-size:1.3rem;
 }
