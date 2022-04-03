@@ -61,6 +61,11 @@ export class NodeServerService {
     return this.http.post(this.url+`/insertNewProducto/${id}`,req_body);
   };
 
+  getProductos():Observable<any> {
+
+    return this.http.get(this.url+'/getProductosMuestra');
+  };
+
   
   //prueba get
   getNodeServer():Observable<any> {

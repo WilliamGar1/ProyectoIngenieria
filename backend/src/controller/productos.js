@@ -79,9 +79,10 @@ const insertNewProducto = async  (req, res,next) => {
 const getProductosMuestra = async (req,res) =>{
     const conectBD = MySQLBD.conectar();
 
-    conectBD.query(`SELECT p.*,i.productoImagen Imagen ,i.contentType ImagenTipo, c.nombre Categoria, c.Id CategoriaId FROM Productos p 
+    conectBD.query(`SELECT p.*,i.productoImagen Imagen ,i.contentType ImagenTipo,CONCAT(u.nombre,' ',u.apellido) Usuario , c.nombre Categoria, c.Id CategoriaId FROM Productos p 
     INNER JOIN ImagenesProducto i ON p.Id = i.productoId
     INNER JOIN Categorias c ON c.Id = p.categoriaId
+    INNER JOIN Usuarios u ON u.Id = p.personaId  
     AND p.estadoHabilitacion = TRUE
     GROUP BY p.Id`, (err, ProductoRes) => {
 

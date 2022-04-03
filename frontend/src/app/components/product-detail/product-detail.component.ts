@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import { Location } from "@angular/common";
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: "app-product-detail",
@@ -16,7 +18,14 @@ export class ProductDetailComponent implements OnInit {
   hora = Date.now();
   categoria: string = "Celulares";
 
-  constructor() {}
+  constructor(private route: ActivatedRoute) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.obtenerProducto();
+  }
+
+  obtenerProducto(){
+    const id = +this.route.snapshot.paramMap.get('id');
+    console.log(id);
+  }
 }
