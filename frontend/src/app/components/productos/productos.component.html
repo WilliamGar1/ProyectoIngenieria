@@ -2,7 +2,7 @@
 <div class="arriba mt-5" [formGroup]="formulario">
     <p class="titulo">Elija la Categoría de su preferencia</p>
     <div class="col-md-4">
-        <select class="form-select" id="categorias" formControlName="categorias">
+        <select class="form-select" id="categorias" formControlName="categorias" (change)="cargarProductos()">
             <option selected disabled value="">Elegir...</option>
             <option value="0">Todas</option>
             <option *ngFor="let ctg of allCategorias" [ngValue]="ctg.Id">{{ctg.nombre}}</option>
@@ -12,8 +12,8 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-5">
-            <div class="card" style="width: 18rem;" *ngFor="let pro of allProductos">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-5" *ngFor="let pro of allProductos">
+            <div class="card" style="width: 18rem;">
                 <img src="{{pro.Imagen}}" width="200" height="200" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h5 class="card-title">{{pro.nombre}}</h5>

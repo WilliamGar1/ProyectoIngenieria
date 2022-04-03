@@ -41,11 +41,11 @@ router.post('/insertNewProducto/:id',multer.cargarArchivo.array('imagenesProduct
 
 router.get('/getProductosMuestra',productos.getProductosMuestra);
 
-router.get('/getProductosCategoria',productos.getProductosCategoria);
+router.get('/getProductosCategoria/:id',productos.getProductosCategoria);
 
 router.get('/getProductosUsuario',productos.getProductosUsuario);
 
-router.get('/getProductoDetalle',productos.getProductoDetalle);
+router.get('/getProductoDetalle/:id',productos.getProductoDetalle);
 
 router.get('/setInhabilitarProducto',productos.setInhabilitarProducto);
 

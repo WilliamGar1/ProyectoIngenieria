@@ -14,7 +14,7 @@ import { Buffer } from 'buffer';
 export class ProductosComponent implements OnInit {
 
   formulario = new FormGroup({
-    categorias: new FormControl('', Validators.required),
+    categorias: new FormControl(''),
   });
 
   id: number = 0;
@@ -35,6 +35,7 @@ export class ProductosComponent implements OnInit {
       if (data.exito) {
         console.log(data.mensaje);
         this.allCategorias = data.categorias;
+        console.log(this.allCategorias);
       }
       else {
         console.log(data.mensaje);
@@ -60,6 +61,23 @@ export class ProductosComponent implements OnInit {
     }, err => console.log(err));
   }
 
+  getProductosCategoria(id : number){
+    console.log('Productos de categoria: '+id);
+    this._nodeServer.getProductosCategoria(id).subscribe(data => {
+
+      if (data.exito) {
+        console.log(data.mensaje);
+        this.allProductos = data.productos;
+        this.convertirImagenes();
+        console.log(this.allProductos);
+      }
+      else {
+        console.log(data.mensaje);
+      }
+
+    }, err => console.log(err));
+  }
+
   convertirImagenes(){
     this.allProductos.forEach(producto=>{
       let buff = new Buffer(producto.Imagen);
@@ -69,5 +87,12 @@ export class ProductosComponent implements OnInit {
     });
   }
 
-
+  cargarProductos(){
+    let id = this.formulario.value.categorias;
+    if(id == 0){
+      this.getProductos();
+    }else{
+      this.getProductosCategoria(id);
+    }
+  }
 }

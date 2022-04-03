@@ -66,6 +66,16 @@ export class NodeServerService {
     return this.http.get(this.url+'/getProductosMuestra');
   };
 
+  getProductosCategoria(id: number):Observable<any> {
+
+    return this.http.get(this.url+`/getProductosCategoria/${id}`);
+  };
+
+  getProductoDetalle(id: number):Observable<any> {
+
+    return this.http.get(this.url+`/getProductoDetalle/${id}`);
+  };
+
   
   //prueba get
   getNodeServer():Observable<any> {
