@@ -35,7 +35,6 @@ export class ProductosComponent implements OnInit {
       if (data.exito) {
         console.log(data.mensaje);
         this.allCategorias = data.categorias;
-        console.log(this.allCategorias);
       }
       else {
         console.log(data.mensaje);
@@ -52,7 +51,6 @@ export class ProductosComponent implements OnInit {
         console.log(data.mensaje);
         this.allProductos = data.productos;
         this.convertirImagenes();
-        console.log(this.allProductos);
       }
       else {
         console.log(data.mensaje);
@@ -69,7 +67,6 @@ export class ProductosComponent implements OnInit {
         console.log(data.mensaje);
         this.allProductos = data.productos;
         this.convertirImagenes();
-        console.log(this.allProductos);
       }
       else {
         console.log(data.mensaje);

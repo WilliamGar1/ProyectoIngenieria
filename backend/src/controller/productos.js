@@ -128,7 +128,7 @@ const getProductosCategoria = async (req,res) =>{
 
 const getProductosUsuario = async (req,res) =>{
 
-    const {usuarioId} = req.body;
+    const usuarioId = req.params.id;
 
     const conectBD = MySQLBD.conectar();
 
@@ -206,7 +206,7 @@ const getProductoDetalle = async (req,res) =>{
 
 const setInhabilitarProducto = async (req,res) =>{
 
-    const {productoId} = req.body;
+    const productoId = req.params.id;
 
     const conectBD = MySQLBD.conectar();
 

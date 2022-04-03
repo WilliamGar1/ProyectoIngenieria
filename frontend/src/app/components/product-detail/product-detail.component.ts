@@ -55,8 +55,6 @@ export class ProductDetailComponent implements OnInit {
         this.producto = data.producto[0];
         this.imagenesProducto = data.imagenes;
         this.convertirImagenes();
-        console.log(this.producto);
-        console.log(this.imagenesProducto);
       }
       else {
         console.log(data.mensaje);

@@ -133,7 +133,7 @@ export class RegistrarProductoComponent implements OnInit {
         'No ha iniciado sesión',
         'warning',
       );
-      this._router.navigate(['Inicio']);
+      this._router.navigate(['login']);
     }
   }
 

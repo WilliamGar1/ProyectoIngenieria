@@ -76,6 +76,16 @@ export class NodeServerService {
     return this.http.get(this.url+`/getProductoDetalle/${id}`);
   };
 
+  getProductosUsuario(id: number):Observable<any> {
+
+    return this.http.get(this.url+`/getProductosUsuario/${id}`);
+  };
+
+  getInhabilitarProducto(id: number):Observable<any> {
+
+    return this.http.get(this.url+`/setInhabilitarProducto/${id}`);
+  };
+
   
   //prueba get
   getNodeServer():Observable<any> {
