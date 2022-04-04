@@ -79,9 +79,10 @@ const insertNewProducto = async  (req, res,next) => {
 const getProductosMuestra = async (req,res) =>{
     const conectBD = MySQLBD.conectar();
 
-    conectBD.query(`SELECT p.*,i.productoImagen Imagen ,i.contentType ImagenTipo, c.nombre Categoria, c.Id CategoriaId FROM Productos p 
+    conectBD.query(`SELECT p.*,i.productoImagen Imagen ,i.contentType ImagenTipo,CONCAT(u.nombre,' ',u.apellido) Usuario , c.nombre Categoria, c.Id CategoriaId FROM Productos p 
     INNER JOIN ImagenesProducto i ON p.Id = i.productoId
     INNER JOIN Categorias c ON c.Id = p.categoriaId
+    INNER JOIN Usuarios u ON u.Id = p.personaId  
     AND p.estadoHabilitacion = TRUE
     GROUP BY p.Id`, (err, ProductoRes) => {
 
@@ -98,19 +99,19 @@ const getProductosMuestra = async (req,res) =>{
 
 const getProductosCategoria = async (req,res) =>{
 
-    const {categoriaId} = req.body;
+    const categoriaId = req.params.id;
 
     const conectBD = MySQLBD.conectar();
 
-    conectBD.query(`SELECT p.*,i.productoImagen Imagen ,i.contentType ImagenTipo, c.nombre Categoria, c.Id CategoriaId FROM Productos p 
+    conectBD.query(`SELECT p.*,i.productoImagen Imagen ,i.contentType ImagenTipo,CONCAT(u.nombre,' ',u.apellido) Usuario , c.nombre Categoria, c.Id CategoriaId FROM Productos p 
     INNER JOIN ImagenesProducto i ON p.Id = i.productoId
     INNER JOIN Categorias c ON c.Id = p.categoriaId
-    AND p.categoriaId = ${categoriaId} AND estadoHabilitacion = TRUE 
-    GROUP BY p.Id
-    ORDER BY p.creacion DESC`, (err, ProductoRes) => {
-
+    INNER JOIN Usuarios u ON u.Id = p.personaId  
+    AND p.categoriaId = ${categoriaId} AND p.estadoHabilitacion = TRUE
+    GROUP BY p.Id`, (err, ProductoRes) => {
+        
         if(err){
-            res.send({mensaje:'Error al buscar productos',exito:0})
+            res.send({mensaje:`Error al buscar productos ${categoriaId}`,exito:0})
         }else{
             if(ProductoRes.length){
             res.send({mensaje:'Productos encontrados',productos:ProductoRes,categoria:{id:ProductoRes[0].CategoriaId,nombre:ProductoRes[0].Categoria},exito:1})
@@ -127,11 +128,11 @@ const getProductosCategoria = async (req,res) =>{
 
 const getProductosUsuario = async (req,res) =>{
 
-    const {usuarioId} = req.body;
+    const usuarioId = req.params.id;
 
     const conectBD = MySQLBD.conectar();
 
-    conectBD.query(` SELECT p.*,i.productoImagen Imagen ,i.contentType ImagenTipo,u.nombre Usuario, u.Id UsuarioId, c.nombre Categoria, c.Id CategoriaId FROM Productos p 
+    conectBD.query(`SELECT p.*,i.productoImagen Imagen ,i.contentType ImagenTipo,u.nombre Usuario, u.Id UsuarioId, c.nombre Categoria, c.Id CategoriaId FROM Productos p 
     INNER JOIN ImagenesProducto i ON p.Id = i.productoId
     INNER JOIN Categorias c ON c.Id = p.categoriaId
 	INNER JOIN Usuarios u ON u.Id = p.personaId  
@@ -157,12 +158,20 @@ const getProductosUsuario = async (req,res) =>{
 
 const getProductoDetalle = async (req,res) =>{
 
-    const {productoId} = req.body;
+    const productoId = req.params.id;
 
     const conectBD = MySQLBD.conectar();
 
-    conectBD.query(`SELECT * FROM Productos WHERE Id = ${productoId} AND estadoHabilitacion = TRUE `, (err, ProductoRes) => {
+    conectBD.query(`SELECT p.*,i.productoImagen Imagen ,i.contentType ImagenTipo,CONCAT(u.nombre,' ',u.apellido) Usuario, u.Id UsuarioId, c.nombre Categoria, c.Id CategoriaId FROM Productos p 
+    INNER JOIN ImagenesProducto i ON p.Id = i.productoId
+    INNER JOIN Categorias c ON c.Id = p.categoriaId
+	INNER JOIN Usuarios u ON u.Id = p.personaId  
+	AND p.Id = ${productoId} AND p.estadoHabilitacion = TRUE 
+    GROUP BY p.Id
+    ORDER BY p.creacion DESC`, (err, ProductoRes) => {
 
+
+        
         if(err){
             res.send({mensaje:'Error al buscar productos',exito:0});
             console.log("Close Connection");
@@ -197,7 +206,7 @@ const getProductoDetalle = async (req,res) =>{
 
 const setInhabilitarProducto = async (req,res) =>{
 
-    const {productoId} = req.body;
+    const productoId = req.params.id;
 
     const conectBD = MySQLBD.conectar();
 

@@ -61,6 +61,31 @@ export class NodeServerService {
     return this.http.post(this.url+`/insertNewProducto/${id}`,req_body);
   };
 
+  getProductos():Observable<any> {
+
+    return this.http.get(this.url+'/getProductosMuestra');
+  };
+
+  getProductosCategoria(id: number):Observable<any> {
+
+    return this.http.get(this.url+`/getProductosCategoria/${id}`);
+  };
+
+  getProductoDetalle(id: number):Observable<any> {
+
+    return this.http.get(this.url+`/getProductoDetalle/${id}`);
+  };
+
+  getProductosUsuario(id: number):Observable<any> {
+
+    return this.http.get(this.url+`/getProductosUsuario/${id}`);
+  };
+
+  getInhabilitarProducto(id: number):Observable<any> {
+
+    return this.http.get(this.url+`/setInhabilitarProducto/${id}`);
+  };
+
   
   //prueba get
   getNodeServer():Observable<any> {
