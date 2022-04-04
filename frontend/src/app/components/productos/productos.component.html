@@ -12,19 +12,19 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-5" *ngFor="let pro of allProductos">
-            <div class="card" style="width: 18rem;">
-                <img src="{{pro.Imagen}}" width="200" height="200" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">{{pro.nombre}}</h5>
-                  <p class="card-text">Descripción: {{pro.descripcion}}</p>
-                  <p class="card-text">Precio: L. {{pro.precio}}</p>
-                  <div class="arriba2">
-                    <p class="card-text">Vendedor: {{pro.Usuario}}</p>
-                    <a [routerLink]="['detalle', pro.Id]"><i class="fa-solid fa-circle-plus"></i></a>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-5" *ngFor="let pro of allProductos">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{pro.Imagen}}" width="200" height="200" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">{{pro.nombre}}</h5>
+                      <p class="card-text" maxlength="10">Descripción: {{pro.descripcion.slice(0,18)}}...</p>
+                      <p class="card-text">Precio: L. {{pro.precio}}</p>
+                      <div class="arriba2">
+                        <p class="card-text">Vendedor: {{pro.Usuario}}</p>
+                        <a [routerLink]="['detalle', pro.Id]"><i class="fa-solid fa-circle-plus"></i></a>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-        </div>
+            </div>
     </div>
 </div>
