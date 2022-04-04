@@ -9,7 +9,7 @@
               <img src="{{pro.Imagen}}" width="200" height="200" class="card-img-top" alt="...">
               <div class="card-body">
                 <h5 class="card-title">{{pro.nombre}}</h5>
-                <p class="card-text">{{pro.descripcion}}</p>
+                <p class="card-text">{{pro.descripcion.slice(0,18)}}...</p>
                 <p class="card-text">Precio L. {{pro.precio}}</p>
                 <div class="arriba2">
                   <p class="card-text">{{pro.actualizacion | date:'short'}}</p>
