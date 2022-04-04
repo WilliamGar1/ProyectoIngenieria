@@ -5,6 +5,7 @@ import { NodeServerService } from 'src/app/services/node-server.service';
 import { forEachChild } from 'typescript';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Buffer } from 'buffer';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-productos',
@@ -70,6 +71,12 @@ export class ProductosComponent implements OnInit {
       }
       else {
         console.log(data.mensaje);
+        this.allProductos=[];
+        Swal.fire(
+          'Ups!',
+          'No hay productos de esa categoría',
+          'warning',
+        );
       }
 
     }, err => console.log(err));
