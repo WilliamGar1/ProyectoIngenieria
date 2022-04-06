@@ -1,0 +1,46 @@
+<h1 class="text-center">Detalles del producto</h1>
+<hr>
+
+<div class="card mb-3">
+    <div class="row g-0">
+        <div class="col-md-9">
+            <div id="imgsProduct" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div *ngFor="let img of imagenesProducto; first as isFirst" [ngClass]="{'carousel-item' : true, 'active' : isFirst}">
+                        <img src="{{img.Imagen}}" class="d-block w-100" alt="...">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#imgsProduct"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#imgsProduct"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card-body">
+                <h5 class="card-title">{{producto.nombre}} <i class="fa-regular fa-bookmark float-end"></i></h5>
+                
+                <p class="card-text">{{producto.precio | currency:'L ':"symbol"}}</p>
+                <p class="card-text"><small class="text-muted">Publicado desde:  {{producto.actualizacion | date:'short'}}</small></p>
+                <p class="card-text">{{producto.descripcion}}</p>
+                <p class="card-text fw-bold">{{producto.Categoria}}</p>
+            </div>
+            
+            <div class="card-body">
+                <hr>
+                <p class="card-text">Vendedor: {{producto.Usuario}}</p>
+                <hr>
+            </div>
+            <div class="card-body d-grid d-flex align-items-end flex-column bd-highlight mb-3">
+                <p class="card-text">¿Interesado en el producto?</p>
+               <!-- <button class="btn btn-primary mt-auto p-2 bd-highlight" type="button"> <i class="fa-solid fa-message"></i> Enviar un mensaje</button>-->
+            </div>
+        </div>
+    </div>
+</div>

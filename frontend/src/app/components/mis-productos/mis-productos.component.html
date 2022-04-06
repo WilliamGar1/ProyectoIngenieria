@@ -1,0 +1,24 @@
+<h1 class="text-center">Productos Publicados</h1>
+
+<p class="intro text-center mt-3">En esta página podás encontrar todos los productos que haz publicado y tendrás la opción de eliminarlos en caso de que así lo desees.</p>
+<div class="container-fluid mt-5">
+    <div class="row">
+      
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-5" *ngFor="let pro of allProductos" >
+          <div class="card" style="width: 18rem;">
+              <img src="{{pro.Imagen}}" width="200" height="200" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">{{pro.nombre}}</h5>
+                <p class="card-text">{{pro.descripcion.slice(0,18)}}...</p>
+                <p class="card-text">Precio L. {{pro.precio}}</p>
+                <div class="arriba2">
+                  <p class="card-text">{{pro.actualizacion | date:'short'}}</p>
+                <!-- <i class="fa-solid fa-pencil" routerLink="/registrarProducto"></i>-->
+                  <i class="fa-solid fa-trash-can del" (click)="eliminarProducto(pro)"></i>
+                </div>
+              </div>
+            </div>
+        </div>
+        
+    </div>
+</div>

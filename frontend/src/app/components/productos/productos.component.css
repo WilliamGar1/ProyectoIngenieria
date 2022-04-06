@@ -1,0 +1,30 @@
+.arriba{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-evenly;;
+	align-items: baseline;
+	align-content: stretch;
+}
+.arriba2{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;;
+	align-items: baseline;
+	align-content: stretch;
+}
+
+i{
+    font-size: 25px;
+    color: #4a3121;
+}
+
+i:hover{
+	cursor: pointer;
+}
+
+.titulo{
+    font-size:1.3rem;
+}
+

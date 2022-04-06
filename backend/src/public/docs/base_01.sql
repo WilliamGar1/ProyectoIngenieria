@@ -73,8 +73,9 @@ CREATE TABLE Categorias(
 Id INTEGER PRIMARY KEY,
 nombre VARCHAR(100) NOT NULL
 );
-INSERT INTO Categorias VALUES (1,'CATEGORIA_P1');
-INSERT INTO Categorias VALUES (2,'CATEGORIA_P2');
+INSERT INTO Categorias VALUES (1,'Comestibles');
+INSERT INTO Categorias VALUES (2,'Calzado');
+INSERT INTO Categorias VALUES (3,'Muebles');
 
 /*--PRODUCTO*/
 CREATE TABLE Productos(
@@ -147,49 +148,47 @@ CREATE TABLE  IF NOT EXISTS test(
 SELECT 
     *
 FROM
-    Productos;
+    Usuarios;
     
     SELECT 
     *
 FROM
     ImagenesProducto;
     
-    SELECT p.*,i.productoImagen,i.contentType, c.nombre cat FROM Productos p 
+    
+    /*querys*/
+   SELECT p.*,i.productoImagen Imagen ,i.contentType ImagenTipo, c.nombre Categoria, c.Id CategoriaId FROM Productos p 
     INNER JOIN ImagenesProducto i ON p.Id = i.productoId
     INNER JOIN Categorias c ON c.Id = p.categoriaId
     AND estadoHabilitacion = TRUE
     GROUP BY p.Id;
-/*
-DROP TABLE IF EXISTS Direcciones;
-
-CREATE TABLE Direcciones(
-Id INTEGER AUTO_INCREMENT PRIMARY KEY,
-calle VARCHAR(30) NULL,
-avenida VARCHAR(30) NULL,
-referencia VARCHAR(50)  NULL,
-municipiosId INTEGER
-);
-
-DROP TABLE IF EXISTS users;
-CREATE TABLE users(
-Id INTEGER AUTO_INCREMENT PRIMARY KEY,
-nombre VARCHAR(30) NOT NULL,
-apellido VARCHAR(30) NOT NULL,
-email VARCHAR(30) UNIQUE ,
-estadoHabilitacion BOOLEAN DEFAULT FALSE,
-contrato  BOOLEAN  DEFAULT TRUE,
-municipioId INTEGER  ,
-direccion  VARCHAR(200) ,
-creacion TIMESTAMP DEFAULT NOW(),
-actualizacion TIMESTAMP DEFAULT NOW() ON UPDATE NOW()
-);
-
-DROP TABLE IF EXISTS DireccionesUsuarios;
-
-CREATE TABLE DireccionesUsuarios(
-Id INTEGER  AUTO_INCREMENT PRIMARY KEY,
-personaId INTEGER NOT NULL REFERENCES Usuarios(Id),
-direccionId INTEGER NOT NULL REFERENCES Direcciones(Id),
-estado BOOL DEFAULT TRUE
-);
-*/
+    
+    /* getProductosCategoria*/
+    SELECT p.*,i.productoImagen Imagen ,i.contentType ImagenTipo, c.nombre Categoria, c.Id CategoriaId FROM Productos p 
+    INNER JOIN ImagenesProducto i ON p.Id = i.productoId
+    INNER JOIN Categorias c ON c.Id = p.categoriaId
+    AND p.categoriaId = 3 AND estadoHabilitacion = TRUE 
+    GROUP BY p.Id
+    ORDER BY p.creacion DESC;
+    
+    /*getProductosUsuario*/
+    SELECT p.*,i.productoImagen Imagen ,i.contentType ImagenTipo ,CONCAT(u.nombre,' ',u.apellido) Usuario, u.Id UsuarioId, c.nombre Categoria, c.Id CategoriaId FROM Productos p 
+    INNER JOIN ImagenesProducto i ON p.Id = i.productoId
+    INNER JOIN Categorias c ON c.Id = p.categoriaId
+	INNER JOIN Usuarios u ON u.Id = p.personaId  
+	AND p.personaId = 4 AND p.estadoHabilitacion = TRUE 
+    GROUP BY p.Id
+    ORDER BY p.creacion DESC;
+    
+    /*ImagenPerfil usuario*/
+    SELECT *  FROM ImagenPerfilUsuario WHERE personaId = 3;
+    
+    /*getProductoDetalle*/
+    SELECT * FROM Productos WHERE Id = 7;
+    SELECT Id,productoImagen Imagen,contentType ImagenTipo FROM ImagenesProducto WHERE productoId =7;
+    
+     /*setInhabilitarProducto */
+      UPDATE Productos SET estadoHabilitacion = true  WHERE Id =1;
+    
+    select * from Productos;
+    select * from ImagenPerfilUsuario;

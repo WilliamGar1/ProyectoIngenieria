@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
     , private _router : Router) { }
 
   ngOnInit(): void {
+    this.comprobarUsuario();
     this.crearRegistroForm();
   }
 
@@ -31,7 +32,7 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  logIn() { 
+  logIn() {
 
     var usuario = this.loginForm.value;
 
@@ -77,6 +78,18 @@ export class LoginComponent implements OnInit {
 
   get emailValido(){
     return esEmailValido(this.loginForm.get('email').value)
+  }
+
+  comprobarUsuario(){
+    if(localStorage.getItem('usuario')){
+      console.log("Ya se ha iniciado sesión");
+      Swal.fire(
+        '',
+        'Ya se tiene una sesión activa',
+        'warning',
+      );
+      this._router.navigate(['inicio']);
+    }
   }
   
 }

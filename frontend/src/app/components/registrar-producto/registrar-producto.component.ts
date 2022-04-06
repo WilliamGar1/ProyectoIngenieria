@@ -55,6 +55,12 @@ export class RegistrarProductoComponent implements OnInit {
         'Porfavor completar todos los campos',
         'warning',
       );
+    }else if(this.files.length>4){
+      Swal.fire(
+        'ERROR!',
+        'solo se permiten máximo 4 imágenes',
+        'warning',
+      );
     } else {
       const formData = new FormData();
 
@@ -94,14 +100,14 @@ export class RegistrarProductoComponent implements OnInit {
 
         }
       });
-
-
-    }
-    this.formulario.reset();
+      this.formulario.reset();
     // this.files.pop();
     while (this.files.length) {
       this.files.pop();
     }
+
+    }
+    
 
 
   }
@@ -133,7 +139,7 @@ export class RegistrarProductoComponent implements OnInit {
         'No ha iniciado sesión',
         'warning',
       );
-      this._router.navigate(['Inicio']);
+      this._router.navigate(['login']);
     }
   }
 

@@ -10,12 +10,12 @@ const storage = multer.diskStorage({
   }
 });
 
-const cargarImagen = multer({
+const cargarArchivo = multer({
   storage : storage
 }); //<--nombre del imput imagen
 
 
 module.exports = {
 
-    cargarImagen
+    cargarArchivo
 };

@@ -62,7 +62,7 @@ const insertNewProducto = async  (req, res,next) => {
     });
     
     fs.unlinkSync((path.join( __dirname,'..','public','uploads',imagen.filename)));
-    }, 20)
+    }, 5)
 
 
 
@@ -76,31 +76,175 @@ const insertNewProducto = async  (req, res,next) => {
 
 };
 
-const getProductoMuestra = async (req,res) =>{
+const getProductosMuestra = async (req,res) =>{
     const conectBD = MySQLBD.conectar();
 
-    conectBD.query(`SELECT p.*,i.productoImagen,i.contentType, c.nombre cat FROM Productos p 
+    conectBD.query(`SELECT p.*,i.productoImagen Imagen ,i.contentType ImagenTipo,CONCAT(u.nombre,' ',u.apellido) Usuario , c.nombre Categoria, c.Id CategoriaId FROM Productos p 
     INNER JOIN ImagenesProducto i ON p.Id = i.productoId
     INNER JOIN Categorias c ON c.Id = p.categoriaId
-    AND estadoHabilitacion = TRUE
+    INNER JOIN Usuarios u ON u.Id = p.personaId  
+    AND p.estadoHabilitacion = TRUE
     GROUP BY p.Id`, (err, ProductoRes) => {
 
 
-        res.render('img.html',{  pds: ProductoRes,
-            items: [] });
+    if(err){ res.send({mensaje:'Error al buscar productos',exito:0})}
+    else{res.send({mensaje:'Productos encontrados',productos:ProductoRes,exito:1}) }
+
  
         console.log("Close Connection");
         conectBD.end(); 
     });
 
-}
+};
+
+const getProductosCategoria = async (req,res) =>{
+
+    const categoriaId = req.params.id;
+
+    const conectBD = MySQLBD.conectar();
+
+    conectBD.query(`SELECT p.*,i.productoImagen Imagen ,i.contentType ImagenTipo,CONCAT(u.nombre,' ',u.apellido) Usuario , c.nombre Categoria, c.Id CategoriaId FROM Productos p 
+    INNER JOIN ImagenesProducto i ON p.Id = i.productoId
+    INNER JOIN Categorias c ON c.Id = p.categoriaId
+    INNER JOIN Usuarios u ON u.Id = p.personaId  
+    AND p.categoriaId = ${categoriaId} AND p.estadoHabilitacion = TRUE
+    GROUP BY p.Id`, (err, ProductoRes) => {
+        
+        if(err){
+            res.send({mensaje:`Error al buscar productos ${categoriaId}`,exito:0})
+        }else{
+            if(ProductoRes.length){
+            res.send({mensaje:'Productos encontrados',productos:ProductoRes,categoria:{id:ProductoRes[0].CategoriaId,nombre:ProductoRes[0].Categoria},exito:1})
+            }else{
+            res.send({mensaje:'No hay Productos en esta categoria',exito:0})  
+            }
+        }
+       
+        console.log("Close Connection");
+        conectBD.end(); 
+    });
+
+};
+
+const getProductosUsuario = async (req,res) =>{
+
+    const usuarioId = req.params.id;
+
+    const conectBD = MySQLBD.conectar();
+
+    conectBD.query(`SELECT p.*,i.productoImagen Imagen ,i.contentType ImagenTipo,u.nombre Usuario, u.Id UsuarioId, c.nombre Categoria, c.Id CategoriaId FROM Productos p 
+    INNER JOIN ImagenesProducto i ON p.Id = i.productoId
+    INNER JOIN Categorias c ON c.Id = p.categoriaId
+	INNER JOIN Usuarios u ON u.Id = p.personaId  
+	AND p.personaId = ${usuarioId} AND p.estadoHabilitacion = TRUE 
+    GROUP BY p.Id
+    ORDER BY p.creacion DESC`, (err, ProductoRes) => {
+
+        if(err){
+            res.send({mensaje:'Error al buscar productos',exito:0})
+        }else{
+            if(ProductoRes.length){
+            res.send({mensaje:'Productos encontrados',productos:ProductoRes,usuario:{id:ProductoRes[0].UsuarioId,nombre:ProductoRes[0].Usuario},exito:1})
+            }else{
+            res.send({mensaje:'Este usuario no ha agreagdo productos',exito:0})  
+            }
+        }
+       
+        console.log("Close Connection");
+        conectBD.end(); 
+    });
+
+};
+
+const getProductoDetalle = async (req,res) =>{
+
+    const productoId = req.params.id;
+
+    const conectBD = MySQLBD.conectar();
+
+    conectBD.query(`SELECT p.*,i.productoImagen Imagen ,i.contentType ImagenTipo,CONCAT(u.nombre,' ',u.apellido) Usuario, u.Id UsuarioId, c.nombre Categoria, c.Id CategoriaId FROM Productos p 
+    INNER JOIN ImagenesProducto i ON p.Id = i.productoId
+    INNER JOIN Categorias c ON c.Id = p.categoriaId
+	INNER JOIN Usuarios u ON u.Id = p.personaId  
+	AND p.Id = ${productoId} AND p.estadoHabilitacion = TRUE 
+    GROUP BY p.Id
+    ORDER BY p.creacion DESC`, (err, ProductoRes) => {
+
+
+        
+        if(err){
+            res.send({mensaje:'Error al buscar productos',exito:0});
+            console.log("Close Connection");
+            conectBD.end(); 
+        }else{
+            if(ProductoRes.length){
+                conectBD.query(` SELECT Id,productoImagen Imagen,contentType ImagenTipo FROM ImagenesProducto WHERE productoId =  ${productoId} `, (err, ImagenRes) => {
+                    
+                    if(err){res.send({mensaje:'Error al buscar imagenes del producto',exito:0});}
+                    else{
+                    res.send({mensaje:'Productos encontrados',producto:ProductoRes,imagenes:ImagenRes,exito:1})
+                     /*Prueba 
+                     res.render('img.html',{ 
+
+                         pds:[],
+                         items:ImagenRes });
+                     /* Prueba */
+                }
+
+                });
+            }else{
+            res.send({mensaje:'No existe el producto',exito:0})  
+            }
+            console.log("Close Connection");
+            conectBD.end(); 
+        }
+       
+      
+    });
+
+};
+
+const setInhabilitarProducto = async (req,res) =>{
+
+    const productoId = req.params.id;
+
+    const conectBD = MySQLBD.conectar();
+
+    conectBD.query(`SELECT * FROM Productos WHERE Id = ${productoId} AND estadoHabilitacion = TRUE `, (err, ProductoRes) => {
+
+        if(err){
+            res.send({mensaje:'Error al buscar producto',exito:0});
+            console.log("Close Connection");
+            conectBD.end(); 
+        }else{
+            if(ProductoRes.length){
+                conectBD.query(`  UPDATE Productos SET estadoHabilitacion = FALSE  WHERE Id =  ${productoId} `, (err,  ProductoRes) => {
+                    
+                    if(err){res.send({mensaje:'Error al inhabilitarProducto',exito:0});}
+                    else{
+                    res.send({mensaje:'Producto dado de baja',exito:1})
+                     
+                }
+
+                });
+            }else{
+            res.send({mensaje:'No existe el producto',exito:0})  
+            }
+            console.log("Close Connection");
+            conectBD.end(); 
+        }
+       
+      
+    });
+
+};
 
  
 const testImg = async  (req, res) => {
 
     const conectBD = MySQLBD.conectar();
     //BUSCAR CATEGORIAS
-    conectBD.query(`SELECT * FROM ImagenesProducto`, (err, ImagenRes) => {
+    conectBD.query(`SELECT i.perfilImagen Imagen, i.contentType ImagenTipo  FROM ImagenPerfilUsuario i`, (err, ImagenRes) => {
 
         res.render('img.html',{ 
             
@@ -118,36 +262,10 @@ const testImg = async  (req, res) => {
 
 module.exports = {
  insertNewProducto,
- getProductoMuestra,
+ getProductosMuestra,
+ getProductosCategoria,
+ getProductosUsuario,
+ getProductoDetalle,
+ setInhabilitarProducto,
  testImg
 };
-
-
-
-
-
-               /* imagenes.forEach(imagen => {
-               
-                    conectBD.query(`INSERT INTO ImagenesProducto(productoId,productoImagen) VALUES
-                                    (${ProductoRes.insertId},${imagen})`, (err, ImagenRes) => {
-                           if(err){
-
-                            mensaje=mensaje +', Pero Error al guardar imagen '+ imerr;
-                            imerr+=1;
-    
-                           }
-                          
-                    });
-
-                });
-*/
-
-//var imagen=  fs.readFileSync(path.join( __dirname,'..','public','uploads',req.file.filename));
-   //console.log(imagen);
-  // imagen.content
-    //fs.unlinkSync((path.join( __dirname,'..','public','uploads',req.file.filename)));
-
-
-    /*const {producto,imagenes} = req.body;
- 
-    */
