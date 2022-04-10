@@ -58,6 +58,12 @@ router.get('/calificarVendedor',calificaDenuncia.calificarVendedor);
 
 router.get('/getCalificacionMedia',calificaDenuncia.calificacionMedia);
 
+router.get('/resivirDenuncia',calificaDenuncia.resivirDenuncia);
+
+router.get('/getDenuncias',calificaDenuncia.getAll_Denuncias);
+
+router.get('/tacharDenuncia',calificaDenuncia.tacharDenuncia);
+
 router.get('/test',users.test);
 router.get('/testImagen',productos.testImg);
 

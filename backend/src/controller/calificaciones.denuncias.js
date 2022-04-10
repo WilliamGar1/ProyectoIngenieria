@@ -21,7 +21,7 @@ const calificarVendedor = async (req,res)=>{
                 if(err){
                 res.send({mensaje:'Error al calificar vendedor',exito:0});
                 }else{
-                    res.send({mensaje:'Vendedor Calificado',CalificarRes,exito:1});
+                    res.send({mensaje:'Vendedor Calificado',exito:1});
                 }
         
                 console.log("Close Connection");
@@ -56,7 +56,62 @@ const calificacionMedia = async (req,res)=>{
 };
 
 
+const resivirDenuncia = async (req,res)=>{
+    const {clienteId,vendedorId,detalle} = req.body; 
+    const conectBD = MySQLBD.conectar();
+    
+    conectBD.query(`INSERT INTO Denuncias(clienteId,vendedorId,detalle) VALUES (${clienteId},${vendedorId},'${detalle}')`, (err, DenunciarRes) => {
+
+        if(err){
+        res.send({mensaje:'Error al enviar denuncia',exito:0});
+        }else{
+            res.send({mensaje:'Vendedor denunciado',exito:1});
+        }
+
+        console.log("Close Connection");
+        conectBD.end();
+    });
+};
+
+const getAll_Denuncias = async (req,res) => {
+    const conectBD = MySQLBD.conectar();
+    conectBD.query(`SELECT * FROM Denuncias WHERE estado = TRUE`, (err, DenunciasRes) => {
+
+        if(err){
+        res.send({mensaje:'Error al buscar denuncias',exito:0});
+        }else{
+            res.send({mensaje:'Denuncias Encontradas',denuncias:DenunciasRes,exito:1});
+        }
+
+        console.log("Close Connection");
+        conectBD.end();
+    });
+};
+
+const tacharDenuncia = async (req,res) => {
+
+    const {denunciaId} = req.body;
+
+    const conectBD = MySQLBD.conectar();
+    conectBD.query(`UPDATE Denuncias SET estado = FALSE WHERE Id = ${denunciaId}`, (err, DenunciasRes) => {
+
+        if(err){
+        res.send({mensaje:'Error al <Tachar>',exito:0});
+        }else{
+       
+            res.send({mensaje:'Denuncia <Tachada>',exito:1});
+        }
+
+        console.log("Close Connection");
+        conectBD.end();
+    });
+};
+
+
 module.exports = {
     calificarVendedor,
-    calificacionMedia
+    calificacionMedia,
+    resivirDenuncia,
+    getAll_Denuncias,
+    tacharDenuncia
 }
