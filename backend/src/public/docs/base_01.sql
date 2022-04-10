@@ -1,7 +1,7 @@
 use bavvsia83xxkjbvtnugt;
 
 
-DROP TABLE IF EXISTS Municipios;
+/*DROP TABLE IF EXISTS Municipios;
 DROP TABLE IF EXISTS Departamentos;
 
 DROP TABLE IF EXISTS  Telefonos;
@@ -12,19 +12,24 @@ DROP TABLE IF EXISTS Usuarios;
 DROP TABLE IF EXISTS ImagenesProducto;
 DROP TABLE IF EXISTS Productos;
 
-DROP TABLE IF EXISTS Categorias;
+DROP TABLE IF EXISTS Categorias;*/
+
+DROP TABLE IF EXISTS Calificaciones;
+DROP TABLE IF EXISTS Denuncias;
+DROP TABLE IF EXISTS Suscripciones;
+DROP TABLE IF EXISTS Chats;
 
 DROP TABLE IF EXISTS test;
 
 
 /*--direcciones*/
-CREATE TABLE Departamentos(
+CREATE TABLE IF NOT EXISTS Departamentos(
 Id INTEGER PRIMARY KEY,
 nombre VARCHAR(100) NOT NULL
 );
 
 
-CREATE TABLE Municipios(
+CREATE TABLE IF NOT EXISTS Municipios(
 Id INTEGER PRIMARY KEY,
 nombre VARCHAR(100) NOT NULL,
 departamentoId INTEGER NOT NULL REFERENCES Departamentos(Id)
@@ -33,7 +38,7 @@ departamentoId INTEGER NOT NULL REFERENCES Departamentos(Id)
 
 
 /*--usuario*/
-CREATE TABLE Usuarios(
+CREATE TABLE IF NOT EXISTS Usuarios(
  Id INTEGER AUTO_INCREMENT PRIMARY KEY,
  nombre        VARCHAR(30)   ,
  apellido      VARCHAR(30)   ,
@@ -47,20 +52,20 @@ CREATE TABLE Usuarios(
 );
 
 
-CREATE TABLE DatosInicioSesion(
+CREATE TABLE IF NOT EXISTS DatosInicioSesion(
 Id INTEGER  AUTO_INCREMENT PRIMARY KEY,
 personaId INTEGER NOT NULL REFERENCES Usuarios(Id),
 contrasenia VARCHAR(200) NOT NULL,
 estado  BOOLEAN DEFAULT TRUE
 );
 
-CREATE TABLE Telefonos(
+CREATE TABLE IF NOT EXISTS Telefonos(
 Id INTEGER  AUTO_INCREMENT  PRIMARY KEY,
 personaId INTEGER NOT NULL REFERENCES Usuarios(Id),
 telefono VARCHAR(16) NOT NULL
 );
 
-CREATE TABLE ImagenPerfilUsuario(
+CREATE TABLE IF NOT EXISTS ImagenPerfilUsuario(
 Id INTEGER  AUTO_INCREMENT PRIMARY KEY,
 perfilImagen LONGBLOB,
 contentType VARCHAR(30),
@@ -69,16 +74,14 @@ personaId INTEGER NOT NULL REFERENCES Usuarios(Id)
 
 
 /*--CATEGORIAS*/
-CREATE TABLE Categorias(
+CREATE TABLE IF NOT EXISTS Categorias(
 Id INTEGER PRIMARY KEY,
 nombre VARCHAR(100) NOT NULL
 );
-INSERT INTO Categorias VALUES (1,'Comestibles');
-INSERT INTO Categorias VALUES (2,'Calzado');
-INSERT INTO Categorias VALUES (3,'Muebles');
+
 
 /*--PRODUCTO*/
-CREATE TABLE Productos(
+CREATE TABLE IF NOT EXISTS  Productos(
 Id INTEGER AUTO_INCREMENT PRIMARY KEY,
 nombre VARCHAR(100) NOT NULL,
 precio DOUBLE NOT NULL,
@@ -90,12 +93,48 @@ creacion TIMESTAMP DEFAULT NOW(),
 actualizacion TIMESTAMP DEFAULT NOW() ON UPDATE NOW()
 );
 
-CREATE TABLE ImagenesProducto(
+CREATE TABLE  IF NOT EXISTS ImagenesProducto(
 Id INTEGER AUTO_INCREMENT PRIMARY KEY,
 productoId INTEGER NOT NULL REFERENCES Productos(Id),
 productoImagen LONGBLOB ,
 contentType VARCHAR(30)
 );
+
+/*CALIFICACIONES*/
+CREATE TABLE IF NOT EXISTS Calificaciones(
+Id INTEGER  AUTO_INCREMENT PRIMARY KEY,
+clienteId INTEGER NOT NULL REFERENCES Usuarios(Id),
+vendedorId INTEGER NOT NULL REFERENCES Usuarios(Id),
+calificacion INTEGER NOT NULL
+);
+
+/*DENUNCIAS*/
+CREATE TABLE  IF NOT EXISTS Denuncias(
+Id INTEGER AUTO_INCREMENT PRIMARY KEY,
+clienteId INTEGER NOT NULL REFERENCES Usuarios(Id),
+vendedorId INTEGER NOT NULL REFERENCES Usuarios(Id),
+detalle VARCHAR(200) NOT NULL,
+estado BOOLEAN DEFAULT TRUE
+);
+
+/*SUSCRIPCIONES*/
+CREATE TABLE IF NOT EXISTS Suscripciones(
+Id INTEGER AUTO_INCREMENT PRIMARY KEY,
+clienteId INTEGER NOT NULL REFERENCES Usuarios(Id),
+categoriaId INTEGER NOT NULL REFERENCES Categorias(Id),
+estado BOOLEAN DEFAULT TRUE
+);
+
+/*CHATS*/
+CREATE TABLE IF NOT EXISTS Chats(
+Id INTEGER AUTO_INCREMENT PRIMARY KEY,
+clienteId INTEGER NOT NULL REFERENCES Usuarios(Id),
+vendedorId INTEGER NOT NULL REFERENCES Usuarios(Id),
+mensaje VARCHAR(300)
+);
+
+
+/*DENUNCIAS*/
 
 
 INSERT INTO Departamentos VALUES(1, 'Atlantida');
@@ -139,21 +178,20 @@ INSERT INTO Municipios VALUES(17, 'Tocoa', 2);
 INSERT INTO Municipios VALUES(18, 'Bonito Oriental', 2);
 
 
+INSERT INTO Categorias VALUES (1,'Electrónicos');
+INSERT INTO Categorias VALUES (2,'Muebles');
+INSERT INTO Categorias VALUES (3,'Ropa');
+INSERT INTO Categorias VALUES (4,'Calzado');
+INSERT INTO Categorias VALUES (5,'Cosméticos');
+INSERT INTO Categorias VALUES (6,'Comestibles');
+
 
 CREATE TABLE  IF NOT EXISTS test(
      id  int auto_increment PRIMARY KEY,
      n varchar(10)
 );
 
-SELECT 
-    *
-FROM
-    Usuarios;
-    
-    SELECT 
-    *
-FROM
-    ImagenesProducto;
+
     
     
     /*querys*/
@@ -180,15 +218,4 @@ FROM
     GROUP BY p.Id
     ORDER BY p.creacion DESC;
     
-    /*ImagenPerfil usuario*/
-    SELECT *  FROM ImagenPerfilUsuario WHERE personaId = 3;
-    
-    /*getProductoDetalle*/
-    SELECT * FROM Productos WHERE Id = 7;
-    SELECT Id,productoImagen Imagen,contentType ImagenTipo FROM ImagenesProducto WHERE productoId =7;
-    
-     /*setInhabilitarProducto */
-      UPDATE Productos SET estadoHabilitacion = true  WHERE Id =1;
-    
-    select * from Productos;
-    select * from ImagenPerfilUsuario;
+   

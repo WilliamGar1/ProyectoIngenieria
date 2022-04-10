@@ -8,7 +8,10 @@ const users = require('./users');
 const direcciones = require('./direcciones');
 const categorias = require('./categorias');
 const productos = require('./productos');
+const calificaDenuncia = require('./calificaciones.denuncias');
+
 const multer = require("../config/multer.config");
+
 
 //SERVIDOR
 router.get('/',(req,res)=>{nodeS = { server :"Node server online" }; res.render('index.html',{nodeS });});
@@ -48,6 +51,12 @@ router.get('/getProductosUsuario/:id',productos.getProductosUsuario);
 router.get('/getProductoDetalle/:id',productos.getProductoDetalle);
 
 router.get('/setInhabilitarProducto/:id',productos.setInhabilitarProducto);
+
+//CALIFICACIONES_DENUNCIAS
+
+router.get('/calificarVendedor',calificaDenuncia.calificarVendedor);
+
+router.get('/getCalificacionMedia',calificaDenuncia.calificacionMedia);
 
 router.get('/test',users.test);
 router.get('/testImagen',productos.testImg);
