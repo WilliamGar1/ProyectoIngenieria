@@ -3,6 +3,8 @@ import { Location } from "@angular/common";
 import { ActivatedRoute, Router } from '@angular/router';
 import { NodeServerService } from "src/app/services/node-server.service";
 import { Buffer } from 'buffer';
+import { FormGroup, FormControl, Validator, Validators } from "@angular/forms";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: "app-product-detail",
@@ -10,6 +12,17 @@ import { Buffer } from 'buffer';
   styleUrls: ["./product-detail.component.css"],
 })
 export class ProductDetailComponent implements OnInit {
+  denuncia = new FormGroup({
+    motivo: new FormControl('', Validators.required),
+  });
+  calificacion = new FormGroup({
+    estrella1: new FormControl('1'),
+    estrella2: new FormControl('2'),
+    estrella3: new FormControl('3'),
+    estrella4: new FormControl('4'),
+    estrella5: new FormControl('5'),
+  });
+
   id : number;
 
   nombre: string = "Celular";
@@ -70,5 +83,22 @@ export class ProductDetailComponent implements OnInit {
       let img = 'data:'+imagen.ImagenTipo+';base64,'+stringToBase64;
       imagen.Imagen = img;
     });
+  }
+
+  validar(){
+    if(!this.denuncia.valid){
+      Swal.fire(
+        'Error!',
+       'Por favor ingrese el motivo',
+       'warning',
+    );
+    }else{
+      Swal.fire(
+        '¡Excelente!',
+       'Su denuncia a sido enviada',
+       'success',
+    );
+      this.denuncia.reset();
+    }
   }
 }

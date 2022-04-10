@@ -41,6 +41,48 @@
                 <p class="card-text">¿Interesado en el producto?</p>
                <!-- <button class="btn btn-primary mt-auto p-2 bd-highlight" type="button"> <i class="fa-solid fa-message"></i> Enviar un mensaje</button>-->
             </div>
+            <div class="card-body d-grid d-flex align-items-end flex-column bd-highlight mb-3">
+                <p class="card-text">Denunciar al Vendedor</p>
+               <button class="btn btn-danger mt-auto p-2 bd-highlight " type="button" data-bs-toggle="modal" data-bs-target="#denuncias"> <i class="fa-solid fa-flag"></i>  Denunciar </button>
+            </div>
+            <div class="card-body d-grid d-flex align-items-end flex-column bd-highlight mb-3">
+                <p class="card-text">Calificar al Vendedor</p>
+                <form [formGroup]="calificacion"> 
+                    <p class="clasificacion">
+                      <input id="radio1" type="radio"  formControlName="estrella1"  name="estrellas">
+                            <label for="radio1"><i class="estre fa-solid fa-star"></i></label>
+                      <input id="radio2" type="radio"  formControlName="estrella2"name="estrellas" >
+                            <label for="radio2"><i class="estre fa-solid fa-star"></i></label>
+                      <input id="radio3" type="radio" formControlName="estrella3" name="estrellas" >
+                            <label for="radio3"><i class="estre fa-solid fa-star"></i></label>
+                      <input id="radio4" type="radio" formControlName="estrella4" name="estrellas">
+                             <label for="radio4"><i class="estre fa-solid fa-star"></i></label>
+                      <input id="radio5" type="radio" formControlName="estrella5" name="estrellas">
+                             <label for="radio5"><i class="estre fa-solid fa-star"></i></label>
+                    </p>
+                </form>
+            </div>
+           
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="denuncias" tabindex="-1" aria-labelledby="modalTerminosLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xs">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTerminosLabel">Denuncias</h5>
+            </div>
+            <div class="modal-body">
+               <form [formGroup]="denuncia">
+                <label for="mensaje" class="col-sm-2 col-form-label">Motivo:</label><br>
+                <textarea name="textarea" class="form-control" rows="3" cols="30" formControlName="motivo"></textarea>
+               </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" (click)="validar()">Enviar</button>
+            </div>
         </div>
     </div>
 </div>
