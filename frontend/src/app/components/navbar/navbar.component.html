@@ -1,24 +1,48 @@
 <nav class="nav navbar navbar-expand-lg">
-    <div class="container-fluid">
-      <a class="nav-link" [routerLink]="['Inicio']">Inicio</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" [routerLink]="['registrarProducto']">Registrar Productos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" [routerLink]="['producto']">Productos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" [routerLink]="['misProductos']">Mís Productos</a>
-          </li>
-          <li class="user nav-item">
-            <a class="nav-link" [routerLink]="['login']"><i class=" login fa-solid fa-circle-user"></i></a>
-          </li>
-        </ul>
-      </div>
+  <div class="container-fluid">
+    <a class="nav-link" [routerLink]="['Inicio']">Inicio</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" [routerLink]="['registrarProducto']">Registrar Productos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" [routerLink]="['producto']">Productos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" [routerLink]="['misProductos']">Mís Productos</a>
+        </li>
+        <li class="user nav-item">
+          <div class="dropdown">
+            <a class="nav-link" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class=" login fa-solid fa-circle-user"></i>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <li *ngIf="!sesion">
+                <a class="dropdown-item" routerLink="/login">
+                  <i class="fa-solid fa-arrow-right-to-bracket me-1"></i>Iniciar Sesión
+                </a>
+              </li>
+
+              <li *ngIf="sesion">
+                <a class="dropdown-item" role="button">
+                  <i class="fa-solid fa-address-card me-1"></i>Perfil
+                </a>
+              </li>
+              <li *ngIf="sesion">
+                <a class="dropdown-item" role="button" (click)="out()">
+                  <i class="fa-solid fa-arrow-right-from-bracket me-1"></i>Cerrar Sesión
+                </a>
+              </li>
+
+            </ul>
+          </div>
+        </li>
+      </ul>
     </div>
-  </nav>
+  </div>
+</nav>
