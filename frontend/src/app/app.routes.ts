@@ -8,6 +8,7 @@ import { RegistrarProductoComponent } from "./components/registrar-producto/regi
 import {ProductosComponent} from "./components/productos/productos.component";
 import {MisProductosComponent} from "./components/mis-productos/mis-productos.component";
 import { ProductDetailComponent } from "./components/product-detail/product-detail.component";
+import { ProfileComponent } from "./components/profile/profile.component";
 
 
 const app_routes: Routes =[
@@ -20,6 +21,7 @@ const app_routes: Routes =[
     {path: 'producto', component: ProductosComponent},
     {path: 'misProductos', component: MisProductosComponent},
     {path: 'producto/detalle/:id', component: ProductDetailComponent},
+    {path: 'perfil', component: ProfileComponent},
     {path:'**', pathMatch:'full', redirectTo:'inicio'}
 ];
 

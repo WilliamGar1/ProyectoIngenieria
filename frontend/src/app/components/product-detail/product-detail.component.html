@@ -10,12 +10,12 @@
                         <img src="{{img.Imagen}}" class="d-block w-100" alt="...">
                     </div>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#imgsProduct"
+                <button class="carousel-control-prev car" type="button" data-bs-target="#imgsProduct"
                     data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#imgsProduct"
+                <button class="carousel-control-next car" type="button" data-bs-target="#imgsProduct"
                     data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
@@ -49,15 +49,15 @@
                 <p class="card-text">Calificar al Vendedor</p>
                 <form [formGroup]="calificacion"> 
                     <p class="clasificacion">
-                      <input id="radio1" type="radio"  formControlName="estrella1"  name="estrellas">
+                      <input id="radio1" type="radio"  formControlName="estrella1">
                             <label for="radio1"><i class="estre fa-solid fa-star"></i></label>
-                      <input id="radio2" type="radio"  formControlName="estrella2"name="estrellas" >
+                      <input id="radio2" type="radio"  formControlName="estrella2">
                             <label for="radio2"><i class="estre fa-solid fa-star"></i></label>
-                      <input id="radio3" type="radio" formControlName="estrella3" name="estrellas" >
+                      <input id="radio3" type="radio" formControlName="estrella3">
                             <label for="radio3"><i class="estre fa-solid fa-star"></i></label>
-                      <input id="radio4" type="radio" formControlName="estrella4" name="estrellas">
+                      <input id="radio4" type="radio" formControlName="estrella4">
                              <label for="radio4"><i class="estre fa-solid fa-star"></i></label>
-                      <input id="radio5" type="radio" formControlName="estrella5" name="estrellas">
+                      <input id="radio5" type="radio" formControlName="estrella5">
                              <label for="radio5"><i class="estre fa-solid fa-star"></i></label>
                     </p>
                 </form>
