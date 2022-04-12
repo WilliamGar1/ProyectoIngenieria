@@ -1,5 +1,5 @@
 img.w-100 {
-  height: 40em;
+  height: 45em;
   object-fit: none;
 }
 
@@ -44,4 +44,8 @@ input[type="radio"]:checked ~ label {
 }
 .estre {
   font-size: 30px;
+}
+
+.car{
+  background-color: rgba(0, 0, 0, 0.8);
 }
