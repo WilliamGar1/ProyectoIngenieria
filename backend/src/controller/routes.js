@@ -8,7 +8,12 @@ const users = require('./users');
 const direcciones = require('./direcciones');
 const categorias = require('./categorias');
 const productos = require('./productos');
+const calificaDenuncia = require('./calificaciones.denuncias');
+const suscripciones = require('./suscripciones');
+const chats = require('./chats');
+
 const multer = require("../config/multer.config");
+
 
 //SERVIDOR
 router.get('/',(req,res)=>{nodeS = { server :"Node server online" }; res.render('index.html',{nodeS });});
@@ -48,6 +53,34 @@ router.get('/getProductosUsuario/:id',productos.getProductosUsuario);
 router.get('/getProductoDetalle/:id',productos.getProductoDetalle);
 
 router.get('/setInhabilitarProducto/:id',productos.setInhabilitarProducto);
+
+//CALIFICACIONES_DENUNCIAS
+
+router.get('/calificarVendedor',calificaDenuncia.calificarVendedor);
+
+router.get('/getCalificacionMedia',calificaDenuncia.calificacionMedia);
+
+router.get('/resivirDenuncia',calificaDenuncia.resivirDenuncia);
+
+router.get('/getDenuncias',calificaDenuncia.getAll_Denuncias);
+
+router.get('/tacharDenuncia',calificaDenuncia.tacharDenuncia);
+
+//SUSCRIPCIONES 
+router.get('/suscribirCategoria',suscripciones.suscribirCategoria);
+
+router.get('/cancelarSuscripcion',suscripciones.cancelarSuscripcion);
+
+router.get('/suscripcionesCliente',suscripciones.suscripcionesCliente);
+
+//CHATS
+router.get('/enviarMensaje',chats.enviarMensaje);
+
+router.get('/chatPersonas',chats.chatPersonas);
+
+router.get('/mensajesPersona',chats.mensajesPersona);
+
+router.get('/borrarChat',chats.borrarChat);
 
 router.get('/test',users.test);
 router.get('/testImagen',productos.testImg);
