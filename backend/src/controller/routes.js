@@ -58,9 +58,9 @@ router.get('/setInhabilitarProducto/:id',productos.setInhabilitarProducto);
 
 //CALIFICACIONES_DENUNCIAS
 
-router.get('/calificarVendedor',calificaDenuncia.calificarVendedor);
+router.post('/calificarVendedor',calificaDenuncia.calificarVendedor);
 
-router.get('/getCalificacionMedia',calificaDenuncia.calificacionMedia);
+router.get('/getCalificacionMedia/:id',calificaDenuncia.calificacionMedia);
 
 router.get('/resivirDenuncia',calificaDenuncia.resivirDenuncia);
 

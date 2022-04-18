@@ -38,15 +38,15 @@ const calificarVendedor = async (req,res)=>{
 
 const calificacionMedia = async (req,res)=>{
 
-    const {vendedorId}= req.body;   
+    const vendedorId= req.params.id;   
     const conectBD = MySQLBD.conectar();
-    conectBD.query(`SELECT SUM(calificacion)/COUNT(*) CalificacionMedia FROM Calificaciones WHERE vendedorId = ${vendedorId}`, (err, CalificacionRes) => {
+    conectBD.query(`SELECT SUM(calificacion)/COUNT(*) CalificacionMedia, COUNT(*) cantidad FROM Calificaciones WHERE vendedorId = ${vendedorId}`, (err, CalificacionRes) => {
 
 
         if(err){
         res.send({mensaje:'Error al optener calificacion',exito:0});
         }else{
-            res.send({mensaje:'Calificacion Encontrada',CalificacionMedia:CalificacionRes[0].CalificacionMedia,exito:1});
+            res.send({mensaje:'Calificacion Encontrada',CalificacionMedia:CalificacionRes[0].CalificacionMedia,cantidad:CalificacionRes[0].cantidad,exito:1});
         }
         
         console.log("Close Connection");

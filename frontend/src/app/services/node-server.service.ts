@@ -108,6 +108,17 @@ export class NodeServerService {
     return this.http.post(this.url+'/cancelarSuscripcion',req_body);
   };
 
+  //CALIFICACIONES
+  getCalificacionMedia(id: number):Observable<any> {
+
+    return this.http.get(this.url+`/getCalificacionMedia/${id}`);
+  };
+
+  postCalificarVendedor( req_body : any ):Observable<any> {
+
+    return this.http.post(this.url+'/calificarVendedor',req_body);
+  };
+
   
   //prueba get
   getNodeServer():Observable<any> {

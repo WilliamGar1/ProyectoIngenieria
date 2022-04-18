@@ -87,6 +87,25 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 
+  calificarVendedor(calif: number){
+    console.log(calif);
+    var data = {
+      vendedorId: 1,
+      clienteId: 5,
+      calificacion: calif
+    }
+    this._nodeServer.postCalificarVendedor(data).subscribe(data => {
+      if (data.exito) {
+        console.log(data.mensaje);
+        console.log(data);
+      }
+      else {
+        console.log(data.mensaje);
+      }
+
+    }, err => console.log(err));
+  }
+
   validar() {
     if (!this.denuncia.valid) {
       Swal.fire('Error!', 'Por favor ingrese el motivo', 'warning');

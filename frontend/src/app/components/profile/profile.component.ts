@@ -11,6 +11,8 @@ import Swal from 'sweetalert2';
 export class ProfileComponent implements OnInit {
 
   Usuario: number;
+  calificacion: number;
+  opiniones: number;
   allCategorias = [];
   categoria = new FormControl();
   suscripciones = [];
@@ -28,35 +30,7 @@ export class ProfileComponent implements OnInit {
     this.getUsuario();
     this.getCategorias();
     this.getSubscripcionesCliente();
-  }
-
-  getUsuario(){
-    this.Usuario = parseInt(localStorage.getItem('usuario'));
-    this._nodeServer.getInfoUsuario(this.Usuario).subscribe(data => {
-      if (data.exito) {
-        console.log(data.mensaje);
-        this.usuario = data.usuario;
-        console.log(this.usuario);
-      }
-      else {
-        console.log(data.mensaje);
-      }
-    }, err => console.log(err));
-  }
-
-  getSubscripcionesCliente() {
-
-    this._nodeServer.getSubscripcionesCliente(this.Usuario).subscribe(data => {
-
-      if (data.exito) {
-        console.log(data.mensaje);
-        this.suscripciones = data.suscripciones;
-      }
-      else {
-        console.log(data.mensaje);
-      }
-
-    }, err => console.log(err));
+    this.getCalificacionMedia();
   }
 
   subscribirCategoria(){
@@ -119,6 +93,49 @@ export class ProfileComponent implements OnInit {
         }, err => console.log(err));
       }
     })
+  }
+
+  getUsuario(){
+    this.Usuario = parseInt(localStorage.getItem('usuario'));
+    this._nodeServer.getInfoUsuario(this.Usuario).subscribe(data => {
+      if (data.exito) {
+        console.log(data.mensaje);
+        this.usuario = data.usuario;
+      }
+      else {
+        console.log(data.mensaje);
+      }
+    }, err => console.log(err));
+  }
+
+  getSubscripcionesCliente() {
+
+    this._nodeServer.getSubscripcionesCliente(this.Usuario).subscribe(data => {
+
+      if (data.exito) {
+        console.log(data.mensaje);
+        this.suscripciones = data.suscripciones;
+      }
+      else {
+        console.log(data.mensaje);
+      }
+
+    }, err => console.log(err));
+  }
+
+  getCalificacionMedia(){
+    this._nodeServer.getCalificacionMedia(this.Usuario).subscribe(data => {
+
+      if (data.exito) {
+        console.log(data.mensaje);
+        this.opiniones = data.cantidad;
+        this.calificacion = data.CalificacionMedia*2;
+      }
+      else {
+        console.log(data.mensaje);
+      }
+
+    }, err => console.log(err));
   }
 
   getCategorias() {

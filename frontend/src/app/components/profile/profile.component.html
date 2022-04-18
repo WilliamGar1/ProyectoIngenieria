@@ -68,12 +68,12 @@
         <div class="card ultimas">
             <h5 class="card-header">Calificación como Vendedor</h5>
             <div class="card-body">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star-half-stroke"></i>
-                <i class="fa-regular fa-star"></i>
-                <p class="fw-bold my-2"><small>13 Opiniones</small></p>
+                <i class="fa-regular fa-star" [ngClass]="{'fa-solid':calificacion>=1, 'fa-star-half-stroke':calificacion<2}"></i>
+                <i class="fa-regular fa-star" [ngClass]="{'fa-solid':calificacion>=3, 'fa-star-half-stroke':calificacion>=3 && calificacion<4}"></i>
+                <i class="fa-regular fa-star" [ngClass]="{'fa-solid':calificacion>=5, 'fa-star-half-stroke':calificacion>=5 && calificacion<6}"></i>
+                <i class="fa-regular fa-star" [ngClass]="{'fa-solid':calificacion>=7, 'fa-star-half-stroke':calificacion>=7 && calificacion<8}"></i>
+                <i class="fa-regular fa-star" [ngClass]="{'fa-solid':calificacion>=9, 'fa-star-half-stroke':calificacion>=9 && calificacion<10}"></i>
+                <p class="fw-bold my-2"><small>{{opiniones}} Opiniones</small></p>
             </div>
         </div>
     </div>

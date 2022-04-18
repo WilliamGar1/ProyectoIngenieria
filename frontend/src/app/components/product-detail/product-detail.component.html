@@ -50,15 +50,15 @@
                 <form [formGroup]="calificacion"> 
                     <p class="clasificacion">
                       <input id="radio1" type="radio"  formControlName="estrella1">
-                            <label for="radio1"><i class="estre fa-solid fa-star"></i></label>
+                            <label for="radio1" (click)="calificarVendedor(5)"><i class="estre fa-solid fa-star"></i></label>
                       <input id="radio2" type="radio"  formControlName="estrella2">
-                            <label for="radio2"><i class="estre fa-solid fa-star"></i></label>
+                            <label for="radio2" (click)="calificarVendedor(4)"><i class="estre fa-solid fa-star"></i></label>
                       <input id="radio3" type="radio" formControlName="estrella3">
-                            <label for="radio3"><i class="estre fa-solid fa-star"></i></label>
+                            <label for="radio3" (click)="calificarVendedor(3)"><i class="estre fa-solid fa-star"></i></label>
                       <input id="radio4" type="radio" formControlName="estrella4">
-                             <label for="radio4"><i class="estre fa-solid fa-star"></i></label>
+                            <label for="radio4" (click)="calificarVendedor(2)"><i class="estre fa-solid fa-star"></i></label>
                       <input id="radio5" type="radio" formControlName="estrella5">
-                             <label for="radio5"><i class="estre fa-solid fa-star"></i></label>
+                            <label for="radio5" (click)="calificarVendedor(1)"><i class="estre fa-solid fa-star"></i></label>
                     </p>
                 </form>
             </div>
