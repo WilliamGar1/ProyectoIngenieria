@@ -34,6 +34,11 @@ export class NodeServerService {
     return this.http.post(this.url+'/loginUsuario',req_body);
   };
 
+  getInfoUsuario(id: number):Observable<any> {
+
+    return this.http.get(this.url+`/InfoUsuario/${id}`);
+  };
+
   postRecuperar( req_body : any ):Observable<any> {
 
     return this.http.post(this.url+'/resetPasswordSolicitud',req_body);
@@ -56,6 +61,7 @@ export class NodeServerService {
     return this.http.get(this.url+'/datosregistroProducto');
   };
 
+  //PRODUCTOS
   postInsertNewProducto( req_body : any, id: number):Observable<any> {
 
     return this.http.post(this.url+`/insertNewProducto/${id}`,req_body);
@@ -84,6 +90,22 @@ export class NodeServerService {
   getInhabilitarProducto(id: number):Observable<any> {
 
     return this.http.get(this.url+`/setInhabilitarProducto/${id}`);
+  };
+
+  //SUSCRIPCIONES 
+  getSubscripcionesCliente(id: number):Observable<any> {
+
+    return this.http.get(this.url+`/suscripcionesCliente/${id}`);
+  };
+
+  postInscribirCategoria( req_body : any ):Observable<any> {
+
+    return this.http.post(this.url+'/suscribirCategoria',req_body);
+  };
+
+  postcancelarSuscripcion( req_body : any ):Observable<any> {
+
+    return this.http.post(this.url+'/cancelarSuscripcion',req_body);
   };
 
   

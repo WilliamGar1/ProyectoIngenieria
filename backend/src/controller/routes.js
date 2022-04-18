@@ -23,6 +23,8 @@ router.post('/insertNewUser',users.insertNewUser);
 
 router.post('/loginUsuario', users.LoginUser);
 
+router.get('/InfoUsuario/:id', users.InfoUser);
+
 router.post('/confirmarCuenta',users.verifyUser);
 
 //RESET PASSWORD
@@ -67,11 +69,11 @@ router.get('/getDenuncias',calificaDenuncia.getAll_Denuncias);
 router.get('/tacharDenuncia',calificaDenuncia.tacharDenuncia);
 
 //SUSCRIPCIONES 
-router.get('/suscribirCategoria',suscripciones.suscribirCategoria);
+router.post('/suscribirCategoria',suscripciones.suscribirCategoria);
 
-router.get('/cancelarSuscripcion',suscripciones.cancelarSuscripcion);
+router.post('/cancelarSuscripcion',suscripciones.cancelarSuscripcion);
 
-router.get('/suscripcionesCliente',suscripciones.suscripcionesCliente);
+router.get('/suscripcionesCliente/:id',suscripciones.suscripcionesCliente);
 
 //CHATS
 router.get('/enviarMensaje',chats.enviarMensaje);
