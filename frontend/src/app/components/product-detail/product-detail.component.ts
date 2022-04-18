@@ -123,8 +123,8 @@ export class ProductDetailComponent implements OnInit {
 
   denunciarVendedor(){
     var data = {
-      clienteId: this.producto.UsuarioId,
-      vendedorId: parseInt(localStorage.getItem('usuario')),
+      vendedorId: this.producto.UsuarioId,
+      clienteId: parseInt(localStorage.getItem('usuario')),
       detalle: this.denuncia.value.motivo
     }
     this._nodeServer.postDenunciarVendedor(data).subscribe(data => {
