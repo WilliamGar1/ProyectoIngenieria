@@ -201,6 +201,7 @@ const LoginUser = async (req, res) => {
 
 };
 
+//INFO USUARIO
 const InfoUser = async (req, res) => {
 
     const id = req.params.id;
@@ -226,7 +227,9 @@ const InfoUser = async (req, res) => {
                 res.send({"mensaje":"Usuario encontrado","usuario":UsuarioRes[0],exito:1},);
             }else{
                 res.send({"mensaje":"El usuario no ha confirmado su cuenta",exito:0},); 
-                }
+            }
+            console.log("Close Connection");
+            conectBD.end();
         }
     });
 
