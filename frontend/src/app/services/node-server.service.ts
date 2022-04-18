@@ -119,6 +119,11 @@ export class NodeServerService {
     return this.http.post(this.url+'/calificarVendedor',req_body);
   };
 
+  postDenunciarVendedor( req_body : any ):Observable<any> {
+
+    return this.http.post(this.url+'/recibirDenuncia',req_body);
+  };
+
   
   //prueba get
   getNodeServer():Observable<any> {

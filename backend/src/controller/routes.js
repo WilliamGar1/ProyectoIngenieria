@@ -62,7 +62,7 @@ router.post('/calificarVendedor',calificaDenuncia.calificarVendedor);
 
 router.get('/getCalificacionMedia/:id',calificaDenuncia.calificacionMedia);
 
-router.get('/resivirDenuncia',calificaDenuncia.resivirDenuncia);
+router.post('/recibirDenuncia',calificaDenuncia.recibirDenuncia);
 
 router.get('/getDenuncias',calificaDenuncia.getAll_Denuncias);
 

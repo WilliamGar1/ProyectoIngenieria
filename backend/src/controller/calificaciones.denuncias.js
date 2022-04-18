@@ -56,7 +56,7 @@ const calificacionMedia = async (req,res)=>{
 };
 
 
-const resivirDenuncia = async (req,res)=>{
+const recibirDenuncia = async (req,res)=>{
     const {clienteId,vendedorId,detalle} = req.body; 
     const conectBD = MySQLBD.conectar();
     
@@ -111,7 +111,7 @@ const tacharDenuncia = async (req,res) => {
 module.exports = {
     calificarVendedor,
     calificacionMedia,
-    resivirDenuncia,
+    recibirDenuncia,
     getAll_Denuncias,
     tacharDenuncia
 }
