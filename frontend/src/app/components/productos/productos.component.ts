@@ -95,12 +95,16 @@ export class ProductosComponent implements OnInit {
 
   verificarProductos(){
     if(localStorage.getItem('usuario')){
+      var indices = [];
       var usuario = parseInt(localStorage.getItem('usuario'));
       this.allProductos.forEach((producto, index) =>{
         if(producto.personaId==usuario){
-          this.allProductos.splice(index, 1);
+          indices.push(index);
         }
       });
+      for(var i = indices.length-1;i>=0;i--){
+        this.allProductos.splice(indices[i], 1);
+      }
     }
   }
 
