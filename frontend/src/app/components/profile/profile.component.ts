@@ -118,6 +118,7 @@ export class ProfileComponent implements OnInit {
       }
       else {
         console.log(data.mensaje);
+        this.suscripciones = [];
       }
 
     }, err => console.log(err));

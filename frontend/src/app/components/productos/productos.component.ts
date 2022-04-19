@@ -51,6 +51,7 @@ export class ProductosComponent implements OnInit {
       if (data.exito) {
         console.log(data.mensaje);
         this.allProductos = data.productos;
+        this.verificarProductos();
         this.convertirImagenes();
       }
       else {
@@ -67,6 +68,7 @@ export class ProductosComponent implements OnInit {
       if (data.exito) {
         console.log(data.mensaje);
         this.allProductos = data.productos;
+        this.verificarProductos();
         this.convertirImagenes();
       }
       else {
@@ -89,6 +91,17 @@ export class ProductosComponent implements OnInit {
       let imagen = 'data:'+producto.ImagenTipo+';base64,'+stringToBase64;
       producto.Imagen = imagen;
     });
+  }
+
+  verificarProductos(){
+    if(localStorage.getItem('usuario')){
+      var usuario = parseInt(localStorage.getItem('usuario'));
+      this.allProductos.forEach((producto, index) =>{
+        if(producto.personaId==usuario){
+          this.allProductos.splice(index, 1);
+        }
+      });
+    }
   }
 
   cargarProductos(){
