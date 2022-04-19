@@ -49,3 +49,7 @@ input[type="radio"]:checked ~ label {
 .car{
   background-color: rgba(0, 0, 0, 0.8);
 }
+
+a{
+  color: black;
+}

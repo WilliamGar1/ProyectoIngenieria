@@ -20,7 +20,7 @@
                       <p class="card-text" maxlength="10">Descripción: {{pro.descripcion.slice(0,18)}}...</p>
                       <p class="card-text">Precio: L. {{pro.precio}}</p>
                       <div class="arriba2">
-                        <p class="card-text">Vendedor: {{pro.Usuario}}</p>
+                        <p class="card-text">Vendedor: <a [routerLink]="['/vendedor', pro.Id]">{{pro.Usuario}}</a></p>
                         <a [routerLink]="['detalle', pro.Id]"><i class="fa-solid fa-circle-plus"></i></a>
                       </div>
                     </div>
