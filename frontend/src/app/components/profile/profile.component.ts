@@ -11,8 +11,8 @@ import Swal from 'sweetalert2';
 export class ProfileComponent implements OnInit {
 
   Usuario: number;
-  calificacion: number;
-  opiniones: number;
+  calificacion = 0;
+  opiniones = 0;
   allCategorias = [];
   categoria = new FormControl();
   suscripciones = [];

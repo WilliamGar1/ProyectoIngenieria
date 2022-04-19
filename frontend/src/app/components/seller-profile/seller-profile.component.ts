@@ -14,8 +14,8 @@ export class SellerProfileComponent implements OnInit {
     nombre: '',
     departamento: ''
   }
-  calificacion: number;
-  opiniones: number;
+  calificacion = 0;
+  opiniones = 0;
 
   constructor(private route: ActivatedRoute,
     private _nodeServer: NodeServerService) { }
