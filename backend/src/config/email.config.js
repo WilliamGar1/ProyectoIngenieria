@@ -138,8 +138,8 @@ const sendEmailPublicidadHTML = async (email,subject,html)=>{
     `;
 };
 
-const getPublicidadTemplate = ()=>{
-    
+const getPublicidadTemplate = (productos)=>{
+
     var head = `
     <!DOCTYPE html>
     <html lang="en">
@@ -147,18 +147,28 @@ const getPublicidadTemplate = ()=>{
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Cambio De Contraseña</title>
+        <title>Ultimos Productos de la categoria </title>
     </head>
     <body>
     `;
 
- var body =`
- <div class="container" id="email_content">
- <h2>Buen Día </h2>
-<p>Para cambiar su contraseña, por favor ingrese al siguiente enlace</p>
-<a href="${urlBase}/Hola/adios"> cambiar contraseña </a>
+   var body = ` <div class="container" id="productoPublicidad">`;
 
- </div>`;
+    productos.forEach(producto => {
+    body=body+ `
+
+        <h2>${producto.nombre} </h2>
+       <p>Este es un producto</p>
+       <img src="data:${producto.ImagenTipo};base64,${producto.Imagen.toString('base64')}" width="100" height="100">
+
+       <a href="${urlBase}/producto/detalle/${producto.Id}"> Producto</a>
+       <br>
+
+       `       
+    });
+ 
+    body += `</div>`;
+
 
 var foot =  `
     </body>
