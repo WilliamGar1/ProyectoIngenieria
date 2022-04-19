@@ -1,4 +1,5 @@
 const nodemailer = require("nodemailer");
+const { conectar } = require("./mysql.config");
 
 const urlBase ='http://localhost:4200';
 //const urlBase ='https://app-frontendingenieria.herokuapp.com';
@@ -54,13 +55,29 @@ var transporter = nodemailer.createTransport(({
     }
 };
 
+const sendEmailPublicidadHTML = async (email,subject,html)=>{
+    try {
+      await transporter.sendMail({
+          from: `NTT: <${mail.user}>`, // sender address
+          to: email, // list of receivers
+          subject, // Subject line
+          text: "Publicidad", // plain text body
+          html, // html body
+        });
+        
+    } catch (error) {
+        console.log('error en el email ',error);
+    }
+};
+
+
   const sendEmailPdf = async (email,subject,path)=>{
     try {
       await transporter.sendMail({
           from: `NTT: <${mail.user}>`, // sender address
           to: email, // list of receivers
           subject, // Subject line
-          text: "Verificar", // plain text body
+          text: "Publicidad", // plain text body
           attachments: [
               {
                   path: path
@@ -121,10 +138,41 @@ var transporter = nodemailer.createTransport(({
     `;
 };
 
+const getPublicidadTemplate = ()=>{
+    
+    var head = `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cambio De Contraseña</title>
+    </head>
+    <body>
+    `;
+
+ var body =`
+ <div class="container" id="email_content">
+ <h2>Buen Día </h2>
+<p>Para cambiar su contraseña, por favor ingrese al siguiente enlace</p>
+<a href="${urlBase}/Hola/adios"> cambiar contraseña </a>
+
+ </div>`;
+
+var foot =  `
+    </body>
+    </html>`;
+    
+    return head+body+foot;
+};
+
   module.exports ={
       sendEmailVerify,
       sendEmailPdf,
       getVerifyTemplate,
       sendEmailSolicitudCambioPass,
-      getCambioPassTemplate
+      getCambioPassTemplate,
+      getPublicidadTemplate,
+      sendEmailPublicidadHTML
   };

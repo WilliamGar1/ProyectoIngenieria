@@ -38,15 +38,15 @@ const calificarVendedor = async (req,res)=>{
 
 const calificacionMedia = async (req,res)=>{
 
-    const vendedorId= req.params.id;   
+    const {vendedorId}= req.body;   
     const conectBD = MySQLBD.conectar();
-    conectBD.query(`SELECT SUM(calificacion)/COUNT(*) CalificacionMedia, COUNT(*) cantidad FROM Calificaciones WHERE vendedorId = ${vendedorId}`, (err, CalificacionRes) => {
+    conectBD.query(`SELECT SUM(calificacion)/COUNT(*) CalificacionMedia FROM Calificaciones WHERE vendedorId = ${vendedorId}`, (err, CalificacionRes) => {
 
 
         if(err){
         res.send({mensaje:'Error al optener calificacion',exito:0});
         }else{
-            res.send({mensaje:'Calificacion Encontrada',CalificacionMedia:CalificacionRes[0].CalificacionMedia,cantidad:CalificacionRes[0].cantidad,exito:1});
+            res.send({mensaje:'Calificacion Encontrada',CalificacionMedia:CalificacionRes[0].CalificacionMedia,exito:1});
         }
         
         console.log("Close Connection");
@@ -56,7 +56,7 @@ const calificacionMedia = async (req,res)=>{
 };
 
 
-const recibirDenuncia = async (req,res)=>{
+const resivirDenuncia = async (req,res)=>{
     const {clienteId,vendedorId,detalle} = req.body; 
     const conectBD = MySQLBD.conectar();
     
@@ -88,6 +88,22 @@ const getAll_Denuncias = async (req,res) => {
     });
 };
 
+const getAll_DenunciasResueltas = async (req,res) => {
+    const conectBD = MySQLBD.conectar();
+    conectBD.query(`SELECT * FROM Denuncias WHERE estado = FALSE`, (err, DenunciasRes) => {
+
+        if(err){
+        res.send({mensaje:'Error al buscar denuncias',exito:0});
+        }else{
+            res.send({mensaje:'Denuncias Encontradas',denuncias:DenunciasRes,exito:1});
+        }
+
+        console.log("Close Connection");
+        conectBD.end();
+    });
+};
+
+
 const tacharDenuncia = async (req,res) => {
 
     const {denunciaId} = req.body;
@@ -111,7 +127,8 @@ const tacharDenuncia = async (req,res) => {
 module.exports = {
     calificarVendedor,
     calificacionMedia,
-    recibirDenuncia,
+    resivirDenuncia,
     getAll_Denuncias,
+    getAll_DenunciasResueltas,
     tacharDenuncia
 }
