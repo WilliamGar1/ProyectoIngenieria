@@ -36,7 +36,13 @@ export class NodeServerService {
 
   getInfoUsuario(id: number):Observable<any> {
 
-    return this.http.get(this.url+`/InfoUsuario/${id}`);
+    return this.http.get(this.url+`/infoUsuario/${id}`);
+  };
+
+  
+  getVendedorDetalle(id: number):Observable<any> {
+
+    return this.http.get(this.url+`/detallesVendedor/${id}`);
   };
 
   postRecuperar( req_body : any ):Observable<any> {

@@ -1,1 +1,13 @@
+.cats{
+    border: 1px solid black;
+    border-radius: 20px;
+}
 
+.ultimas{
+    height: 100%;
+}
+
+i{
+    color: darkblue;
+    font-size: 25px;
+}

@@ -23,7 +23,9 @@ router.post('/insertNewUser',users.insertNewUser);
 
 router.post('/loginUsuario', users.LoginUser);
 
-router.get('/InfoUsuario/:id', users.InfoUser);
+router.get('/infoUsuario/:id', users.infoUser);
+
+router.get('/detallesVendedor/:id', users.detallesVendedor);
 
 router.post('/confirmarCuenta',users.verifyUser);
 
