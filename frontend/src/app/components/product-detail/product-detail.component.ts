@@ -58,6 +58,7 @@ export class ProductDetailComponent implements OnInit {
     Categoria: '',
     actualizacion: '',
     Usuario: '',
+    UsuarioId: 0
   };
 
   imagenesProducto = [];
@@ -87,12 +88,73 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 
-  validar() {
-    if (!this.denuncia.valid) {
-      Swal.fire('Error!', 'Por favor ingrese el motivo', 'warning');
-    } else {
-      Swal.fire('¡Excelente!', 'Su denuncia a sido enviada', 'success');
-      this.denuncia.reset();
+  calificarVendedor(calif: number){
+    if(!localStorage.getItem('usuario')){
+      console.log("Usuario no encontrado");
+      Swal.fire(
+        'ERROR!',
+        'Debe iniciar sesión para calificar',
+        'warning',
+      );
+      this._router.navigate(['login']);
+    }else{
+      var data = {
+        vendedorId: this.producto.UsuarioId,
+        clienteId: parseInt(localStorage.getItem('usuario')),
+        calificacion: calif
+      }
+      this._nodeServer.postCalificarVendedor(data).subscribe(data => {
+        if (data.exito) {
+          console.log(data.mensaje);
+          Swal.fire(
+            '',
+            data.mensaje,
+            'success',
+          );
+        }
+        else {
+          console.log(data.mensaje);
+        }
+  
+      }, err => console.log(err));
     }
+    
+  }
+
+  denunciarVendedor(){
+    var data = {
+      vendedorId: this.producto.UsuarioId,
+      clienteId: parseInt(localStorage.getItem('usuario')),
+      detalle: this.denuncia.value.motivo
+    }
+    this._nodeServer.postDenunciarVendedor(data).subscribe(data => {
+      if (data.exito) {
+        console.log(data.mensaje);
+      }
+      else {
+        console.log(data.mensaje);
+      }
+    }, err => console.log(err));
+  }
+
+  validar() {
+    if(!localStorage.getItem('usuario')){
+      console.log("Usuario no encontrado");
+      Swal.fire(
+        'ERROR!',
+        'Debe iniciar sesión para calificar',
+        'warning',
+      );
+      this._router.navigate(['login']);
+    }else{
+      if (!this.denuncia.valid) {
+        Swal.fire('Error!', 'Por favor ingrese el motivo', 'warning');
+      } else {
+        this.denunciarVendedor();
+        Swal.fire('¡Excelente!', 'Su denuncia a sido enviada', 'success');
+        this.denuncia.reset();
+      }
+    }
+    
   }
 }

@@ -9,14 +9,14 @@
                 <div class="mb-3 row">
                     <label class="col-4 col-label">Nombre</label>
                     <div class="col-8">
-                        {{nombre}} {{apellido}}
+                        {{usuario.nombre}} {{usuario.apellido}}
                     </div>
                 </div>
                 <hr>
                 <div class="mb-3 row">
                     <label class="col-4 col-label">Departamento</label>
                     <div class="col-8">
-                        {{depto}}
+                        {{usuario.departamento}}
                     </div>
                 </div>
             </div>
@@ -34,14 +34,14 @@
                 <div class="mb-3 row">
                     <label class="col-4 col-label">Correo Electrónico</label>
                     <div class="col-8">
-                        {{correo}}
+                        {{usuario.email}}
                     </div>
                 </div>
                 <hr>
                 <div class="mb-3 row">
                     <label class="col-4 col-label">Celular</label>
                     <div class="col-8">
-                        {{celular}}
+                        {{usuario.telefono}}
                     </div>
                 </div>
             </div>
@@ -60,8 +60,7 @@
                     data-bs-target="#exampleModal">Agregar</button>
             </div>
             <div class="card-body d-inline-flex fw-bold align-items-center flex-wrap">
-                <p class="cats p-2 mx-2">{{cat[0]}}</p>
-                <p class="cats p-2 mx-2">{{cat[1]}}</p>
+                <p *ngFor="let sub of suscripciones" class="cats p-2 mx-2" (click)="cancelarSuscripcion(sub.categoriaId)" >{{sub.nombre}}</p>
             </div>
         </div>
     </div>
@@ -69,12 +68,12 @@
         <div class="card ultimas">
             <h5 class="card-header">Calificación como Vendedor</h5>
             <div class="card-body">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star-half-stroke"></i>
-                <i class="fa-regular fa-star"></i>
-                <p class="fw-bold my-2"><small>13 Opiniones</small></p>
+                <i class="fa-regular fa-star" [ngClass]="{'fa-solid':calificacion>=1, 'fa-star-half-stroke':calificacion<2}"></i>
+                <i class="fa-regular fa-star" [ngClass]="{'fa-solid':calificacion>=3, 'fa-star-half-stroke':calificacion>=3 && calificacion<4}"></i>
+                <i class="fa-regular fa-star" [ngClass]="{'fa-solid':calificacion>=5, 'fa-star-half-stroke':calificacion>=5 && calificacion<6}"></i>
+                <i class="fa-regular fa-star" [ngClass]="{'fa-solid':calificacion>=7, 'fa-star-half-stroke':calificacion>=7 && calificacion<8}"></i>
+                <i class="fa-regular fa-star" [ngClass]="{'fa-solid':calificacion>=9, 'fa-star-half-stroke':calificacion>=9 && calificacion<10}"></i>
+                <p class="fw-bold my-2"><small>{{opiniones}} Opiniones</small></p>
             </div>
         </div>
     </div>
@@ -90,16 +89,14 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <select class="form-select" aria-label="Default select example">
+                <select [formControl]="categoria" class="form-select" aria-label="Default select example">
                     <option selected disabled value="">Elegir...</option>
-                    <option value="1">Zapatos</option>
-                    <option value="2">Juguetes</option>
-                    <option value="3">Herramientas</option>
+                    <option *ngFor="let ctg of allCategorias" [ngValue]="ctg.Id">{{ctg.nombre}}</option>
                   </select>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Agregar</button>
+                <button (click)="subscribirCategoria()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Agregar</button>
             </div>  
         </div>
     </div>
