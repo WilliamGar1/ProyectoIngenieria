@@ -1,0 +1,44 @@
+<h1 class="text-center mb-3">Información Personal del Vendedor</h1>
+
+<div class="row d-flex justify-content-center">
+
+    <div class="col-8 my-4">
+        <div class="card">
+            <h5 class="card-header">Información Básica</h5>
+            <div class="card-body">
+                <div class="mb-3 row">
+                    <label class="col-4 col-label">Nombre</label>
+                    <div class="col-8">
+                        {{vendedor.nombre}}
+                    </div>
+                </div>
+                <hr>
+                <div class="mb-3 row">
+                    <label class="col-4 col-label">Departamento</label>
+                    <div class="col-8">
+                        {{vendedor.departamento}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row d-flex justify-content-center">
+
+    <div class="col-4 my-4 text-center">
+        <div class="card ultimas">
+            <h5 class="card-header">Calificación como Vendedor</h5>
+            <div class="card-body">
+                <i class="fa-regular fa-star" [ngClass]="{'fa-solid':calificacion>=1, 'fa-star-half-stroke':calificacion>=1 && calificacion<2}"></i>
+                <i class="fa-regular fa-star" [ngClass]="{'fa-solid':calificacion>=3, 'fa-star-half-stroke':calificacion>=3 && calificacion<4}"></i>
+                <i class="fa-regular fa-star" [ngClass]="{'fa-solid':calificacion>=5, 'fa-star-half-stroke':calificacion>=5 && calificacion<6}"></i>
+                <i class="fa-regular fa-star" [ngClass]="{'fa-solid':calificacion>=7, 'fa-star-half-stroke':calificacion>=7 && calificacion<8}"></i>
+                <i class="fa-regular fa-star" [ngClass]="{'fa-solid':calificacion>=9, 'fa-star-half-stroke':calificacion>=9 && calificacion<10}"></i>
+                <p class="fw-bold my-2"><small>{{opiniones}} Opiniones</small></p>
+            </div>
+        </div>
+    </div>
+
+</div>

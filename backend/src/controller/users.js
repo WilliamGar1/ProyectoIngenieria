@@ -201,6 +201,71 @@ const LoginUser = async (req, res) => {
 
 };
 
+//INFO USUARIO
+const infoUser = async (req, res) => {
+
+    const id = req.params.id;
+
+    const conectBD = MySQLBD.conectar();
+    //BUSCAR USUARIO
+    conectBD.query(`SELECT u.*, t.telefono, d.nombre AS departamento FROM Usuarios u 
+    INNER JOIN Telefonos t ON u.Id = t.personaId 
+    INNER JOIN Municipios m ON u.municipioId = m.Id 
+    INNER JOIN Departamentos d ON m.departamentoId = d.Id 
+    WHERE u.Id = '${id}' AND u.estadoHabilitacion = TRUE; `, (err, UsuarioRes) => {
+      
+        //REVISAR SI SE ENCONTRO EL USUARIO
+        if (!UsuarioRes.length) {
+
+            res.send({"mensaje":"Usuario No existe O se encuentra deshabilitado",exito:0});
+            console.log("Close Connection");
+            conectBD.end();
+
+        } else {
+
+            if(UsuarioRes[0].estadoHabilitacion){
+                res.send({"mensaje":"Usuario encontrado","usuario":UsuarioRes[0],exito:1},);
+            }else{
+                res.send({"mensaje":"El usuario no ha confirmado su cuenta",exito:0},); 
+            }
+            console.log("Close Connection");
+            conectBD.end();
+        }
+    });
+};
+
+//DETALLES DE VENDEDOR
+const detallesVendedor = async (req, res) => {
+
+    const id = req.params.id;
+
+    const conectBD = MySQLBD.conectar();
+    //BUSCAR USUARIO
+    conectBD.query(`SELECT CONCAT(u.nombre,' ',u.apellido) nombre, u.estadoHabilitacion, d.nombre AS departamento FROM Usuarios u 
+    INNER JOIN Municipios m ON u.municipioId = m.Id 
+    INNER JOIN Departamentos d ON m.departamentoId = d.Id 
+    WHERE u.Id = '${id}' AND u.estadoHabilitacion = TRUE; `, (err, UsuarioRes) => {
+      
+        //REVISAR SI SE ENCONTRO EL USUARIO
+        if (!UsuarioRes.length) {
+
+            res.send({"mensaje":"Usuario No existe O se encuentra deshabilitado",exito:0});
+            console.log("Close Connection");
+            conectBD.end();
+
+        } else {
+
+            if(UsuarioRes[0].estadoHabilitacion){
+                res.send({"mensaje":"Usuario encontrado","usuario":UsuarioRes[0],exito:1},);
+            }else{
+                res.send({"mensaje":"El usuario no ha confirmado su cuenta",exito:0},); 
+            }
+            console.log("Close Connection");
+            conectBD.end();
+        }
+    });
+};
+
 //RESET PASSWORD
 const  resetPasswordSolicitud = async (req, res) => {
     const {email} = req.body;
@@ -467,6 +532,8 @@ const test = async (req, res) => {
 module.exports = {
     insertNewUser,
     LoginUser,
+    infoUser,
+    detallesVendedor,
     verifyUser,
     resetPasswordSolicitud,
     resetPasswordForm,

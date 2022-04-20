@@ -8,7 +8,12 @@ const users = require('./users');
 const direcciones = require('./direcciones');
 const categorias = require('./categorias');
 const productos = require('./productos');
+const calificaDenuncia = require('./calificaciones.denuncias');
+const suscripciones = require('./suscripciones');
+const chats = require('./chats');
+
 const multer = require("../config/multer.config");
+
 
 //SERVIDOR
 router.get('/',(req,res)=>{nodeS = { server :"Node server online" }; res.render('index.html',{nodeS });});
@@ -17,6 +22,10 @@ router.get('/',(req,res)=>{nodeS = { server :"Node server online" }; res.render(
 router.post('/insertNewUser',users.insertNewUser);
 
 router.post('/loginUsuario', users.LoginUser);
+
+router.get('/infoUsuario/:id', users.infoUser);
+
+router.get('/detallesVendedor/:id', users.detallesVendedor);
 
 router.post('/confirmarCuenta',users.verifyUser);
 
@@ -48,6 +57,34 @@ router.get('/getProductosUsuario/:id',productos.getProductosUsuario);
 router.get('/getProductoDetalle/:id',productos.getProductoDetalle);
 
 router.get('/setInhabilitarProducto/:id',productos.setInhabilitarProducto);
+
+//CALIFICACIONES_DENUNCIAS
+
+router.post('/calificarVendedor',calificaDenuncia.calificarVendedor);
+
+router.get('/getCalificacionMedia/:id',calificaDenuncia.calificacionMedia);
+
+router.post('/recibirDenuncia',calificaDenuncia.recibirDenuncia);
+
+router.get('/getDenuncias',calificaDenuncia.getAll_Denuncias);
+
+router.get('/tacharDenuncia',calificaDenuncia.tacharDenuncia);
+
+//SUSCRIPCIONES 
+router.post('/suscribirCategoria',suscripciones.suscribirCategoria);
+
+router.post('/cancelarSuscripcion',suscripciones.cancelarSuscripcion);
+
+router.get('/suscripcionesCliente/:id',suscripciones.suscripcionesCliente);
+
+//CHATS
+router.get('/enviarMensaje',chats.enviarMensaje);
+
+router.get('/chatPersonas',chats.chatPersonas);
+
+router.get('/mensajesPersona',chats.mensajesPersona);
+
+router.get('/borrarChat',chats.borrarChat);
 
 router.get('/test',users.test);
 router.get('/testImagen',productos.testImg);

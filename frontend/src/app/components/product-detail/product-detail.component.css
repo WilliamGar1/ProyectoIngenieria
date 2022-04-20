@@ -1,8 +1,55 @@
-img.w-100{
-    
-    height: 40em;
+img.w-100 {
+  height: 45em;
+  object-fit: none;
 }
 
-i{
-    font-size: 17px;
+i {
+  font-size: 17px;
+}
+
+#form {
+  width: 250px;
+  margin: 0 auto;
+  height: 50px;
+}
+
+#form p {
+  text-align: center;
+}
+
+#form label {
+  font-size: 20px;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+label {
+  color: grey;
+}
+
+.clasificacion {
+  direction: rtl;
+  unicode-bidi: bidi-override;
+}
+
+label:hover,
+label:hover ~ label {
+  color: orange;
+}
+
+input[type="radio"]:checked ~ label {
+  color: orange;
+}
+.estre {
+  font-size: 30px;
+}
+
+.car{
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+a{
+  color: black;
 }

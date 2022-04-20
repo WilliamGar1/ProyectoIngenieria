@@ -1,0 +1,103 @@
+<h1 class="text-center mb-3">Información Personal</h1>
+
+<div class="row d-flex justify-content-center">
+
+    <div class="col-8 my-4">
+        <div class="card">
+            <h5 class="card-header">Información Básica</h5>
+            <div class="card-body">
+                <div class="mb-3 row">
+                    <label class="col-4 col-label">Nombre</label>
+                    <div class="col-8">
+                        {{usuario.nombre}} {{usuario.apellido}}
+                    </div>
+                </div>
+                <hr>
+                <div class="mb-3 row">
+                    <label class="col-4 col-label">Departamento</label>
+                    <div class="col-8">
+                        {{usuario.departamento}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row d-flex justify-content-center">
+
+    <div class="col-8 my-4">
+        <div class="card">
+            <h5 class="card-header">Información de Contacto</h5>
+            <div class="card-body">
+                <div class="mb-3 row">
+                    <label class="col-4 col-label">Correo Electrónico</label>
+                    <div class="col-8">
+                        {{usuario.email}}
+                    </div>
+                </div>
+                <hr>
+                <div class="mb-3 row">
+                    <label class="col-4 col-label">Celular</label>
+                    <div class="col-8">
+                        {{usuario.telefono}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row d-flex justify-content-center">
+
+    <div class="col-4 my-4">
+        <div class="card ultimas">
+            <h5 class="card-header">Suscripción de Categorías</h5>
+            <div class="d-grid gap-2 col-6 mx-auto my-2">
+                <button class="btn btn-primary" type="button" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">Agregar</button>
+            </div>
+            <div class="card-body d-inline-flex fw-bold align-items-center flex-wrap">
+                <p *ngFor="let sub of suscripciones" class="cats p-2 mx-2" (click)="cancelarSuscripcion(sub.categoriaId)" >{{sub.nombre}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-4 my-4 text-center">
+        <div class="card ultimas">
+            <h5 class="card-header">Calificación como Vendedor</h5>
+            <div class="card-body">
+                <i class="fa-regular fa-star" [ngClass]="{'fa-solid':calificacion>=1, 'fa-star-half-stroke':calificacion>=1 && calificacion<2}"></i>
+                <i class="fa-regular fa-star" [ngClass]="{'fa-solid':calificacion>=3, 'fa-star-half-stroke':calificacion>=3 && calificacion<4}"></i>
+                <i class="fa-regular fa-star" [ngClass]="{'fa-solid':calificacion>=5, 'fa-star-half-stroke':calificacion>=5 && calificacion<6}"></i>
+                <i class="fa-regular fa-star" [ngClass]="{'fa-solid':calificacion>=7, 'fa-star-half-stroke':calificacion>=7 && calificacion<8}"></i>
+                <i class="fa-regular fa-star" [ngClass]="{'fa-solid':calificacion>=9, 'fa-star-half-stroke':calificacion>=9 && calificacion<10}"></i>
+                <p class="fw-bold my-2"><small>{{opiniones}} Opiniones</small></p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Suscribirse a una Categoría</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <select [formControl]="categoria" class="form-select" aria-label="Default select example">
+                    <option selected disabled value="">Elegir...</option>
+                    <option *ngFor="let ctg of allCategorias" [ngValue]="ctg.Id">{{ctg.nombre}}</option>
+                  </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button (click)="subscribirCategoria()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Agregar</button>
+            </div>  
+        </div>
+    </div>
+</div>

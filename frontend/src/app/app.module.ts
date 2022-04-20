@@ -25,6 +25,8 @@ import { RegistrarProductoComponent } from './components/registrar-producto/regi
 import { ProductosComponent } from './components/productos/productos.component';
 import { MisProductosComponent } from './components/mis-productos/mis-productos.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { SellerProfileComponent } from './components/seller-profile/seller-profile.component';
 
 
 @NgModule({
@@ -40,7 +42,9 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
     RegistrarProductoComponent,
     ProductosComponent,
     MisProductosComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    ProfileComponent,
+    SellerProfileComponent
   ],
   imports: [
     BrowserModule,

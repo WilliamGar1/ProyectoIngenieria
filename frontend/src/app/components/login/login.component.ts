@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
       contrasenia: usuario.passw
     };
 
-    console.log(JSON.stringify(this.datos));
+    //console.log(JSON.stringify(this.datos));
 
     if(!this.emailValido){
       Swal.fire(
@@ -54,10 +54,10 @@ export class LoginComponent implements OnInit {
       
         if(data.acceso){
           localStorage.setItem('usuario', data.usuario.Id);
-          console.log(data.usuario);
+          //console.log(data.usuario);
           this._router.navigate(['registrarProducto']);
         }else{
-          console.log(data.acceso);
+          //console.log(data.acceso);
           Swal.fire(
             'Error!',
             data.mensaje,
@@ -82,7 +82,7 @@ export class LoginComponent implements OnInit {
 
   comprobarUsuario(){
     if(localStorage.getItem('usuario')){
-      console.log("Ya se ha iniciado sesión");
+      //console.log("Ya se ha iniciado sesión");
       Swal.fire(
         '',
         'Ya se tiene una sesión activa',
