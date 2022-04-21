@@ -8,6 +8,19 @@
     margin-left: 82%;
     
 }
+.chat{
+    font-size: 40px;
+    color: #4a3121;
+}
+.c{
+    position: absolute;
+    margin-left: 76%;
+    margin-top: 0.5%;
+}
+
+.chat:hover{
+    cursor:pointer;
+}
 
 .nav{
     background-color:#ebe8e5;

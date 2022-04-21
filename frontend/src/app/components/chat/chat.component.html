@@ -1,0 +1,72 @@
+<div class="contenedor">
+  <div class="chats">
+    <p class="fs-4 fw-bold">Chats</p>
+    <div class="container-fluid mt-2">
+      <div class="row">
+        <div class="card" style="max-width: 250px; max-height: 80px;" (click)="mostrar()">
+          <div class="row g-0">
+            <div class="col-6 col-md-4">
+              <i class=" login fa-solid fa-circle-user"></i>
+            </div>
+            <div class="col-6 col-md-8">
+              <div class="card-body">
+                <h6 class="card-title fw-bold">Nombre</h6>
+                <p class="card-text">ultimo mensaje</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="max-width: 250px; max-height: 80px;">
+          <div class="row g-0">
+            <div class="col-6 col-md-4">
+              <i class=" login fa-solid fa-circle-user"></i>
+            </div>
+            <div class="col-6 col-md-8">
+              <div class="card-body">
+                <h6 class="card-title fw-bold">Nombre</h6>
+                <p class="card-text">ultimo mensaje</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="desplegados">
+    <div class="recibimiento" *ngIf="!seleccionado">
+      <i class="icono fa-solid fa-comment-sms"></i>
+      <p class="text-center fs-2 fw-bold ms-5">Bienvenido al Chat de la página</p>
+    </div>
+
+    <div *ngIf="seleccionado">
+      <div class="titulo">
+        <div style="max-width: 350px; max-height: 80px; background-color:#F0F2F5;">
+          <div class="row g-0">
+            <div class="col-6 col-md-4">
+              <i class="login2 fa-solid fa-circle-user"></i>
+            </div>
+            <div class="col-6 col-md-8">
+              <div class="card-body">
+                <h6 class="card-title fw-bold">Nombre chat seleccionado</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mensajes" style="background-color: #F8F8F8;">
+      </div>
+      <div class="footer" style="background-color: #F8F8F8;">
+        <form class="ordenar form-control" [formGroup]="mensaje">
+          <div class="col-md-10">
+            <input class="form-control" type="text" formControlName="contenido">
+          </div>
+          <div>
+            <button class="btn btn-primary ms-5" [disabled]="!mensaje.valid"><i
+                class="fa-solid fa-paper-plane"></i></button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>
