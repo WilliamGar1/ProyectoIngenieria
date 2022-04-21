@@ -21,8 +21,9 @@
 }
 
 
-.chats:hover{
+.card:hover{
     cursor:pointer;
+	background-color: #F0F2F5;
 }
 
 .mensajes{
