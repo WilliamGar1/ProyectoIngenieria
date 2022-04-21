@@ -27,6 +27,7 @@ import { MisProductosComponent } from './components/mis-productos/mis-productos.
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SellerProfileComponent } from './components/seller-profile/seller-profile.component';
+import { ChatComponent } from './components/chat/chat.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { SellerProfileComponent } from './components/seller-profile/seller-profi
     MisProductosComponent,
     ProductDetailComponent,
     ProfileComponent,
-    SellerProfileComponent
+    SellerProfileComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,

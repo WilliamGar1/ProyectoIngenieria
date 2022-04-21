@@ -1,0 +1,59 @@
+.contenedor{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: stretch;
+	align-content: stretch;
+}
+.titulo{
+    width: 1000px;
+    background-color:#F0F2F5;
+}
+.login{
+    font-size: 40px;
+    margin-top: 15px;
+}
+.login2{
+    font-size: 40px;
+    margin-left: 5px;
+    margin-top: 10px;
+}
+
+
+.chats:hover{
+    cursor:pointer;
+}
+
+.mensajes{
+    height: 500px;
+}
+
+.desplegados{
+    background-color:#F0F2F5;;
+    height: 500px;
+    width: 1500px;
+}
+
+.icono{
+    font-size: 50px;
+}
+
+.recibimiento{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+    margin-top: 15%;
+}
+
+.ordenar{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: flex-end;
+	align-content: stretch;
+}
