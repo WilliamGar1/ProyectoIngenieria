@@ -53,7 +53,19 @@
           </div>
         </div>
       </div>
-      <div class="mensajes" style="background-color: #F8F8F8;">
+      <div class="mensajes" style="background-color: #F8F8F8;" id="mensajes">
+        <div class="mensaje enviado">
+          Mensaje 1
+          <small class="text-muted">10:50am</small>
+        </div>
+        <div class="mensaje recibido">
+          Mensaje 2
+          <small class="text-muted">10:52am</small>
+        </div>
+        <div class="mensaje enviado">
+          Mensaje 3
+          <small class="text-muted">10:55am</small>
+        </div>
       </div>
       <div class="footer" style="background-color: #F8F8F8;">
         <form class="ordenar form-control" [formGroup]="mensaje">
@@ -61,7 +73,7 @@
             <input class="form-control" type="text" formControlName="contenido">
           </div>
           <div>
-            <button class="btn btn-primary ms-5" [disabled]="!mensaje.valid"><i
+            <button class="btn btn-primary ms-5" [disabled]="!mensaje.valid" (click)="agregar()"><i
                 class="fa-solid fa-paper-plane"></i></button>
           </div>
         </form>

@@ -28,6 +28,32 @@
 
 .mensajes{
     height: 500px;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-end;
+	align-items: stretch;
+	align-content: stretch;
+}
+
+.mensaje{
+	background-color: black;
+	color: white;
+	padding: 10px;
+	margin: 10px;
+	border-radius: 6px;
+	width: auto;
+}
+
+.mensaje.enviado{
+	background-color: #EBE8E5;
+	color: black;
+	margin-left: auto;
+}
+
+.mensaje.recibido{
+	background-color: #4d3a2f;
+	margin-right: auto;
 }
 
 .desplegados{

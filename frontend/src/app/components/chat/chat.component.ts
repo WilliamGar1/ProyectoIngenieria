@@ -1,22 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, OnInit } from "@angular/core";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 
 @Component({
-  selector: 'app-chat',
-  templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.css']
+  selector: "app-chat",
+  templateUrl: "./chat.component.html",
+  styleUrls: ["./chat.component.css"],
 })
 export class ChatComponent implements OnInit {
-  seleccionado: boolean= false;
+  
+  seleccionado: boolean = false;
   mensaje = new FormGroup({
-    contenido: new FormControl('', Validators.required),
+    contenido: new FormControl("", Validators.required),
   });
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  mostrar() {
+    this.seleccionado = true;
   }
 
-mostrar(){
-  this.seleccionado=true
-}
+  agregar() {
+    console.log('Se presiono el boton');
+    
+  }
 }
