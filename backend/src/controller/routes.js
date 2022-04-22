@@ -11,6 +11,8 @@ const productos = require('./productos');
 const calificaDenuncia = require('./calificaciones.denuncias');
 const suscripciones = require('./suscripciones');
 const chats = require('./chats');
+const publicidad = require('./publicidad');
+const PDFMaker = require('./PDFMaker');
 
 const multer = require("../config/multer.config");
 
@@ -22,10 +24,6 @@ router.get('/',(req,res)=>{nodeS = { server :"Node server online" }; res.render(
 router.post('/insertNewUser',users.insertNewUser);
 
 router.post('/loginUsuario', users.LoginUser);
-
-router.get('/infoUsuario/:id', users.infoUser);
-
-router.get('/detallesVendedor/:id', users.detallesVendedor);
 
 router.post('/confirmarCuenta',users.verifyUser);
 
@@ -45,6 +43,12 @@ router.get('/datosregistro',direcciones.getAll_departamentos_municipios);
 //CATEGORTIAS
 router.get('/datosregistroProducto',categorias.getAll_categorias);
 
+router.get('/insertNewCategoria',categorias.insertNewCategoria);
+
+router.get('/actualizarCategoria',categorias.actualizarCategoria);
+
+router.get('/eliminarCategoria',categorias.eliminarCategoria);
+
 //PRODUCTO
 router.post('/insertNewProducto/:id',multer.cargarArchivo.array('imagenesProducto',4),productos.insertNewProducto);
 
@@ -60,22 +64,24 @@ router.get('/setInhabilitarProducto/:id',productos.setInhabilitarProducto);
 
 //CALIFICACIONES_DENUNCIAS
 
-router.post('/calificarVendedor',calificaDenuncia.calificarVendedor);
+router.get('/calificarVendedor',calificaDenuncia.calificarVendedor);
 
-router.get('/getCalificacionMedia/:id',calificaDenuncia.calificacionMedia);
+router.get('/getCalificacionMedia',calificaDenuncia.calificacionMedia);
 
-router.post('/recibirDenuncia',calificaDenuncia.recibirDenuncia);
+router.get('/resivirDenuncia',calificaDenuncia.resivirDenuncia);
 
 router.get('/getDenuncias',calificaDenuncia.getAll_Denuncias);
 
 router.get('/tacharDenuncia',calificaDenuncia.tacharDenuncia);
 
+router.get('/getDenunciasResueltas',calificaDenuncia.getAll_DenunciasResueltas);
+
 //SUSCRIPCIONES 
-router.post('/suscribirCategoria',suscripciones.suscribirCategoria);
+router.get('/suscribirCategoria',suscripciones.suscribirCategoria);
 
-router.post('/cancelarSuscripcion',suscripciones.cancelarSuscripcion);
+router.get('/cancelarSuscripcion',suscripciones.cancelarSuscripcion);
 
-router.get('/suscripcionesCliente/:id',suscripciones.suscripcionesCliente);
+router.get('/suscripcionesCliente',suscripciones.suscripcionesCliente);
 
 //CHATS
 router.get('/enviarMensaje',chats.enviarMensaje);
@@ -85,6 +91,13 @@ router.get('/chatPersonas',chats.chatPersonas);
 router.get('/mensajesPersona',chats.mensajesPersona);
 
 router.get('/borrarChat',chats.borrarChat);
+
+
+//Publicidad email,Prueba
+router.get('/publicidadPDF',publicidad.publicidadPDF);
+router.get('/publicidadHTML',publicidad.publicidadHTML);
+
+router.get('/pdf',PDFMaker.PDFMaker)
 
 router.get('/test',users.test);
 router.get('/testImagen',productos.testImg);
