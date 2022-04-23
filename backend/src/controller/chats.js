@@ -1,5 +1,6 @@
 const MySQLBD = require("../config/mysql.config");
 
+
 const enviarMensaje = async (req,res) => {
     
     const {emisor,receptor,mensaje} = req.body; 
@@ -20,7 +21,7 @@ const enviarMensaje = async (req,res) => {
 
 const chatPersonas = async (req,res) => {
 
-    const {usuarioId} = req.body; 
+    const usuarioId = req.params; 
     const conectBD = MySQLBD.conectar();
     conectBD.query(` 
     SELECT CONCAT(u.nombre,' ',u.apellido) chatPersona, u.Id chatPersonaId FROM Usuarios u
