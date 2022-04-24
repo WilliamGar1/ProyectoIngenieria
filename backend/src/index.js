@@ -42,12 +42,18 @@ app.use(require('./controller/routes'));
 //app.use('/api',require('./controller/routes'));
 
 
-//Socket.io
+//SOCKET.IO
 io.on('connection', (socket) => {
     console.log('a user connected');
-    /*socket.on("test", ()=> {
-        console.log("evento TEST");
-    })*/
+
+    socket.on("privateMessage", (messageInfo)=>{
+        
+    });
+
+    socket.on("sendMessage", (messageInfo)=> {
+        console.log("enviando el mensaje: "+messageInfo.message+" user: "+messageInfo.user);
+        socket.broadcast.emit("reciveMessage", messageInfo);
+    })
 });
 
 //SETTINGS

@@ -90,11 +90,11 @@ router.get('/suscripcionesCliente/:id',suscripciones.suscripcionesCliente);
 //CHATS
 router.post('/enviarMensaje',chats.enviarMensaje);
 
-router.get('/chatPersonas',chats.chatPersonas);
+router.get('/chatPersonas/:id',chats.chatPersonas);
 
-router.get('/mensajesPersona',chats.mensajesPersona);
+router.get('/mensajesPersona/:usuarioId/:personaId',chats.mensajesPersona);
 
-router.get('/borrarChat',chats.borrarChat);
+router.post('/borrarChat',chats.borrarChat);
 
 
 //Publicidad email,Prueba

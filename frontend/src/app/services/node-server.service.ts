@@ -130,6 +130,17 @@ export class NodeServerService {
     return this.http.post(this.url+'/recibirDenuncia',req_body);
   };
 
+  //CHATS
+  getChatsPersona(id: number):Observable<any> {
+
+    return this.http.get(this.url+`/chatPersonas/${id}`);
+  };
+
+  getMensajesPersona(usuarioId: number, personaId: number):Observable<any> {
+
+    return this.http.get(this.url+`/mensajesPersona/${usuarioId}/${personaId}`);
+  };
+
   
   //prueba get
   getNodeServer():Observable<any> {
