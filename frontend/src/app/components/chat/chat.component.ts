@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { ChatService } from "src/app/services/chat.service";
+import { SocketioService } from "src/app/services/socketio.service";
 
 @Component({
   selector: "app-chat",
@@ -12,7 +14,7 @@ export class ChatComponent implements OnInit {
   mensaje = new FormGroup({
     contenido: new FormControl("", Validators.required),
   });
-  constructor() {}
+  constructor(private socket:SocketioService) {}
 
   ngOnInit(): void {}
 

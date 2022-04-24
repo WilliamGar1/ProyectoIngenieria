@@ -1,10 +1,18 @@
 const express= require('express');
+
 const bodyParser= require('body-parser');
 const path = require('path');
 const cors = require('cors');
-const socketIO = require('socket.io')
+const { isObject } = require('util');
 
 const app = express();
+const http = require('http').Server(app);
+const io = require('socket.io')(http,{
+    cors : {
+        origin: true,
+        credentials: true
+    }
+});
 
 
 //MIDDLEWARE
@@ -34,11 +42,18 @@ app.use(require('./controller/routes'));
 //app.use('/api',require('./controller/routes'));
 
 
+//Socket.io
+io.on('connection', (socket) => {
+    console.log('a user connected');
+    /*socket.on("test", ()=> {
+        console.log("evento TEST");
+    })*/
+});
+
 //SETTINGS
 
 const port = process.env.PORT || 3000;
-app.listen(port,()=>{
+http.listen(port,()=>{
     console.log("Servidor iniciado");
 });
 
-//Socket.io
