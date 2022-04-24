@@ -26,6 +26,7 @@ const app_routes: Routes =[
     {path: 'perfil', component: ProfileComponent},
     {path: 'vendedor/:id', component: SellerProfileComponent},
     {path: 'chat', component: ChatComponent},
+    {path: 'chat/:id', component: ChatComponent},
     {path:'**', pathMatch:'full', redirectTo:'inicio'}
 ];
 

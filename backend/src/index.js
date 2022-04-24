@@ -45,16 +45,26 @@ app.use(require('./controller/routes'));
 //SOCKET.IO
 io.on('connection', (socket) => {
     console.log('a user connected');
+    console.log(socket.id);
 
-    socket.on("privateMessage", (messageInfo)=>{
-        
-    });
-
+    //METHODS
     socket.on("sendMessage", (messageInfo)=> {
         console.log("enviando el mensaje: "+messageInfo.message+" user: "+messageInfo.user);
         socket.broadcast.emit("reciveMessage", messageInfo);
     })
+
+    socket.on("joinRoom", (id)=>{
+        socket.join(id);
+        console.log("added to room: "+id);
+        io.emit("res",{message:"added to room: "+id});
+    });
+
+    socket.on("privateMessage", (messageInfo)=>{
+        io.sockets.in(messageInfo.person).emit("newPrivateMessage",messageInfo);
+    });
+    
 });
+
 
 //SETTINGS
 
