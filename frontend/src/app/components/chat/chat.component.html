@@ -3,7 +3,7 @@
     <p class="fs-4 fw-bold">Chats</p>
     <div class="container-fluid mt-2">
       <div class="row">
-        <div class="card" style="max-width: 250px; max-height: 80px;" *ngFor="let cht of chatList" (click)="mostrar(cht.chatPersonaId)">
+        <div class="card" style="max-width: 250px; max-height: 80px;" *ngFor="let cht of chatList" (click)="mostrar(cht.chatPersonaId, cht.chatPersona)">
           <div class="row g-0">
             <div class="col-6 col-md-4">
               <i class=" login fa-solid fa-circle-user"></i>
@@ -34,7 +34,7 @@
             </div>
             <div class="col-6 col-md-8">
               <div class="card-body">
-                <h6 class="card-title fw-bold">Nombre chat seleccionado</h6>
+                <h6 class="card-title fw-bold">{{nameActualChat}}</h6>
               </div>
             </div>
           </div>
@@ -43,7 +43,7 @@
       <div class="mensajes" style="background-color: #F8F8F8;" id="mensajes">
         <div *ngFor="let message of socket.chat" class="mensaje" [ngClass]="{'enviado':message.user==userId,'recibido':message.user==personaId}">
           {{message.message}}
-          <small class="text-muted">10:50am</small>
+          <small class="text-muted"></small>
         </div>
       </div>
       <div class="footer" style="background-color: #F8F8F8;">

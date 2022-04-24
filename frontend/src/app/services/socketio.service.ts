@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { of } from 'rxjs';
 import { io } from 'socket.io-client';
 
 @Injectable({
@@ -15,6 +16,8 @@ export class SocketioService {
   actualRoom = 0;
   chat=[];
   usersOnline=[];
+
+  
   constructor() {
     this.onRecivePrivateMessage();
     this.onUsers();
@@ -27,10 +30,22 @@ export class SocketioService {
   connection(id){
     this.userId = id;
     this.io.connect();
+    this.io.emit("joinRoom",id);
   }
 
   joinRoom(id){
-    this.io.emit("joinRoom",id);
+    if(this.actualRoom != id){
+      if(this.actualRoom != 0){
+        this.leaveRoom(this.actualRoom);
+      }
+      this.io.emit("joinRoom",id);
+      this.actualRoom = id;
+    }
+    
+  }
+
+  leaveRoom(id){
+    this.io.emit("leaveRoom",id);
     this.actualRoom = id;
   }
 
