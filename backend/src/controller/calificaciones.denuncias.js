@@ -7,7 +7,7 @@ const calificarVendedor = async (req,res)=>{
     conectBD.query(`SELECT * FROM Calificaciones WHERE clienteId = ${clienteId} AND vendedorId = ${vendedorId} `, (err, CalificarRes) => {
         if(err){  res.send({mensaje:'Error al calificar vendedor',exito:0});
                 console.log("Close Connection");
-                    conectBD.end();}
+                conectBD.end();}
         else{
            
             let query =`INSERT INTO Calificaciones(clienteId,vendedorId,calificacion) VALUES (${clienteId},${vendedorId},${calificacion})`;
@@ -88,6 +88,22 @@ const getAll_Denuncias = async (req,res) => {
     });
 };
 
+const getAll_DenunciasResueltas = async (req,res) => {
+    const conectBD = MySQLBD.conectar();
+    conectBD.query(`SELECT * FROM Denuncias WHERE estado = FALSE`, (err, DenunciasRes) => {
+
+        if(err){
+        res.send({mensaje:'Error al buscar denuncias',exito:0});
+        }else{
+            res.send({mensaje:'Denuncias Encontradas',denuncias:DenunciasRes,exito:1});
+        }
+
+        console.log("Close Connection");
+        conectBD.end();
+    });
+};
+
+
 const tacharDenuncia = async (req,res) => {
 
     const {denunciaId} = req.body;
@@ -113,5 +129,6 @@ module.exports = {
     calificacionMedia,
     recibirDenuncia,
     getAll_Denuncias,
+    getAll_DenunciasResueltas,
     tacharDenuncia
 }

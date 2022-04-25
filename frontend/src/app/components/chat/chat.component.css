@@ -1,0 +1,89 @@
+.contenedor{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: stretch;
+	align-content: stretch;
+}
+.titulo{
+    width: 1000px;
+    background-color:#F0F2F5;
+}
+.login{
+    font-size: 40px;
+    margin-top: 15px;
+}
+.login2{
+    font-size: 40px;
+    margin-left: 5px;
+    margin-top: 10px;
+}
+
+
+.card:hover{
+    cursor:pointer;
+	background-color: #F0F2F5;
+}
+
+.mensajes{
+    height: 500px;
+	width: 1000px;
+	display: inline-flexbox;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-end;
+	align-items: stretch;
+	align-content: stretch;
+	overflow-y: scroll;
+}
+
+.mensaje{
+	background-color: black;
+	color: white;
+	padding: 10px;
+	margin: 10px;
+	border-radius: 6px;
+	width: fit-content !important;
+}
+
+.mensaje.enviado{
+	background-color: #EBE8E5;
+	color: black;
+	margin-left: auto;
+}
+
+.mensaje.recibido{
+	background-color: #b9a8b9;
+	color: black;
+	margin-right: auto;
+}
+
+.desplegados{
+    background-color:#F0F2F5;;
+    height: 500px;
+    width: 1000px;
+}
+
+.icono{
+    font-size: 50px;
+}
+
+.recibimiento{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+    margin-top: 15%;
+}
+
+.ordenar{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: flex-end;
+	align-content: stretch;
+}

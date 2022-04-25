@@ -5,6 +5,7 @@ import { NodeServerService } from 'src/app/services/node-server.service';
 import { Buffer } from 'buffer';
 import { FormGroup, FormControl, Validator, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { NewChatService } from 'src/app/services/new-chat.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -38,7 +39,8 @@ export class ProductDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private _nodeServer: NodeServerService,
-    private _router: Router
+    private _router: Router,
+    private newChat: NewChatService
   ) {}
 
   ngOnInit(): void {
@@ -135,6 +137,11 @@ export class ProductDetailComponent implements OnInit {
         console.log(data.mensaje);
       }
     }, err => console.log(err));
+  }
+
+  iniciarChat(chatPersona: string, chatPersonaId: number){
+    this.newChat.addNewChat(chatPersona,chatPersonaId);
+    this._router.navigate(['chat']);
   }
 
   validar() {

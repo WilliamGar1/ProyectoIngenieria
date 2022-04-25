@@ -11,6 +11,8 @@ const productos = require('./productos');
 const calificaDenuncia = require('./calificaciones.denuncias');
 const suscripciones = require('./suscripciones');
 const chats = require('./chats');
+const publicidad = require('./publicidad');
+const PDFMaker = require('./PDFMaker');
 
 const multer = require("../config/multer.config");
 
@@ -45,6 +47,12 @@ router.get('/datosregistro',direcciones.getAll_departamentos_municipios);
 //CATEGORTIAS
 router.get('/datosregistroProducto',categorias.getAll_categorias);
 
+router.get('/insertNewCategoria',categorias.insertNewCategoria);
+
+router.get('/actualizarCategoria',categorias.actualizarCategoria);
+
+router.get('/eliminarCategoria',categorias.eliminarCategoria);
+
 //PRODUCTO
 router.post('/insertNewProducto/:id',multer.cargarArchivo.array('imagenesProducto',4),productos.insertNewProducto);
 
@@ -70,6 +78,8 @@ router.get('/getDenuncias',calificaDenuncia.getAll_Denuncias);
 
 router.get('/tacharDenuncia',calificaDenuncia.tacharDenuncia);
 
+router.get('/getDenunciasResueltas',calificaDenuncia.getAll_DenunciasResueltas);
+
 //SUSCRIPCIONES 
 router.post('/suscribirCategoria',suscripciones.suscribirCategoria);
 
@@ -78,13 +88,20 @@ router.post('/cancelarSuscripcion',suscripciones.cancelarSuscripcion);
 router.get('/suscripcionesCliente/:id',suscripciones.suscripcionesCliente);
 
 //CHATS
-router.get('/enviarMensaje',chats.enviarMensaje);
+router.post('/enviarMensaje',chats.enviarMensaje);
 
-router.get('/chatPersonas',chats.chatPersonas);
+router.get('/chatPersonas/:id',chats.chatPersonas);
 
-router.get('/mensajesPersona',chats.mensajesPersona);
+router.get('/mensajesPersona/:usuarioId/:personaId',chats.mensajesPersona);
 
-router.get('/borrarChat',chats.borrarChat);
+router.post('/borrarChat',chats.borrarChat);
+
+
+//Publicidad email,Prueba
+router.get('/publicidadPDF',publicidad.publicidadPDF);
+router.get('/publicidadHTML',publicidad.publicidadHTML);
+
+router.get('/pdf',PDFMaker.PDFMaker)
 
 router.get('/test',users.test);
 router.get('/testImagen',productos.testImg);

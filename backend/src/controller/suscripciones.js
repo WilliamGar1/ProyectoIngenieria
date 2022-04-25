@@ -8,7 +8,7 @@ const suscribirCategoria = async (req,res)=>{
 
     conectBD.query(`SELECT * FROM Suscripciones WHERE clienteId = ${clienteId} AND categoriaId = ${categoriaId}`, (err, SuscritoRes) => {
        
-        if(err){  res.send({mensaje:`Error al suscribirse a la categoria ${clienteId}`,exito:0});
+        if(err){  res.send({mensaje:'Error al suscribirse a la categoria',exito:0});
                 console.log("Close Connection");
                 conectBD.end();}
         else{
@@ -89,7 +89,7 @@ const cancelarSuscripcion = async (req,res)=>{
 
 const suscripcionesCliente = async (req,res)=>{
 
-    const clienteId = req.params.id; 
+    const clienteId = req.params.id;
 
     const conectBD = MySQLBD.conectar();
     conectBD.query(`SELECT c.nombre,s.* FROM Suscripciones s
@@ -98,7 +98,7 @@ const suscripcionesCliente = async (req,res)=>{
                     AND s.estado = TRUE`, (err, SuscripcionRes) => {
 
         if(err){
-            res.send({mensaje:`Error al buscar suscripciones ${clienteId}`,exito:0});
+            res.send({mensaje:'Error al buscar suscripciones',exito:0});
             }else{
 
                 if(SuscripcionRes.length){
