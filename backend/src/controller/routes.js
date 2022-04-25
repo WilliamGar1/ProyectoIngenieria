@@ -25,6 +25,10 @@ router.post('/insertNewUser',users.insertNewUser);
 
 router.post('/loginUsuario', users.LoginUser);
 
+router.get('/infoUsuario/:id', users.infoUser);
+
+router.get('/detallesVendedor/:id', users.detallesVendedor);
+
 router.post('/confirmarCuenta',users.verifyUser);
 
 //RESET PASSWORD
@@ -64,11 +68,11 @@ router.get('/setInhabilitarProducto/:id',productos.setInhabilitarProducto);
 
 //CALIFICACIONES_DENUNCIAS
 
-router.get('/calificarVendedor',calificaDenuncia.calificarVendedor);
+router.post('/calificarVendedor',calificaDenuncia.calificarVendedor);
 
-router.get('/getCalificacionMedia',calificaDenuncia.calificacionMedia);
+router.get('/getCalificacionMedia/:id',calificaDenuncia.calificacionMedia);
 
-router.get('/resivirDenuncia',calificaDenuncia.resivirDenuncia);
+router.post('/recibirDenuncia',calificaDenuncia.recibirDenuncia);
 
 router.get('/getDenuncias',calificaDenuncia.getAll_Denuncias);
 
@@ -77,20 +81,20 @@ router.get('/tacharDenuncia',calificaDenuncia.tacharDenuncia);
 router.get('/getDenunciasResueltas',calificaDenuncia.getAll_DenunciasResueltas);
 
 //SUSCRIPCIONES 
-router.get('/suscribirCategoria',suscripciones.suscribirCategoria);
+router.post('/suscribirCategoria',suscripciones.suscribirCategoria);
 
-router.get('/cancelarSuscripcion',suscripciones.cancelarSuscripcion);
+router.post('/cancelarSuscripcion',suscripciones.cancelarSuscripcion);
 
-router.get('/suscripcionesCliente',suscripciones.suscripcionesCliente);
+router.get('/suscripcionesCliente/:id',suscripciones.suscripcionesCliente);
 
 //CHATS
-router.get('/enviarMensaje',chats.enviarMensaje);
+router.post('/enviarMensaje',chats.enviarMensaje);
 
-router.get('/chatPersonas',chats.chatPersonas);
+router.get('/chatPersonas/:id',chats.chatPersonas);
 
-router.get('/mensajesPersona',chats.mensajesPersona);
+router.get('/mensajesPersona/:usuarioId/:personaId',chats.mensajesPersona);
 
-router.get('/borrarChat',chats.borrarChat);
+router.post('/borrarChat',chats.borrarChat);
 
 
 //Publicidad email,Prueba

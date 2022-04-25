@@ -129,6 +129,27 @@ export class NodeServerService {
 
     return this.http.post(this.url+'/recibirDenuncia',req_body);
   };
+  
+  //CHATS
+  getChatsPersona(id: number):Observable<any> {
+
+    return this.http.get(this.url+`/chatPersonas/${id}`);
+  };
+
+  getMensajesPersona(usuarioId: number, personaId: number):Observable<any> {
+
+    return this.http.get(this.url+`/mensajesPersona/${usuarioId}/${personaId}`);
+  };
+
+  postEnviarMensaje( req_body : any ):Observable<any> {
+
+    return this.http.post(this.url+'/enviarMensaje',req_body);
+  };
+  
+  postBorrarMensajes( req_body : any ):Observable<any> {
+
+    return this.http.post(this.url+'/borrarChat',req_body);
+  };
 
   
   //prueba get

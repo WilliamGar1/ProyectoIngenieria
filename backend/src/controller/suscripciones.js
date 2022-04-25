@@ -89,7 +89,7 @@ const cancelarSuscripcion = async (req,res)=>{
 
 const suscripcionesCliente = async (req,res)=>{
 
-    const {clienteId} = req.body; 
+    const clienteId = req.params.id;
 
     const conectBD = MySQLBD.conectar();
     conectBD.query(`SELECT c.nombre,s.* FROM Suscripciones s

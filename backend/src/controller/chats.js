@@ -20,7 +20,7 @@ const enviarMensaje = async (req,res) => {
 
 const chatPersonas = async (req,res) => {
 
-    const {usuarioId} = req.body; 
+    const usuarioId = req.params.id; 
     const conectBD = MySQLBD.conectar();
     conectBD.query(` 
     SELECT CONCAT(u.nombre,' ',u.apellido) chatPersona, u.Id chatPersonaId FROM Usuarios u
@@ -47,7 +47,8 @@ const chatPersonas = async (req,res) => {
 
 const mensajesPersona = async (req,res) => {
 
-    const {usuarioId,chatPersonaId} = req.body; 
+    const usuarioId = req.params.usuarioId;
+    const chatPersonaId = req.params.personaId; 
     const conectBD = MySQLBD.conectar();
     conectBD.query(`SELECT * FROM Chats 
     WHERE (emisor = ${usuarioId} AND receptor = ${chatPersonaId}  AND estado_Emisor = TRUE) 

@@ -28,12 +28,14 @@
 
 .mensajes{
     height: 500px;
-	display: flex;
+	width: 1000px;
+	display: inline-flexbox;
 	flex-direction: column;
 	flex-wrap: nowrap;
 	justify-content: flex-end;
 	align-items: stretch;
 	align-content: stretch;
+	overflow-y: scroll;
 }
 
 .mensaje{
@@ -42,7 +44,7 @@
 	padding: 10px;
 	margin: 10px;
 	border-radius: 6px;
-	width: auto;
+	width: fit-content !important;
 }
 
 .mensaje.enviado{
@@ -52,14 +54,15 @@
 }
 
 .mensaje.recibido{
-	background-color: #4d3a2f;
+	background-color: #b9a8b9;
+	color: black;
 	margin-right: auto;
 }
 
 .desplegados{
     background-color:#F0F2F5;;
     height: 500px;
-    width: 1500px;
+    width: 1000px;
 }
 
 .icono{
