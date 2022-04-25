@@ -21,6 +21,6 @@
     "nodemailer": "^6.7.2",
     "nodemon": "^2.0.15",
     "pdfmake": "^0.2.4",
-    "socket.io": "^4.4.1"
+    "socket.io": "^4.5.0"
   }
 }

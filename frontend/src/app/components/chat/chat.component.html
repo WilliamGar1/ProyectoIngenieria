@@ -3,7 +3,7 @@
     <p class="fs-4 fw-bold">Chats</p>
     <div class="container-fluid mt-2">
       <div class="row">
-        <div class="card" style="max-width: 250px; max-height: 80px;" *ngFor="let cht of chatList" (click)="mostrar(cht.chatPersonaId, cht.chatPersona)">
+        <div class="card" style="max-width: 250px; max-height: 90px;" *ngFor="let cht of chatList" (click)="mostrar(cht.chatPersonaId, cht.chatPersona)">
           <div class="row g-0">
             <div class="col-6 col-md-4">
               <i class=" login fa-solid fa-circle-user"></i>
@@ -57,7 +57,7 @@
           </div>
         </form>
       </div>
-      <button (click)="borrarMensajes()" >Borrar</button>
+      <button (click)="borrarMensajes()" class="btn btn-danger mt-3" >Borrar</button>
     </div>
   </div>
 </div>
