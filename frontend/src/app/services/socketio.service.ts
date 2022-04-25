@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { io } from 'socket.io-client';
 
 @Injectable({
@@ -12,19 +12,20 @@ export class SocketioService {
     withCredentials:true,
     autoConnect: false
   });
+
   userId = 0;
   actualRoom = 0;
-  chat=[];
-  usersOnline=[];
 
   
   constructor() {
-    this.onRecivePrivateMessage();
-    this.onUsers();
   }
 
-  resetChat(newChat){
-    this.chat = newChat;
+  listenPrivateMessage(){
+    return new Observable((Subscriber)=>{
+      this.io.on("newPrivateMessage",(messageInfo)=>{
+        Subscriber.next(messageInfo);
+      });
+    });
   }
 
   connection(id){
@@ -50,34 +51,7 @@ export class SocketioService {
   }
 
   privateMessage(messageInfo){
-    this.chat.push(messageInfo);
     this.io.emit("privateMessage",messageInfo);
-  }
-
-  onUsers(){
-    this.io.on("users", (users)=>{
-      this.usersOnline = users;
-    });
-  }
-
-  sendMessage(messageInfo){
-    this.chat.push(messageInfo);
-    this.io.emit("sendMessage",messageInfo);
-  
-  }
-
-  onRecivePrivateMessage(){
-    this.io.on("newPrivateMessage",(messageInfo)=>{
-      if(messageInfo.user == this.actualRoom && messageInfo.person == this.userId){ 
-        this.chat.push(messageInfo);
-      }
-    });
-  }
-
-  onReciveMessage(){
-    this.io.on("reciveMessage",(messageInfo)=>{
-      this.chat.push(messageInfo);
-    });
   }
 
 }

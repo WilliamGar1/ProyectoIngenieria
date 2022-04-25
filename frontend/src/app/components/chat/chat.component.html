@@ -41,7 +41,7 @@
         </div>
       </div>
       <div class="mensajes" style="background-color: #F8F8F8;" id="mensajes">
-        <div *ngFor="let message of socket.chat" class="mensaje" [ngClass]="{'enviado':message.user==userId,'recibido':message.user==personaId}">
+        <div *ngFor="let message of chat" class="mensaje" [ngClass]="{'enviado':message.user==userId,'recibido':message.user==personaId}">
           {{message.message}}
           <small class="text-muted"> {{message.date | date:'short'}}</small>
         </div>
