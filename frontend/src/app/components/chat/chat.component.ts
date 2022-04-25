@@ -21,7 +21,15 @@ export class ChatComponent implements OnInit {
   nameActualChat = '';
   userId = 0;
   chatList: [
-    {chatPersona: string, chatPersonaId: number}
+    {
+      chatPersona: string, 
+      chatPersonaId: number, 
+      ultimo: {
+        emisor: number
+        receptor: number,
+        mensaje: string
+      }
+    }
   ];
   
   constructor(
@@ -52,7 +60,8 @@ export class ChatComponent implements OnInit {
   newChat(data){
     var chat = {
       chatPersona: data.chatPersona,
-      chatPersonaId: data.chatPersonaId
+      chatPersonaId: data.chatPersonaId,
+      ultimo: data.ultimo
     }
     this.chatList.push(chat);
     console.log(this.chatList);
@@ -65,7 +74,8 @@ export class ChatComponent implements OnInit {
       if(data.exito){
         console.log(data.mensaje);
         this.chatList = data.chatPersonas;
-        console.log(this.chatList);
+        //console.log(this.chatList);
+        this.getUltimo();
         var isNew = false;
         if(nChat.chatPersonaId!=0){
           this.chatList.forEach(chat =>{
@@ -91,6 +101,21 @@ export class ChatComponent implements OnInit {
     this.newC.deleteNewChat();
   }
 
+  getUltimo(){
+    this.chatList.forEach(chat =>{
+      this._nodeServer.getMensajesPersona(this.userId, chat.chatPersonaId).subscribe(data =>{
+        if(data.exito){
+          chat.ultimo = data.mensajesPersona[data.mensajesPersona.length-1];
+          if(chat.ultimo.emisor==this.userId){
+            chat.ultimo.mensaje = `Tu: ${chat.ultimo.mensaje}`;
+          }
+        }else{
+          console.log(data.mensaje);
+        }
+      }, err => console.log(err));
+    });
+  }
+
   comprobarUsuario(){
     if(!localStorage.getItem('usuario')){
       console.log("Usuario no encontrado");
@@ -110,11 +135,13 @@ export class ChatComponent implements OnInit {
     this._nodeServer.getMensajesPersona(this.userId, this.personaId).subscribe(data =>{
       if(data.exito){
         console.log(data.mensaje);
+        console.log(data);
         var newChat = [];
         data.mensajesPersona.forEach(mensaje => {
           var message = {
             message: mensaje.mensaje,
-            user: mensaje.emisor
+            user: mensaje.emisor,
+            date: mensaje.creacion
           }
           newChat.push(message);
         });
@@ -128,17 +155,24 @@ export class ChatComponent implements OnInit {
   }
 
   sendMessage(){
-   console.log(this.mensaje.value.contenido);
-   let messageInfo = {
-     message: this.mensaje.value.contenido,
-     user: parseInt(localStorage.getItem('usuario')),
-     person: this.personaId
-   }
-   //console.log(messageInfo);
-   //this.socket.sendMessage(messageInfo);
-   this.socket.privateMessage(messageInfo);
-   this.guardarMensaje();
-   //limpiar texto de mensaje
+    let dateTime = new Date().toLocaleString("en-US", {timeZone: "Africa/Casablanca"});
+    console.log(this.mensaje.value.contenido);
+    let messageInfo = {
+      message: this.mensaje.value.contenido,
+      user: parseInt(localStorage.getItem('usuario')),
+      person: this.personaId,
+      date: dateTime
+    }
+    //console.log(messageInfo);
+    //this.socket.sendMessage(messageInfo);
+    this.chatList.forEach(chat =>{
+      if(chat.chatPersonaId == this.personaId){
+        chat.ultimo.mensaje = `Tu: ${messageInfo.message}`;
+      }
+    });
+    this.socket.privateMessage(messageInfo);
+    this.guardarMensaje();
+    //limpiar texto de mensaje
 
   }
 
