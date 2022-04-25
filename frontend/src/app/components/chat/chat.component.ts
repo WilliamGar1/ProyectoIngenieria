@@ -263,6 +263,9 @@ export class ChatComponent implements OnInit {
           if(data.exito){
             console.log(data.mensaje);
             this.resetChat([]);
+            this._router.navigateByUrl('perfil', { skipLocationChange: true }).then(() => {
+              this._router.navigate(['chat']);
+          }); 
           }else{
             console.log(data.mensaje);
           }
