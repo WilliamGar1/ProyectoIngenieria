@@ -29,14 +29,13 @@
 .mensajes{
     height: 500px;
 	width: 1000px;
-	display: flex;
+	display: inline-flexbox;
 	flex-direction: column;
 	flex-wrap: nowrap;
 	justify-content: flex-end;
 	align-items: stretch;
 	align-content: stretch;
-	display:inline-block;
-	overflow-y: scroll;
+	overflow-y: auto;
 }
 
 .mensaje{
@@ -45,7 +44,7 @@
 	padding: 10px;
 	margin: 10px;
 	border-radius: 6px;
-	width: 300px !important;
+	width: fit-content !important;
 }
 
 .mensaje.enviado{
@@ -55,7 +54,8 @@
 }
 
 .mensaje.recibido{
-	background-color: #4d3a2f;
+	background-color: #b9a8b9;
+	color: black;
 	margin-right: auto;
 }
 

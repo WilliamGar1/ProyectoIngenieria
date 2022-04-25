@@ -11,7 +11,7 @@
             <div class="col-6 col-md-8">
               <div class="card-body">
                 <h6 class="card-title fw-bold">{{cht.chatPersona}}</h6>
-                <p class="card-text" *ngIf="cht.ultimo">{{cht.ultimo.mensaje}}</p>
+                <p class="text-muted" *ngIf="cht.ultimo">{{cht.ultimo.mensaje.slice(0,7)}}...</p>
               </div>
             </div>
           </div>
