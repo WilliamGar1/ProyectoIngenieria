@@ -145,6 +145,11 @@ export class NodeServerService {
 
     return this.http.post(this.url+'/enviarMensaje',req_body);
   };
+  
+  postBorrarMensajes( req_body : any ):Observable<any> {
+
+    return this.http.post(this.url+'/borrarChat',req_body);
+  };
 
   
   //prueba get

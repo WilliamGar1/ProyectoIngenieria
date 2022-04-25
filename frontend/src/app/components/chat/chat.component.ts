@@ -225,7 +225,7 @@ export class ChatComponent implements OnInit {
     this.socket.privateMessage(messageInfo);
     this.guardarMensaje();
     //limpiar texto de mensaje
-
+    this.mensaje.reset();
   }
 
   guardarMensaje(){
@@ -241,5 +241,34 @@ export class ChatComponent implements OnInit {
         console.log(data.mensaje);
       }
     }, err =>console.log(err));
+  }
+
+  borrarMensajes(){
+    Swal.fire({
+      title: 'Estas seguro?',
+      text: "Se eliminara todos los mensajes de esta conversación",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        console.log("borrar mensajes de usuario: "+this.personaId);
+        var datos = {
+          usuarioId: this.userId,
+          chatPersonaId: this.personaId
+        }
+        this._nodeServer.postBorrarMensajes(datos).subscribe(data=>{
+          if(data.exito){
+            console.log(data.mensaje);
+            this.resetChat([]);
+          }else{
+            console.log(data.mensaje);
+          }
+        }, err => console.log(err));
+      }
+    })
+    
   }
 }
