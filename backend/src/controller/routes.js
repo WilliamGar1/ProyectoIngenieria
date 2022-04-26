@@ -1,6 +1,7 @@
 const express= require('express');
 const path =require('path');
 const fs = require('fs');
+const cron = require('node-cron');
 
 const router = express.Router();
 
@@ -97,10 +98,24 @@ router.get('/mensajesPersona/:usuarioId/:personaId',chats.mensajesPersona);
 router.post('/borrarChat',chats.borrarChat);
 
 
-//Publicidad email,Prueba
-router.get('/publicidadPDF',publicidad.publicidadPDF);
-router.get('/publicidadHTML',publicidad.publicidadHTML);
+/*Publicidad email,Prueba
 
+            # ┌────────────── second (optional)
+            # │ ┌──────────── minute
+            # │ │ ┌────────── hour
+            # │ │ │ ┌──────── day of month
+            # │ │ │ │ ┌────── month
+            # │ │ │ │ │ ┌──── day of week
+            # │ │ │ │ │ │
+            # │ │ │ │ │ │
+            # * * * * * *         */
+
+            cron.schedule('30 52 21 25 * *', function(){
+                console.log('envio automatico');
+                publicidad.publicidadHTML();
+              });
+
+              router.get('/publicidadPDF',publicidad.publicidadPDF);
 router.get('/pdf',PDFMaker.PDFMaker)
 
 router.get('/test',users.test);
