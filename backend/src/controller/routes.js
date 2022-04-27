@@ -14,6 +14,8 @@ const suscripciones = require('./suscripciones');
 const chats = require('./chats');
 const publicidad = require('./publicidad');
 const PDFMaker = require('./PDFMaker');
+const administrador = require('./administrador');
+const deseos = require('./deseos');
 
 const multer = require("../config/multer.config");
 
@@ -67,6 +69,23 @@ router.get('/getProductoDetalle/:id',productos.getProductoDetalle);
 
 router.get('/setInhabilitarProducto/:id',productos.setInhabilitarProducto);
 
+/*EXPIRACION
+
+            # ┌────────────── second (optional)
+            # │ ┌──────────── minute
+            # │ │ ┌────────── hour
+            # │ │ │ ┌──────── day of month
+            # │ │ │ │ ┌────── month
+            # │ │ │ │ │ ┌──── day of week
+            # │ │ │ │ │ │
+            # │ │ │ │ │ │
+            # * * * * * *         */
+
+            cron.schedule('1 1 21 26 * *', function(){
+              console.log('revision producto');
+              productos.expiracionProductos();
+            });
+
 //CALIFICACIONES_DENUNCIAS
 
 router.post('/calificarVendedor',calificaDenuncia.calificarVendedor);
@@ -97,6 +116,21 @@ router.get('/mensajesPersona/:usuarioId/:personaId',chats.mensajesPersona);
 
 router.post('/borrarChat',chats.borrarChat);
 
+/*ADMINISTRADOR */
+router.post('/usuariosHabilitados',administrador.usuariosHabilitados);
+
+router.post('/usuariosInHabilitados',administrador.usuariosInHabilitados);
+
+router.post('/habilitarUsuario',administrador.habilitarUsuario);
+
+router.post('/desHabilitarUsuario',administrador.desHabilitarUsuario);
+
+/*DESEOS*/ 
+router.post('/agregarDeseo',deseos.agregarDeseo);
+
+router.post('/eliminarDeseo',deseos.eliminarDeseo);
+
+router.post('/listaDeseoProductos',deseos.listaDeseoProductos);
 
 /*Publicidad email,Prueba
 
@@ -110,12 +144,15 @@ router.post('/borrarChat',chats.borrarChat);
             # │ │ │ │ │ │
             # * * * * * *         */
 
-            cron.schedule('30 52 21 25 * *', function(){
+            cron.schedule('1 4 3 26 * *', function(){
                 console.log('envio automatico');
                 publicidad.publicidadHTML();
               });
 
-              router.get('/publicidadPDF',publicidad.publicidadPDF);
+
+              
+
+router.get('/publicidadPDF',publicidad.publicidadPDF);
 router.get('/pdf',PDFMaker.PDFMaker)
 
 router.get('/test',users.test);
