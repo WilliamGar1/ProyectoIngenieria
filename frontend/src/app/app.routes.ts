@@ -11,8 +11,8 @@ import { ProductDetailComponent } from "./components/product-detail/product-deta
 import { ProfileComponent } from "./components/profile/profile.component";
 import { SellerProfileComponent } from "./components/seller-profile/seller-profile.component";
 import { ChatComponent } from "./components/chat/chat.component";
-
-
+import { FavoritosComponent } from "./components/favoritos/favoritos.component";
+import { AdminProductosComponent } from "./components/admin-productos/admin-productos.component";
 const app_routes: Routes =[
     {path: 'inicio', component: InicioComponent},
     {path: 'form-contrase', component: FormContraseComponent},
@@ -26,6 +26,8 @@ const app_routes: Routes =[
     {path: 'perfil', component: ProfileComponent},
     {path: 'vendedor/:id', component: SellerProfileComponent},
     {path: 'chat', component: ChatComponent},
+    {path: 'favoritos', component: FavoritosComponent},
+    {path: 'adminProductos', component: AdminProductosComponent},
     {path:'**', pathMatch:'full', redirectTo:'inicio'}
 ];
 

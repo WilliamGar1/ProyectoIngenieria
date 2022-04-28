@@ -24,7 +24,7 @@
         </div>
         <div class="col-md-3">
             <div class="card-body">
-                <h5 class="card-title">{{producto.nombre}} <i class="fa-regular fa-bookmark float-end"></i></h5>
+                <h5 class="card-title">{{producto.nombre}} <i class="fa-regular fa-bookmark float-end"  [ngClass]="{'fav':marcado,'nofav':!marcado}" (click)="favoritos()"></i></h5>
                 
                 <p class="card-text">{{producto.precio | currency:'L ':"symbol"}}</p>
                 <p class="card-text"><small class="text-muted">Publicado desde:  {{producto.actualizacion | date:'short'}}</small></p>

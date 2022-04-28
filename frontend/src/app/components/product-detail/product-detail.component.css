@@ -53,3 +53,9 @@ input[type="radio"]:checked ~ label {
 a{
   color: black;
 }
+.fav{
+  color:#12D4A7;
+}
+.nofav{
+  color:black;
+}

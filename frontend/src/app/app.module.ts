@@ -28,6 +28,8 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { ProfileComponent } from './components/profile/profile.component';
 import { SellerProfileComponent } from './components/seller-profile/seller-profile.component';
 import { ChatComponent } from './components/chat/chat.component';
+import { FavoritosComponent } from './components/favoritos/favoritos.component';
+import { AdminProductosComponent } from './components/admin-productos/admin-productos.component';
 
 
 @NgModule({
@@ -46,7 +48,9 @@ import { ChatComponent } from './components/chat/chat.component';
     ProductDetailComponent,
     ProfileComponent,
     SellerProfileComponent,
-    ChatComponent
+    ChatComponent,
+    FavoritosComponent,
+    AdminProductosComponent
   ],
   imports: [
     BrowserModule,

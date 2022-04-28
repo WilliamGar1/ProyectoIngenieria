@@ -26,7 +26,7 @@ export class ProductDetailComponent implements OnInit {
   });
 
   id: number;
-
+  marcado:boolean=false
   nombre: string = 'Celular';
   precio: number = 1200;
   descripcion: string = `Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
@@ -162,6 +162,12 @@ export class ProductDetailComponent implements OnInit {
         this.denuncia.reset();
       }
     }
-    
+  }
+  favoritos(){
+    if(this.marcado==false){
+      this.marcado=true
+    }else{
+      this.marcado=false
+    }
   }
 }
