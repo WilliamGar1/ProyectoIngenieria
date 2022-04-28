@@ -61,7 +61,7 @@ const sendEmailPublicidadHTML = async (email,subject,html)=>{
           from: `NTT: <${mail.user}>`, // sender address
           to: email, // list of receivers
           subject, // Subject line
-          text: "Publicidad", // plain text body
+          text: "", // plain text body
           html, // html body
         });
         
@@ -158,10 +158,10 @@ const getPublicidadTemplate = (productos)=>{
     body=body+ `
 
         <h2>${producto.nombre} </h2>
-       <p>Este es un producto</p>
+       <p> Precio: ${producto.precio} </p>
        <img src="data:${producto.ImagenTipo};base64,${producto.Imagen.toString('base64')}" width="100" height="100">
 
-       <a href="${urlBase}/producto/detalle/${producto.Id}"> Producto</a>
+       <a href="${urlBase}/producto/detalle/${producto.Id}"> Ir a detalles</a>
        <br>
 
        `       

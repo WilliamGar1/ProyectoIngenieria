@@ -1,7 +1,8 @@
 use bavvsia83xxkjbvtnugt;
 
+DROP TABLE IF EXISTS TipoUsuario;
 
-/*DROP TABLE IF EXISTS Municipios;
+DROP TABLE IF EXISTS Municipios;
 DROP TABLE IF EXISTS Departamentos;
 
 DROP TABLE IF EXISTS  Telefonos;
@@ -12,15 +13,25 @@ DROP TABLE IF EXISTS Usuarios;
 DROP TABLE IF EXISTS ImagenesProducto;
 DROP TABLE IF EXISTS Productos;
 
-DROP TABLE IF EXISTS Categorias;*/
+DROP TABLE IF EXISTS Categorias;
 
 DROP TABLE IF EXISTS Calificaciones;
 DROP TABLE IF EXISTS Denuncias;
 DROP TABLE IF EXISTS Suscripciones;
 DROP TABLE IF EXISTS Chats;
 
+DROP TABLE IF EXISTS ListaDeseos;
+
 DROP TABLE IF EXISTS test;
 
+/*--tipo de usuario */
+CREATE TABLE IF NOT EXISTS TipoUsuario(
+Id INTEGER PRIMARY KEY,
+nombre VARCHAR(100) NOT NULL
+);
+
+INSERT INTO TipoUsuario VALUES (1,"Normal");
+INSERT INTO TipoUsuario VALUES (2,"Administrador");
 
 /*--direcciones*/
 CREATE TABLE IF NOT EXISTS Departamentos(
@@ -48,7 +59,9 @@ CREATE TABLE IF NOT EXISTS Usuarios(
  direccion     VARCHAR(200) ,
  estadoHabilitacion BOOLEAN DEFAULT FALSE,
  creacion TIMESTAMP DEFAULT NOW(),
- actualizacion TIMESTAMP DEFAULT NOW() ON UPDATE NOW()
+ TipoUsuario  INTEGER   DEFAULT 1 ,
+ actualizacion TIMESTAMP DEFAULT NOW() ON UPDATE NOW(),
+ FOREIGN KEY (TipoUsuario)REFERENCES TipoUsuario(Id)
 );
 
 
@@ -141,7 +154,13 @@ estado_Receptor BOOLEAN DEFAULT TRUE,
 estado_Emisor BOOLEAN DEFAULT TRUE
 );
 
-
+/*LISTA DE DESEOS*/
+CREATE TABLE ListaDeseos(
+Id INTEGER AUTO_INCREMENT PRIMARY KEY,
+clienteId INTEGER NOT NULL REFERENCES Usuarios(Id),
+productoId INTEGER NOT NULL REFERENCES Productos(Id),
+estadoHabilitacion BOOLEAN DEFAULT TRUE
+);
 
 INSERT INTO Departamentos VALUES(1, 'Atlantida');
 INSERT INTO Departamentos VALUES(2, 'Colon');

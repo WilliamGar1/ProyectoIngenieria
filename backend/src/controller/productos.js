@@ -259,6 +259,43 @@ const testImg = async  (req, res) => {
    };
   
 
+   const expiracionProductos =  () =>{
+
+    var i=0;
+    const conectBD = MySQLBD.conectar();
+   conectBD.query(`SELECT  (DATE(creacion) - DATE(now())) exp, Id FROM Productos WHERE estadoHabilitacion = TRUE`, (err, ProductosRes) => {
+ 
+        if(!err){
+
+            ProductosRes.forEach(producto => {
+            i++;
+console.log("revisando expiracion de producto");
+            if(producto.exp <= -299){
+           desHabilitarProducto(producto,conectBD,{i,c:ProductosRes.length});
+        }
+      
+        });
+
+     
+        }
+
+    });
+ 
+   };
+
+   const  desHabilitarProducto =  (producto,con,i) =>{
+
+    con.query(`UPDATE Productos SET estadoHabilitacion = FALSE WHERE Id = ${producto.Id}`, (err, ProductoRes) => {
+
+             if(i.i==i.c){
+                console.log("Close Connection");
+                con.end(); 
+    
+              }
+        
+    });
+   }
+
 
 module.exports = {
  insertNewProducto,
@@ -267,5 +304,6 @@ module.exports = {
  getProductosUsuario,
  getProductoDetalle,
  setInhabilitarProducto,
+ expiracionProductos,
  testImg
 };
