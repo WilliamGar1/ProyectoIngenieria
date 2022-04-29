@@ -13,6 +13,7 @@ import { SellerProfileComponent } from "./components/seller-profile/seller-profi
 import { ChatComponent } from "./components/chat/chat.component";
 import { FavoritosComponent } from "./components/favoritos/favoritos.component";
 import { AdminProductosComponent } from "./components/admin-productos/admin-productos.component";
+import { EstadisticasComponent } from "./components/estadisticas/estadisticas.component";
 const app_routes: Routes =[
     {path: 'inicio', component: InicioComponent},
     {path: 'form-contrase', component: FormContraseComponent},
@@ -28,8 +29,9 @@ const app_routes: Routes =[
     {path: 'chat', component: ChatComponent},
     {path: 'favoritos', component: FavoritosComponent},
     {path: 'adminProductos', component: AdminProductosComponent},
+    {path: 'estadisticas', component: EstadisticasComponent},
     {path:'**', pathMatch:'full', redirectTo:'inicio'}
 ];
 
-export const app_routing =RouterModule.forRoot(app_routes);
+export const app_routing = RouterModule.forRoot(app_routes);
 

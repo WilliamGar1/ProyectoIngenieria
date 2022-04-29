@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import{BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 //
 import {HttpClientModule} from '@angular/common/http';
 
@@ -30,6 +32,7 @@ import { SellerProfileComponent } from './components/seller-profile/seller-profi
 import { ChatComponent } from './components/chat/chat.component';
 import { FavoritosComponent } from './components/favoritos/favoritos.component';
 import { AdminProductosComponent } from './components/admin-productos/admin-productos.component';
+import { EstadisticasComponent } from './components/estadisticas/estadisticas.component';
 
 
 @NgModule({
@@ -50,7 +53,8 @@ import { AdminProductosComponent } from './components/admin-productos/admin-prod
     SellerProfileComponent,
     ChatComponent,
     FavoritosComponent,
-    AdminProductosComponent
+    AdminProductosComponent,
+    EstadisticasComponent
   ],
   imports: [
     BrowserModule,
@@ -58,6 +62,8 @@ import { AdminProductosComponent } from './components/admin-productos/admin-prod
     ReactiveFormsModule,
     NgxDropzoneModule,
     HttpClientModule,
+    NgxChartsModule,
+    BrowserAnimationsModule,
     app_routing
   ],
   providers: [],

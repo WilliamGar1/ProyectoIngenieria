@@ -1,0 +1,56 @@
+<h1 class="text-center mt-5">Estadísticas</h1>
+<div class="container mt-5">
+    <div class="esta">
+        <h4>Clientes por Departamento</h4>
+        <ngx-charts-advanced-pie-chart
+            [view]="view"
+            scheme="natural"
+            [results]="single"
+            [gradient]="gradient"
+            (select)="onSelect($event)"
+            (activate)="onActivate($event)"
+            (deactivate)="onDeactivate($event)">
+        </ngx-charts-advanced-pie-chart>
+    </div>
+    <div class="esta">
+       <h4>Productos por Categoría</h4>
+            <ngx-charts-bar-horizontal-2d
+                [view]="view2"
+                scheme="air"
+                [schemeType]="schemeType"
+                [results]="multi"
+                [gradient]="gradient2"
+                [xAxis]="showXAxis"
+                [yAxis]="showYAxis"
+                [legend]="showLegend2"
+                [legendPosition]="legendPosition"
+                [showXAxisLabel]="showXAxisLabel"
+                [showYAxisLabel]="showYAxisLabel"
+                [xAxisLabel]="xAxisLabel"
+                [yAxisLabel]="yAxisLabel"
+                (select)="onSelect($event)"
+                (activate)="onActivate($event)"
+                (deactivate)="onDeactivate($event)">
+            </ngx-charts-bar-horizontal-2d>
+    </div><br>
+   <div class="esta mt-5">
+        <h4>Usuarios mejor Calificados</h4>
+        <ngx-charts-bar-vertical-2d
+        [view]="view"
+        scheme="cool"
+        [results]="multi2"
+        [gradient]="gradient3"
+        [xAxis]="showXAxis2"
+        [yAxis]="showYAxis2"
+        [legend]="showLegend3"
+        [showXAxisLabel]="showXAxisLabel2"
+        [showYAxisLabel]="showYAxisLabel2"
+        [xAxisLabel]="xAxisLabel2"
+        [yAxisLabel]="yAxisLabel2"
+        [legendTitle]="legendTitle"
+        (select)="onSelect($event)"
+        (activate)="onActivate($event)"
+        (deactivate)="onDeactivate($event)">
+    </ngx-charts-bar-vertical-2d>
+   </div>
+</div>

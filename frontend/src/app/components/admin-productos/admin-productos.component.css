@@ -1,0 +1,28 @@
+th{
+    background-color: #00485A;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+td{
+    background-color:white;
+    text-align: center;
+    padding: 5px;
+}
+table{
+    border-collapse: separate;
+    border-spacing: 10px; 
+}
+td.id{
+    background-color: #99aab5;
+}
+.eliminar{
+    color:#dc001a;
+}
+.eliminar:hover{
+    cursor: pointer;
+}
+
+i{
+    font-size: 25px;
+}
