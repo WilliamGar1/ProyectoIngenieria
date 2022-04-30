@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import{BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 //
 import {HttpClientModule} from '@angular/common/http';
 
@@ -28,9 +30,13 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { ProfileComponent } from './components/profile/profile.component';
 import { SellerProfileComponent } from './components/seller-profile/seller-profile.component';
 import { ChatComponent } from './components/chat/chat.component';
+import { FavoritosComponent } from './components/favoritos/favoritos.component';
+import { AdminProductosComponent } from './components/admin-productos/admin-productos.component';
+import { EstadisticasComponent } from './components/estadisticas/estadisticas.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { ComplaintsComponent } from './components/complaints/complaints.component';
 import { ComplaintsHistoryComponent } from './components/complaints-history/complaints-history.component';
+
 
 
 @NgModule({
@@ -50,9 +56,14 @@ import { ComplaintsHistoryComponent } from './components/complaints-history/comp
     ProfileComponent,
     SellerProfileComponent,
     ChatComponent,
+
+    FavoritosComponent,
+    AdminProductosComponent,
+    EstadisticasComponent,
     CategoriesComponent,
     ComplaintsComponent,
     ComplaintsHistoryComponent
+
   ],
   imports: [
     BrowserModule,
@@ -60,6 +71,8 @@ import { ComplaintsHistoryComponent } from './components/complaints-history/comp
     ReactiveFormsModule,
     NgxDropzoneModule,
     HttpClientModule,
+    NgxChartsModule,
+    BrowserAnimationsModule,
     app_routing
   ],
   providers: [],

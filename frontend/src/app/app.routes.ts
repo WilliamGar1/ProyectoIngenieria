@@ -11,10 +11,12 @@ import { ProductDetailComponent } from "./components/product-detail/product-deta
 import { ProfileComponent } from "./components/profile/profile.component";
 import { SellerProfileComponent } from "./components/seller-profile/seller-profile.component";
 import { ChatComponent } from "./components/chat/chat.component";
+import { FavoritosComponent } from "./components/favoritos/favoritos.component";
+import { AdminProductosComponent } from "./components/admin-productos/admin-productos.component";
+import { EstadisticasComponent } from "./components/estadisticas/estadisticas.component";
 import { CategoriesComponent } from "./components/categories/categories.component";
 import { ComplaintsComponent } from "./components/complaints/complaints.component";
 import { ComplaintsHistoryComponent } from "./components/complaints-history/complaints-history.component";
-
 
 const app_routes: Routes =[
     {path: 'inicio', component: InicioComponent},
@@ -29,11 +31,14 @@ const app_routes: Routes =[
     {path: 'perfil', component: ProfileComponent},
     {path: 'vendedor/:id', component: SellerProfileComponent},
     {path: 'chat', component: ChatComponent},
+    {path: 'favoritos', component: FavoritosComponent},
+    {path: 'adminProductos', component: AdminProductosComponent},
+    {path: 'estadisticas', component: EstadisticasComponent},
     {path: 'categorias', component: CategoriesComponent},
     {path: 'denuncias', component: ComplaintsComponent},
     {path: 'denuncias/resueltas', component: ComplaintsHistoryComponent},
     {path:'**', pathMatch:'full', redirectTo:'inicio'}
 ];
 
-export const app_routing =RouterModule.forRoot(app_routes);
+export const app_routing = RouterModule.forRoot(app_routes);
 

@@ -6,7 +6,13 @@ img.w-100 {
 i {
   font-size: 17px;
 }
+.favorito{
+  font-size: 25px;
+}
 
+.favorito:hover{
+  cursor: pointer;
+}
 #form {
   width: 250px;
   margin: 0 auto;
@@ -52,4 +58,10 @@ input[type="radio"]:checked ~ label {
 
 a{
   color: black;
+}
+.fav{
+  color:#12D4A7;
+}
+.nofav{
+  color:black;
 }

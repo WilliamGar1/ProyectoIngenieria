@@ -1,0 +1,21 @@
+<h1 class="text-center">Favoritos</h1>
+
+<p class="intro text-center mt-3">Aquí podrás encontrar todos tús productos favoritos</p>
+<div class="container-fluid">
+    <div class="row">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-5">
+                <div class="card" style="width: 18rem;">
+                    <img src="assets/imagen.jpeg" width="200" height="200" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Nombre del Producto</h5>
+                      <p class="card-text" maxlength="10">Descripción:</p>
+                      <p class="card-text">Precio: L. 100</p>
+                      <div class="arriba2">
+                        <p class="card-text">Vendedor: <a [routerLink]="['/vendedor']">usuario</a></p>
+                        <a [routerLink]="['detalle']"><i class="fa-solid fa-circle-plus"></i></a>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+    </div>
+</div>
