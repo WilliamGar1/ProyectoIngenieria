@@ -1,0 +1,48 @@
+<h1 class="text-center mt-5">Gestión de Categorías</h1>
+
+<div class="container mt-5 w-50">
+    <button class="btn primario mt-5" data-bs-toggle="modal" data-bs-target="#modalTerminos">Nueva</button>
+
+    <table class="table mt-5 table-striped table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre Categoría</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let cat of categorias">
+                <td scope="row">{{cat.Id}}</td>
+                <td>{{cat.nombre}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="modal" id="modalTerminos" tabindex="-1" aria-labelledby="modalTerminosLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="text-center mb-2">Nueva Categoría</h3>
+                <p type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></p>
+            </div>
+            <div class="modal-body">
+                
+                <form id="form" novalidate [formGroup]="newCategoryForm">
+                    <div class="form-group">
+                        <div class="row g-0">
+                            <label for="name" class="form-label">Nombre</label>
+                            <input formControlName="name" class="form-control" type="text" class="form-control"
+                                id="name" required>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
