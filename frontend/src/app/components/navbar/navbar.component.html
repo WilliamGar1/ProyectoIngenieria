@@ -3,10 +3,10 @@
     <a class="nav-link" [routerLink]="['Inicio']">Inicio</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+      <span class="navbar-toggler-icon" style="color:aqua;"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
+      <ul class="navbar-nav" *ngIf="user else admin">
         <li class="nav-item">
           <a class="nav-link" aria-current="page" [routerLink]="['registrarProducto']">Registrar Productos</a>
         </li>
@@ -14,11 +14,12 @@
           <a class="nav-link" aria-current="page" [routerLink]="['producto']">Productos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" [routerLink]="['misProductos']">Mís Productos</a>
+          <a class="nav-link" aria-current="page" [routerLink]="['misProductos']">Mis Productos</a>
         </li>
         <li class="c nav-item">
           <i class="chat fa-solid fa-comment-dots" [routerLink]="['chat']"></i>
         </li>
+        
         <li class="user nav-item">
           <div class="dropdown">
             <a class="nav-link" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
@@ -31,7 +32,7 @@
                 </a>
               </li>
 
-              <li *ngIf="sesion">
+              <li *ngIf="sesion2">
                 <a class="dropdown-item" routerLink="perfil">
                   <i class="fa-solid fa-address-card me-1"></i>Perfil
                 </a>
@@ -41,11 +42,67 @@
                   <i class="fa-solid fa-arrow-right-from-bracket me-1"></i>Cerrar Sesión
                 </a>
               </li>
-
             </ul>
           </div>
         </li>
       </ul>
+      <ng-template #admin>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" [routerLink]="['categorias']">Categorías</a>
+          </li>
+          <li class="nav-item">
+            <div class="dropdown">
+              <a class="nav-link" role="button" id="denuncias" data-bs-toggle="dropdown" aria-expanded="false">Denuncias</a>
+              <ul class="dropdown-menu" aria-labelledby="denuncias">
+                <li *ngIf="!sesion">
+                  <a class="dropdown-item" [routerLink]="['denuncias']">
+                    Sin Resolver
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" [routerLink]="['denuncias/resueltas']">
+                    Resueltas
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" [routerLink]="['adminProductos']">Productos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" [routerLink]="['estadisticas']">Estadísticas</a>
+          </li>
+          <li class="user nav-item">
+            <div class="dropdown">
+              <a class="nav-link" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class=" login fa-solid fa-circle-user"></i>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li *ngIf="!sesion">
+                  <a class="dropdown-item" routerLink="/login">
+                    <i class="fa-solid fa-arrow-right-to-bracket me-1"></i>Iniciar Sesión
+                  </a>
+                </li>
+  
+                <li *ngIf="sesion2">
+                  <a class="dropdown-item" routerLink="perfil">
+                    <i class="fa-solid fa-address-card me-1"></i>Perfil
+                  </a>
+                </li>
+                <li *ngIf="sesion">
+                  <a class="dropdown-item" role="button" (click)="out()">
+                    <i class="fa-solid fa-arrow-right-from-bracket me-1"></i>Cerrar Sesión
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+        
+      </ng-template>
+      
     </div>
   </div>
 </nav>

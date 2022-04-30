@@ -1,0 +1,21 @@
+input,
+select,
+textarea,
+button{
+    border: 1px solid black;
+    border-radius: 0;
+}
+
+button{
+    width: 150px;
+    font-size: 22px;
+}
+
+label{
+    font-size: 22px;
+}
+
+table{
+    text-align: center;
+    font-size: 20px;
+}

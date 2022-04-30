@@ -1,0 +1,31 @@
+<h1 class="text-center mt-5">Gestión de Denuncias</h1>
+
+<div class="container mt-5">
+    
+    <table class="table mt-5 table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Nº</th>
+                <th>Nombre Cliente</th>
+                <th>Nombre Vendedor</th>
+                <th>Detalle</th>
+                <th>Fecha</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let den of denuncias; index as i">
+                <td scope="row">{{i + 1}}</td>
+                <td>{{den.clienteId}}</td>
+                <td>{{ den.vendedorId }}</td>
+                <td>{{ den.detalle }}</td>
+                <td>{{ den.creacion | date: 'shortDate' }}</td>
+                <td>
+                    <a><i class="fa-solid fa-ban"></i></a>
+                    <a><i class="fa-solid fa-box-archive"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
