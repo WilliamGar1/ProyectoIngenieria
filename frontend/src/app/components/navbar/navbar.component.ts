@@ -21,4 +21,12 @@ export class NavbarComponent implements OnInit {
     return localStorage.getItem('usuario') === null ? false : true;
   }
 
+  get sesion2() {
+    return this.sesion && this.user;
+  }
+
+  get user() {
+    return localStorage.getItem('tipo') === 'Admin' ? false : true;
+  }
+
 }

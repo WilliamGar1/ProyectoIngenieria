@@ -11,6 +11,9 @@ import { ProductDetailComponent } from "./components/product-detail/product-deta
 import { ProfileComponent } from "./components/profile/profile.component";
 import { SellerProfileComponent } from "./components/seller-profile/seller-profile.component";
 import { ChatComponent } from "./components/chat/chat.component";
+import { CategoriesComponent } from "./components/categories/categories.component";
+import { ComplaintsComponent } from "./components/complaints/complaints.component";
+import { ComplaintsHistoryComponent } from "./components/complaints-history/complaints-history.component";
 
 
 const app_routes: Routes =[
@@ -26,6 +29,9 @@ const app_routes: Routes =[
     {path: 'perfil', component: ProfileComponent},
     {path: 'vendedor/:id', component: SellerProfileComponent},
     {path: 'chat', component: ChatComponent},
+    {path: 'categorias', component: CategoriesComponent},
+    {path: 'denuncias', component: ComplaintsComponent},
+    {path: 'denuncias/resueltas', component: ComplaintsHistoryComponent},
     {path:'**', pathMatch:'full', redirectTo:'inicio'}
 ];
 

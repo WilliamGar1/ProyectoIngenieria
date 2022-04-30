@@ -28,6 +28,9 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { ProfileComponent } from './components/profile/profile.component';
 import { SellerProfileComponent } from './components/seller-profile/seller-profile.component';
 import { ChatComponent } from './components/chat/chat.component';
+import { CategoriesComponent } from './components/categories/categories.component';
+import { ComplaintsComponent } from './components/complaints/complaints.component';
+import { ComplaintsHistoryComponent } from './components/complaints-history/complaints-history.component';
 
 
 @NgModule({
@@ -46,7 +49,10 @@ import { ChatComponent } from './components/chat/chat.component';
     ProductDetailComponent,
     ProfileComponent,
     SellerProfileComponent,
-    ChatComponent
+    ChatComponent,
+    CategoriesComponent,
+    ComplaintsComponent,
+    ComplaintsHistoryComponent
   ],
   imports: [
     BrowserModule,
