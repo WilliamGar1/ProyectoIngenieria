@@ -33,6 +33,10 @@ import { ChatComponent } from './components/chat/chat.component';
 import { FavoritosComponent } from './components/favoritos/favoritos.component';
 import { AdminProductosComponent } from './components/admin-productos/admin-productos.component';
 import { EstadisticasComponent } from './components/estadisticas/estadisticas.component';
+import { CategoriesComponent } from './components/categories/categories.component';
+import { ComplaintsComponent } from './components/complaints/complaints.component';
+import { ComplaintsHistoryComponent } from './components/complaints-history/complaints-history.component';
+
 
 
 @NgModule({
@@ -52,9 +56,14 @@ import { EstadisticasComponent } from './components/estadisticas/estadisticas.co
     ProfileComponent,
     SellerProfileComponent,
     ChatComponent,
+
     FavoritosComponent,
     AdminProductosComponent,
-    EstadisticasComponent
+    EstadisticasComponent,
+    CategoriesComponent,
+    ComplaintsComponent,
+    ComplaintsHistoryComponent
+
   ],
   imports: [
     BrowserModule,

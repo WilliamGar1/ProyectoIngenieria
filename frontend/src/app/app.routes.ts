@@ -14,6 +14,10 @@ import { ChatComponent } from "./components/chat/chat.component";
 import { FavoritosComponent } from "./components/favoritos/favoritos.component";
 import { AdminProductosComponent } from "./components/admin-productos/admin-productos.component";
 import { EstadisticasComponent } from "./components/estadisticas/estadisticas.component";
+import { CategoriesComponent } from "./components/categories/categories.component";
+import { ComplaintsComponent } from "./components/complaints/complaints.component";
+import { ComplaintsHistoryComponent } from "./components/complaints-history/complaints-history.component";
+
 const app_routes: Routes =[
     {path: 'inicio', component: InicioComponent},
     {path: 'form-contrase', component: FormContraseComponent},
@@ -30,6 +34,9 @@ const app_routes: Routes =[
     {path: 'favoritos', component: FavoritosComponent},
     {path: 'adminProductos', component: AdminProductosComponent},
     {path: 'estadisticas', component: EstadisticasComponent},
+    {path: 'categorias', component: CategoriesComponent},
+    {path: 'denuncias', component: ComplaintsComponent},
+    {path: 'denuncias/resueltas', component: ComplaintsHistoryComponent},
     {path:'**', pathMatch:'full', redirectTo:'inicio'}
 ];
 

@@ -151,6 +151,12 @@ export class NodeServerService {
     return this.http.post(this.url+'/borrarChat',req_body);
   };
 
+  //DENUNCIAS
+
+  getDenuncias(): Observable<any> {
+    return this.http.get(this.url + '/getDenuncias');
+  }
+
   
   //prueba get
   getNodeServer():Observable<any> {
