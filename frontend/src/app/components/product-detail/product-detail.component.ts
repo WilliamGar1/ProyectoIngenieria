@@ -163,6 +163,11 @@ export class ProductDetailComponent implements OnInit {
       }
     }
   }
+
+  get user() {
+    return parseInt(localStorage.getItem('tipo')) === 1 ? true : false;
+  }
+
   favoritos(){
     if(this.marcado==false){
       this.marcado=true

@@ -36,7 +36,7 @@ const insertNewCategoria = async (req, res) => {
             res.send({mensaje:'Error al insertar categoria',exito:0});
          
         }else{
-                res.send({mensaje:'Categorias insertada',exito:1});
+                res.send({mensaje:'Nueva categoria agregada',exito:1});
 
 
      
@@ -74,7 +74,7 @@ const actualizarCategoria = async (req, res) => {
 
 const eliminarCategoria = async (req, res) => {
     
-    const {categoriaId} = req.body;
+    const categoriaId = req.params.id;
 
     const conectBD = MySQLBD.conectar();
     //BUSCAR CATEGORIAS

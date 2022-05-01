@@ -14,7 +14,10 @@
         <tbody>
             <tr *ngFor="let cat of categorias">
                 <td scope="row">{{cat.Id}}</td>
-                <td>{{cat.nombre}}</td>
+                <td>{{cat.nombre}}
+                    <button (click)="deleteCategoria(cat.Id)">borrar</button>
+                    <button data-bs-toggle="modal" data-bs-target="#modalTerminos2"(click)="updateCategoriaHelper(cat.Id, cat.nombre)">actualizar</button>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -41,7 +44,34 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Guardar</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="newCategoria()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="modalTerminos2" tabindex="-1" aria-labelledby="modalTerminosLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="text-center mb-2">Actualizar categoria: {{nombre}}</h3>
+                <p type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></p>
+            </div>
+            <div class="modal-body">
+                
+                <form id="form" novalidate [formGroup]="newCategoryForm">
+                    <div class="form-group">
+                        <div class="row g-0">
+                            <label for="nameUpdate" class="form-label">Nuevo nombre</label>
+                            <input formControlName="nameUpdate" class="form-control" type="text" class="form-control"
+                                id="nameUpdate" required>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="updateCategoria()">Guardar</button>
             </div>
         </div>
     </div>

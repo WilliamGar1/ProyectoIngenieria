@@ -15,13 +15,13 @@
         </thead>
 
         <tbody>
-            <tr >
-                <td scope="row"></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+            <tr *ngFor="let den of denuncias; index as i">
+                <td scope="row">{{i + 1}}</td>
+                <td [routerLink]="['/vendedor', den.clienteId]">{{den.NombreCliente}}</td>
+                <td [routerLink]="['/vendedor', den.vendedorId]">{{ den.NombreVendedor }}</td>
+                <td>{{ den.detalle }}</td>
+                <td>{{ den.creacion | date: 'shortDate' }}</td>
+                <td>{{ den.actualizacion | date: 'shortDate' }}</td>
             </tr>
         </tbody>
     </table>

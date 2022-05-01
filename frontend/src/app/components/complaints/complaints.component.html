@@ -17,13 +17,13 @@
         <tbody>
             <tr *ngFor="let den of denuncias; index as i">
                 <td scope="row">{{i + 1}}</td>
-                <td>{{den.clienteId}}</td>
-                <td>{{ den.vendedorId }}</td>
+                <td [routerLink]="['/vendedor', den.clienteId]">{{den.NombreCliente}}</td>
+                <td [routerLink]="['/vendedor', den.vendedorId]">{{ den.NombreVendedor }}</td>
                 <td>{{ den.detalle }}</td>
                 <td>{{ den.creacion | date: 'shortDate' }}</td>
                 <td>
-                    <a><i class="fa-solid fa-ban"></i></a>
-                    <a><i class="fa-solid fa-box-archive"></i></a>
+                    <a><i class="fa-solid fa-ban" (click)="banearUsuario(den.vendedorId)"></i></a>
+                    <a><i class="fa-solid fa-box-archive" (click)="tacharDenuncia(den.Id)"></i></a>
                 </td>
             </tr>
         </tbody>

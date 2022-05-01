@@ -26,7 +26,7 @@ export class NavbarComponent implements OnInit {
   }
 
   get user() {
-    return localStorage.getItem('tipo') === 'Admin' ? false : true;
+    return parseInt(localStorage.getItem('tipo')) === 2 ? false : true;
   }
 
 }

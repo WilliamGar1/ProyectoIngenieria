@@ -16,6 +16,7 @@ const publicidad = require('./publicidad');
 const PDFMaker = require('./PDFMaker');
 const administrador = require('./administrador');
 const deseos = require('./deseos');
+const estadisticas = require('./estadisticas');
 
 const multer = require("../config/multer.config");
 
@@ -50,16 +51,18 @@ router.get('/datosregistro',direcciones.getAll_departamentos_municipios);
 //CATEGORTIAS
 router.get('/datosregistroProducto',categorias.getAll_categorias);
 
-router.get('/insertNewCategoria',categorias.insertNewCategoria);
+router.post('/insertNewCategoria',categorias.insertNewCategoria);
 
-router.get('/actualizarCategoria',categorias.actualizarCategoria);
+router.put('/actualizarCategoria',categorias.actualizarCategoria);
 
-router.get('/eliminarCategoria',categorias.eliminarCategoria);
+router.delete('/eliminarCategoria/:id',categorias.eliminarCategoria);
 
 //PRODUCTO
 router.post('/insertNewProducto/:id',multer.cargarArchivo.array('imagenesProducto',4),productos.insertNewProducto);
 
 router.get('/getProductosMuestra',productos.getProductosMuestra);
+
+router.get('/getProductosAdmin',productos.getProductosAdmin);
 
 router.get('/getProductosCategoria/:id',productos.getProductosCategoria);
 
@@ -96,7 +99,7 @@ router.post('/recibirDenuncia',calificaDenuncia.recibirDenuncia);
 
 router.get('/getDenuncias',calificaDenuncia.getAll_Denuncias);
 
-router.get('/tacharDenuncia',calificaDenuncia.tacharDenuncia);
+router.put('/tacharDenuncia',calificaDenuncia.tacharDenuncia);
 
 router.get('/getDenunciasResueltas',calificaDenuncia.getAll_DenunciasResueltas);
 
@@ -131,6 +134,13 @@ router.post('/agregarDeseo',deseos.agregarDeseo);
 router.post('/eliminarDeseo',deseos.eliminarDeseo);
 
 router.post('/listaDeseoProductos',deseos.listaDeseoProductos);
+
+/*Estadisticas*/
+router.get('/statspordepto',estadisticas.getStatsByDepto);
+
+router.get('/statsporcat',estadisticas.getStatsByCat);
+
+router.get('/bestUsers/:value',estadisticas.getBestUsers);
 
 /*Publicidad email,Prueba
 

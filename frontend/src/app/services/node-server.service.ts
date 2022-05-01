@@ -78,6 +78,11 @@ export class NodeServerService {
     return this.http.get(this.url+'/getProductosMuestra');
   };
 
+  getProductosAdmin():Observable<any> {
+
+    return this.http.get(this.url+'/getProductosAdmin');
+  };
+
   getProductosCategoria(id: number):Observable<any> {
 
     return this.http.get(this.url+`/getProductosCategoria/${id}`);
@@ -157,6 +162,55 @@ export class NodeServerService {
     return this.http.get(this.url + '/getDenuncias');
   }
 
+  getDenunciasResueltas(): Observable<any> {
+    return this.http.get(this.url + '/getDenunciasResueltas');
+  }
+
+  putTacharDenuncia( req_body : any ):Observable<any> {
+    
+    return this.http.put(this.url+'/tacharDenuncia',req_body);
+  }
+
+
+  //CATEGORIAS
+
+  postInsertNewCategoria( req_body : any ):Observable<any> {
+    
+    return this.http.post(this.url+'/insertNewCategoria',req_body);
+  }
+
+  deleteCategoria( id : number ):Observable<any> {
+    
+    return this.http.delete(this.url+`/eliminarCategoria/${id}`);
+  }
+
+  putUpdateCategoria( req_body : any ):Observable<any> {
+    
+    return this.http.put(this.url+'/actualizarCategoria',req_body);
+  }
+
+  //ADMINISTRADOR
+  
+  postDeshabilitarUsuario( req_body : any ):Observable<any> {
+    
+    return this.http.post(this.url+'/desHabilitarUsuario',req_body);
+  }
+
+  //ESTADISTICAS
+  
+  getStatByDepto(): Observable<any> {
+    return this.http.get(this.url + '/statspordepto');
+  }
+
+  getStatByCat(): Observable<any> {
+    return this.http.get(this.url + '/statsporcat');
+  }
+
+  getBestUsers(id: number):Observable<any> {
+
+    return this.http.get(this.url+`/bestUsers/${id}`);
+  };
+  
   
   //prueba get
   getNodeServer():Observable<any> {

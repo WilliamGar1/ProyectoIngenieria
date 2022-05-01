@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { NodeServerService } from 'src/app/services/node-server.service';
+import Swal from 'sweetalert2';
 
 
 
@@ -41,103 +44,112 @@ export class EstadisticasComponent implements OnInit {
   legendTitle: string = 'Estrellas'
 
 
- single = [
-    {
-      "name": "Atlántida",
-      "value": 10
-    },
-    {
-      "name": "Colón",
-      "value": 5
-    },
-    {
-      "name": "Comayagua",
-      "value": 3
-    },
-      {
-      "name": "Cotés",
-      "value": 1
-    }
-  ];
+  single = [];
 
-  multi = [
-    {
-      "name": "Muebles",
-      "series": [
-        {
-          "name": "Productos",
-          "value": 6
-        }
-      ]
-    },
+  multi = [];
+
+  multi2 = [];
   
-    {
-      "name": "Celulares",
-      "series": [
-        {
-          "name": "Productos",
-          "value": 4
-        }
-      ]
-    },
-  
-    {
-      "name": "Ropa",
-      "series": [
-        {
-          "name": "Productos",
-          "value": 2
-        }
-      ]
-    }
-  ];
-  multi2 = [
-    {
-      "name": "Usuario1",
-      "series": [
-        {
-          "name": "Estrellas",
-          "value": 3
-        }
-      ]
-    },
-  
-    {
-      "name": "Usuario2",
-      "series": [
-        {
-          "name": "Estrellas",
-          "value": 4
-        }
-      ]
-    },
-  
-    {
-      "name": "Usuario3",
-      "series": [
-        {
-          "name": "Estrellas",
-          "value": 2
-        }
-      ]
-    }
-  ];
-  
-  constructor() {
+  constructor(private _nodeServer: NodeServerService, 
+    private _router : Router) {
    // Object.assign(this, { single });
    }
 
   ngOnInit(): void {
+    this.comprobarUsuario();
+    this.getEstadisticasDepto();
+    this.getEstadisticasCategoria();
+    this.getEstadisticasUsuario();
   }
+
+  getEstadisticasDepto(){
+    this._nodeServer.getStatByDepto().subscribe(data =>{
+      if(data.exito){
+        console.log(data.mensaje);
+        this.single = data.estadisticas;
+      }else{
+        console.log(data.mensaje);
+      }
+    }, err => console.log(err));
+  }
+
+  getEstadisticasCategoria(){
+    this._nodeServer.getStatByCat().subscribe(data =>{
+      if(data.exito){
+        console.log(data.mensaje);
+        this.multi = [];
+        data.estadisticas.forEach(estadistica => {
+          let item = {
+            "name": estadistica.name,
+            "series": 
+            [
+              {
+                "name": "Productos",
+                "value": estadistica.value
+              }
+            ]
+          }
+          this.multi.push(item);
+        });
+      }else{
+        console.log(data.mensaje);
+      }
+    }, err => console.log(err));
+  }
+
+  getEstadisticasUsuario(){
+    this._nodeServer.getBestUsers(3).subscribe(data=>{
+      if(data.exito){
+        console.log(data.mensaje);
+        this.multi2 = [];
+        data.estadisticas.forEach(estadistica =>{
+          let item = {
+            "name": estadistica.name,
+            "series": 
+            [
+              {
+                "name": "Estrellas",
+                "value": estadistica.value
+              }
+            ]
+          }
+          this.multi2.push(item);
+        });
+      }else{
+        console.log(data.mensaje);
+      }
+    }, err => console.log(err));
+  }
+
+  comprobarUsuario(){
+    if(!localStorage.getItem('usuario')){
+      console.log("Usuario no encontrado");
+      Swal.fire(
+        '',
+        'No ha iniciado sesión',
+        'warning',
+      );
+      this._router.navigate(['login']);
+    }else if(parseInt(localStorage.getItem('tipo'))!=2){
+      //console.log("Ya se ha iniciado sesión");
+      Swal.fire(
+        '',
+        'No tiene permisos para acceder a esta sección',
+        'warning',
+      );
+      this._router.navigate(['inicio']);
+    }
+  }
+
   onSelect(data): void {
-    console.log('Item clicked', JSON.parse(JSON.stringify(data)));
+    //console.log('Item clicked', JSON.parse(JSON.stringify(data)));
   }
 
   onActivate(data): void {
-    console.log('Activate', JSON.parse(JSON.stringify(data)));
+    //console.log('Activate', JSON.parse(JSON.stringify(data)));
   }
 
   onDeactivate(data): void {
-    console.log('Deactivate', JSON.parse(JSON.stringify(data)));
+    //console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
 }

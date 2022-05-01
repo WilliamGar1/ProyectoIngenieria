@@ -54,8 +54,13 @@ export class LoginComponent implements OnInit {
       
         if(data.acceso){
           localStorage.setItem('usuario', data.usuario.Id);
+          localStorage.setItem('tipo', data.usuario.TipoUsuario);
           //console.log(data.usuario);
-          this._router.navigate(['registrarProducto']);
+          if(parseInt(localStorage.getItem('tipo'))==1){
+            this._router.navigate(['registrarProducto']);
+          }else if(parseInt(localStorage.getItem('tipo'))==2){
+            this._router.navigate(['adminProductos']);
+          }
         }else{
           //console.log(data.acceso);
           Swal.fire(

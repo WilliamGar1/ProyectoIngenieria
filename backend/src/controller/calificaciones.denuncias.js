@@ -75,7 +75,10 @@ const recibirDenuncia = async (req,res)=>{
 
 const getAll_Denuncias = async (req,res) => {
     const conectBD = MySQLBD.conectar();
-    conectBD.query(`SELECT * FROM Denuncias WHERE estado = TRUE`, (err, DenunciasRes) => {
+    conectBD.query(`SELECT d.*, CONCAT(u.nombre,' ',u.apellido) AS NombreCliente, CONCAT(v.nombre,' ',v.apellido) AS NombreVendedor FROM Denuncias d 
+    INNER JOIN Usuarios u ON d.clienteId = u.Id 
+    INNER JOIN Usuarios v ON d.vendedorId = v.Id 
+    WHERE estado = TRUE`, (err, DenunciasRes) => {
 
         if(err){
         res.send({mensaje:'Error al buscar denuncias',exito:0});
@@ -90,7 +93,10 @@ const getAll_Denuncias = async (req,res) => {
 
 const getAll_DenunciasResueltas = async (req,res) => {
     const conectBD = MySQLBD.conectar();
-    conectBD.query(`SELECT * FROM Denuncias WHERE estado = FALSE`, (err, DenunciasRes) => {
+    conectBD.query(`SELECT d.*, CONCAT(u.nombre,' ',u.apellido) AS NombreCliente, CONCAT(v.nombre,' ',v.apellido) AS NombreVendedor FROM Denuncias d 
+    INNER JOIN Usuarios u ON d.clienteId = u.Id 
+    INNER JOIN Usuarios v ON d.vendedorId = v.Id 
+    WHERE estado = FALSE`, (err, DenunciasRes) => {
 
         if(err){
         res.send({mensaje:'Error al buscar denuncias',exito:0});
@@ -115,7 +121,7 @@ const tacharDenuncia = async (req,res) => {
         res.send({mensaje:'Error al <Tachar>',exito:0});
         }else{
        
-            res.send({mensaje:'Denuncia <Tachada>',exito:1});
+            res.send({mensaje:'Denuncia archivada',exito:1});
         }
 
         console.log("Close Connection");

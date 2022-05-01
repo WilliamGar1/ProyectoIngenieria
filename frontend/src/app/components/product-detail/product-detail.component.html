@@ -24,7 +24,7 @@
         </div>
         <div class="col-md-3">
             <div class="card-body">
-                <h5 class="card-title">{{producto.nombre}} <i class="favorito fa-solid fa-bookmark float-end"  [ngClass]="{'fav':marcado,'nofav':!marcado}" (click)="favoritos()"></i></h5>
+                <h5 class="card-title">{{producto.nombre}} <i *ngIf="user" class="favorito fa-solid fa-bookmark float-end"  [ngClass]="{'fav':marcado,'nofav':!marcado}" (click)="favoritos()"></i></h5>
                 <p class="card-text">{{producto.precio | currency:'L ':"symbol"}}</p>
                 <p class="card-text"><small class="text-muted">Publicado desde:  {{producto.actualizacion | date:'short'}}</small></p>
                 <p class="card-text">{{producto.descripcion}}</p>
@@ -36,15 +36,15 @@
                 <p class="card-text">Vendedor: <a [routerLink]="['/vendedor', producto.UsuarioId]">{{producto.Usuario}}</a></p>
                 <hr>
             </div>
-            <div class="card-body d-grid d-flex align-items-end flex-column bd-highlight mb-3">
+            <div class="card-body d-grid d-flex align-items-end flex-column bd-highlight mb-3" *ngIf="user">
                 <p class="card-text">¿Interesado en el producto?</p>
                 <button class="btn btn-primary mt-auto p-2 bd-highlight" type="button" (click)="iniciarChat(producto.Usuario,producto.UsuarioId)"> <i class="fa-solid fa-message" ></i> Enviar un mensaje</button>
             </div>
-            <div class="card-body d-grid d-flex align-items-end flex-column bd-highlight mb-3">
+            <div class="card-body d-grid d-flex align-items-end flex-column bd-highlight mb-3" *ngIf="user">
                 <p class="card-text">Denunciar al Vendedor</p>
                <button class="btn btn-danger mt-auto p-2 bd-highlight " type="button" data-bs-toggle="modal" data-bs-target="#denuncias"> <i class="fa-solid fa-flag"></i>  Denunciar </button>
             </div>
-            <div class="card-body d-grid d-flex align-items-end flex-column bd-highlight mb-3">
+            <div class="card-body d-grid d-flex align-items-end flex-column bd-highlight mb-3" *ngIf="user">
                 <p class="card-text">Calificar al Vendedor</p>
                 <form [formGroup]="calificacion"> 
                     <p class="clasificacion">
