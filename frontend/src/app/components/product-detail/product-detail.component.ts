@@ -6,6 +6,7 @@ import { Buffer } from 'buffer';
 import { FormGroup, FormControl, Validator, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { NewChatService } from 'src/app/services/new-chat.service';
+import { truncate } from 'fs';
 
 @Component({
   selector: 'app-product-detail',
@@ -26,7 +27,7 @@ export class ProductDetailComponent implements OnInit {
   });
 
   id: number;
-  marcado:boolean=false
+  marcado:boolean=false;
   nombre: string = 'Celular';
   precio: number = 1200;
   descripcion: string = `Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
@@ -45,6 +46,7 @@ export class ProductDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerIdProducto();
+    this.estadoDeseo();
   }
 
   obtenerIdProducto() {
@@ -54,6 +56,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   producto = {
+    Id: 0,
     nombre: '',
     precio: 0,
     descripcion: '',
@@ -168,11 +171,50 @@ export class ProductDetailComponent implements OnInit {
     return parseInt(localStorage.getItem('tipo')) === 1 ? true : false;
   }
 
+  estadoDeseo(){
+    if(parseInt(localStorage.getItem('tipo'))==1){
+      let data = {
+        clienteId:parseInt(localStorage.getItem('usuario')),
+        productoId:this.id
+      }
+      this._nodeServer.postEstadoDeseo(data).subscribe(data=>{
+        if(data.exito){
+          console.log(data.mensaje);
+          if(data.deseo[0].estadoHabilitacion==1){
+            this.marcado = true;
+          }else{
+            this.marcado = false;
+          }
+        }else {
+          console.log(data.mensaje);
+        }
+      }, err => console.log(err));
+    }
+  }
+
   favoritos(){
+    let data = {
+      clienteId:parseInt(localStorage.getItem('usuario')),
+      productoId:this.id
+    }
     if(this.marcado==false){
       this.marcado=true
+      this._nodeServer.postAgregarFavorito(data).subscribe(data=>{
+        if(data.exito){
+          console.log(data.mensaje);
+        }else {
+          console.log(data.mensaje);
+        }
+      }, err => console.log(err));
     }else{
       this.marcado=false
+      this._nodeServer.postEliminarFavorito_2(data).subscribe(data=>{
+        if(data.exito){
+          console.log(data);
+        }else {
+          console.log(data.mensaje);
+        }
+      }, err => console.log(err));
     }
   }
 }

@@ -210,6 +210,28 @@ export class NodeServerService {
 
     return this.http.get(this.url+`/bestUsers/${id}`);
   };
+
+  //FAVORITOS
+
+  postAgregarFavorito( req_body : any ):Observable<any> {
+    
+    return this.http.post(this.url+'/agregarDeseo',req_body);
+  }
+
+  postEliminarFavorito_2( req_body : any ):Observable<any> {
+    
+    return this.http.post(this.url+'/eliminarDeseo_2',req_body);
+  }
+
+  postEstadoDeseo( req_body : any ):Observable<any> {
+    
+    return this.http.post(this.url+'/estadoDeseo',req_body);
+  }
+
+  getFavoritos(id: number):Observable<any> {
+
+    return this.http.get(this.url+`/listaDeseoProductos/${id}`);
+  };
   
   
   //prueba get

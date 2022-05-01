@@ -133,7 +133,11 @@ router.post('/agregarDeseo',deseos.agregarDeseo);
 
 router.post('/eliminarDeseo',deseos.eliminarDeseo);
 
-router.post('/listaDeseoProductos',deseos.listaDeseoProductos);
+router.post('/eliminarDeseo_2',deseos.eliminarDeseo_2);
+
+router.post('/estadoDeseo',deseos.estadoDeseo);
+
+router.get('/listaDeseoProductos/:id',deseos.listaDeseoProductos);
 
 /*Estadisticas*/
 router.get('/statspordepto',estadisticas.getStatsByDepto);
