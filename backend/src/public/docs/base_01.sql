@@ -199,9 +199,165 @@ INSERT INTO Municipios VALUES(13, 'Sabá', 2);
 INSERT INTO Municipios VALUES(14, 'Santa Fe', 2);
 INSERT INTO Municipios VALUES(15, 'Santa Rosa de Aguán', 2);
 INSERT INTO Municipios VALUES(16, 'Sonaguera', 2);
-INSERT INTO Municipios VALUES(17, 'Tocoa', 2);
-INSERT INTO Municipios VALUES(18, 'Bonito Oriental', 2);
+INSERT INTO Municipios VALUES(143, 'Tocoa', 2);
+INSERT INTO Municipios VALUES(144, 'Bonito Oriental', 2);
 
+
+INSERT INTO Municipios VALUES(17, 'Comayagua', 3);
+INSERT INTO Municipios VALUES(18, 'Ajuterique', 3);
+INSERT INTO Municipios VALUES(19, 'El Rosario', 3);
+INSERT INTO Municipios VALUES(20, 'Esquías', 3);
+INSERT INTO Municipios VALUES(21, 'Humuya', 3);
+INSERT INTO Municipios VALUES(22, 'La Libertad', 3);
+INSERT INTO Municipios VALUES(23, 'Lamaní', 3);
+INSERT INTO Municipios VALUES(24, 'La Trinidad', 3);
+INSERT INTO Municipios VALUES(25, 'Lejamaní', 3);
+INSERT INTO Municipios VALUES(26, 'Meámbar', 3);
+INSERT INTO Municipios VALUES(27, 'Minas de Oro', 3);
+INSERT INTO Municipios VALUES(28, 'Ojo de Agua', 3);
+INSERT INTO Municipios VALUES(29, 'San Jerónimo', 3);
+INSERT INTO Municipios VALUES(30, 'San José de Comayagua', 3);
+INSERT INTO Municipios VALUES(31, 'San José del Potrero', 3);
+INSERT INTO Municipios VALUES(32, 'San Luis', 3);
+INSERT INTO Municipios VALUES(33, 'San Sebastián', 3);
+INSERT INTO Municipios VALUES(34, 'Siguatepeque', 3);
+INSERT INTO Municipios VALUES(35, 'Villa de San Antonio', 3);
+INSERT INTO Municipios VALUES(36, 'Lajass', 3);
+INSERT INTO Municipios VALUES(37, 'Taulabe', 3);
+
+
+INSERT INTO Municipios VALUES(38, 'Santa Rosa de Copán', 4);
+INSERT INTO Municipios VALUES(39, 'Cabañas', 4);
+INSERT INTO Municipios VALUES(40, 'Concepción', 4);
+INSERT INTO Municipios VALUES(41, 'Copán Ruinas', 4);
+INSERT INTO Municipios VALUES(42, 'Corquín', 4);
+INSERT INTO Municipios VALUES(43, 'Cucuyagua', 4);
+INSERT INTO Municipios VALUES(44, 'Dolores', 4);
+INSERT INTO Municipios VALUES(45, 'Dulce Nombre', 4);
+INSERT INTO Municipios VALUES(46, 'El Paraíso', 4);
+INSERT INTO Municipios VALUES(47, 'Florida', 4);
+INSERT INTO Municipios VALUES(48, 'La Jigua', 4);
+INSERT INTO Municipios VALUES(49, 'La Unión', 4);
+INSERT INTO Municipios VALUES(50, 'Nueva Arcadia', 4);
+INSERT INTO Municipios VALUES(51, 'San Agustín', 4);
+INSERT INTO Municipios VALUES(52, 'San Antonio', 4);
+INSERT INTO Municipios VALUES(53, 'San Jerónimo', 4);
+INSERT INTO Municipios VALUES(54, 'San José', 4);
+INSERT INTO Municipios VALUES(55, 'San Juan de Opoa', 4);
+INSERT INTO Municipios VALUES(56, 'San Nicolás', 4);
+INSERT INTO Municipios VALUES(57, 'San Pedro', 4);
+INSERT INTO Municipios VALUES(58, 'Santa Rita', 4);
+INSERT INTO Municipios VALUES(59, 'Trinidad de Copán', 4);
+INSERT INTO Municipios VALUES(60, 'Veracruz', 4);
+
+
+INSERT INTO Municipios VALUES(61, 'San Pedro Sula', 5);
+INSERT INTO Municipios VALUES(62, 'Choloma', 5);
+INSERT INTO Municipios VALUES(63, 'Omoa', 5);
+INSERT INTO Municipios VALUES(64, 'Pimienta', 5);
+INSERT INTO Municipios VALUES(65, 'Potrerillos', 5);
+INSERT INTO Municipios VALUES(66, 'Puerto Cortés', 5);
+INSERT INTO Municipios VALUES(67, 'San Antonio de Cortés', 5);
+INSERT INTO Municipios VALUES(68, 'San Francisco de Yojoa', 5);
+INSERT INTO Municipios VALUES(69, 'San Manuel', 5);
+INSERT INTO Municipios VALUES(70, 'Santa Cruz de Yojoa', 5);
+INSERT INTO Municipios VALUES(71, 'Villanueva', 5);
+INSERT INTO Municipios VALUES(72, 'La Lima', 5);
+
+
+INSERT INTO Municipios VALUES(73, 'Choluteca', 6);
+INSERT INTO Municipios VALUES(74, 'Apacilagua', 6);
+INSERT INTO Municipios VALUES(75, 'Concepción de María', 6);
+INSERT INTO Municipios VALUES(76, 'Duyure', 6);
+INSERT INTO Municipios VALUES(77, 'El Corpus', 6);
+INSERT INTO Municipios VALUES(78, 'El Triunfo', 6);
+INSERT INTO Municipios VALUES(79, 'Marcovia', 6);
+INSERT INTO Municipios VALUES(80, 'Morolica', 6);
+INSERT INTO Municipios VALUES(81, 'Namasigüe', 6);
+INSERT INTO Municipios VALUES(82, 'Orocuina', 6);
+INSERT INTO Municipios VALUES(83, 'Pespire', 6);
+INSERT INTO Municipios VALUES(84, 'San Antonio de Flores', 6);
+INSERT INTO Municipios VALUES(85, 'San Isidro', 6);
+INSERT INTO Municipios VALUES(86, 'San José', 6);
+INSERT INTO Municipios VALUES(87, 'San Marcos de Colón', 6);
+INSERT INTO Municipios VALUES(88, 'Santa Ana de Yusguare', 6);
+
+
+INSERT INTO Municipios VALUES(89, 'Yuscaran', 7);
+INSERT INTO Municipios VALUES(90, 'Aluca', 7);
+INSERT INTO Municipios VALUES(91, 'Danli', 7);
+INSERT INTO Municipios VALUES(92, 'El Paraiso', 7);
+INSERT INTO Municipios VALUES(93, 'Guinope', 7);
+INSERT INTO Municipios VALUES(94, 'Jacaleapa', 7);
+INSERT INTO Municipios VALUES(95, 'Liure', 7);
+INSERT INTO Municipios VALUES(96, 'Moroceli', 7);
+
+
+INSERT INTO Municipios VALUES(97, 'Tegucigalpa D.C.', 8);
+INSERT INTO Municipios VALUES(98, 'Cedros', 8);
+INSERT INTO Municipios VALUES(99, 'Lepaterique', 8);
+INSERT INTO Municipios VALUES(100, 'Ojojona', 8);
+INSERT INTO Municipios VALUES(101, 'Sabanagrande', 8);
+INSERT INTO Municipios VALUES(102, 'Santa Ana', 8);
+INSERT INTO Municipios VALUES(103, 'Santa Lucia', 8);
+INSERT INTO Municipios VALUES(104, 'Valle de Angeles', 8);
+
+
+INSERT INTO Municipios VALUES(105, 'Puerto Lempira', 9);
+INSERT INTO Municipios VALUES(106, 'Brus Laguna', 9);
+INSERT INTO Municipios VALUES(107, 'Villeda Morales', 9);
+
+
+INSERT INTO Municipios VALUES(108, 'La Esperanza', 10);
+INSERT INTO Municipios VALUES(109, 'Concepcion', 10);
+INSERT INTO Municipios VALUES(110, 'Intibuca', 10);
+
+
+INSERT INTO Municipios VALUES(111, 'Roatan', 11);
+INSERT INTO Municipios VALUES(112, 'Guanaja', 11);
+INSERT INTO Municipios VALUES(113, 'Jose Santos Guardiola', 11);
+INSERT INTO Municipios VALUES(114, 'Utila', 11);
+
+
+INSERT INTO Municipios VALUES(115, 'La Paz', 12);
+INSERT INTO Municipios VALUES(116, 'Marcala', 12);
+INSERT INTO Municipios VALUES(117, 'San Juan', 12);
+INSERT INTO Municipios VALUES(118, 'Yarula', 12);
+
+
+INSERT INTO Municipios VALUES(119, 'Gracias', 13);
+INSERT INTO Municipios VALUES(120, 'La union', 13);
+INSERT INTO Municipios VALUES(121, 'Lepaera', 13);
+INSERT INTO Municipios VALUES(122, 'Talgua', 13);
+
+INSERT INTO Municipios VALUES(123, 'Nueva Ocotepeque', 14);
+INSERT INTO Municipios VALUES(124, 'Concepcion', 14);
+INSERT INTO Municipios VALUES(125, 'San Marcos', 14);
+INSERT INTO Municipios VALUES(126, 'Sinuapa', 14);
+
+
+INSERT INTO Municipios VALUES(127, 'Juticalpa', 15);
+INSERT INTO Municipios VALUES(128, 'Campamento', 15);
+INSERT INTO Municipios VALUES(129, 'Catacamas', 15);
+INSERT INTO Municipios VALUES(130, 'Patuca', 15);
+
+
+INSERT INTO Municipios VALUES(131, 'Santa Barbara', 16);
+INSERT INTO Municipios VALUES(132, 'Gualala', 16);
+INSERT INTO Municipios VALUES(133, 'Ilama', 16);
+INSERT INTO Municipios VALUES(134, 'Quimistan', 16);
+
+
+INSERT INTO Municipios VALUES(135, 'Nacaome', 17);
+INSERT INTO Municipios VALUES(136, 'Amapala', 17);
+INSERT INTO Municipios VALUES(137, 'Langue', 17);
+INSERT INTO Municipios VALUES(138, 'San Lorenza', 17);
+
+
+INSERT INTO Municipios VALUES(139, 'Yoro', 18);
+INSERT INTO Municipios VALUES(140, 'Arenal', 18);
+INSERT INTO Municipios VALUES(141, 'Olanchito', 18);
+INSERT INTO Municipios VALUES(142, 'Yorito', 18);
 
 INSERT INTO Categorias VALUES (1,'Electrónicos');
 INSERT INTO Categorias VALUES (2,'Muebles');
@@ -209,6 +365,8 @@ INSERT INTO Categorias VALUES (3,'Ropa');
 INSERT INTO Categorias VALUES (4,'Calzado');
 INSERT INTO Categorias VALUES (5,'Cosméticos');
 INSERT INTO Categorias VALUES (6,'Comestibles');
+INSERT INTO Categorias VALUES (7,'Linea Blanca');
+INSERT INTO Categorias VALUES (8,'Equipo Deportivo');
 
 
 CREATE TABLE  IF NOT EXISTS test(
