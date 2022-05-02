@@ -1,37 +1,39 @@
 <h1 class="text-center mt-5">Gestión de Categorías</h1>
 
 <div class="container mt-5 w-50">
-    <button class="btn primario mt-5" data-bs-toggle="modal" data-bs-target="#modalTerminos">Nueva</button>
+    <button class="btn primario mt-5" data-bs-toggle="modal" data-bs-target="#modalCategories">Nueva</button>
 
     <table class="table mt-5 table-striped table-hover">
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Nombre Categoría</th>
+                <th>Acción</th>
             </tr>
         </thead>
 
         <tbody>
             <tr *ngFor="let cat of categorias">
                 <td scope="row">{{cat.Id}}</td>
-                <td>{{cat.nombre}}
-                    <button (click)="deleteCategoria(cat.Id)">borrar</button>
-                    <button data-bs-toggle="modal" data-bs-target="#modalTerminos2"(click)="updateCategoriaHelper(cat.Id, cat.nombre)">actualizar</button>
+                <td>{{cat.nombre}}</td>
+                <td>
+                    <a type="button" data-bs-toggle="modal" data-bs-target="#modalCategories2"
+                        (click)="updateCategoriaHelper(cat.Id, cat.nombre)"><i class="fa-regular fa-pen-to-square"></i></a>
                 </td>
             </tr>
         </tbody>
     </table>
 </div>
 
-<div class="modal" id="modalTerminos" tabindex="-1" aria-labelledby="modalTerminosLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" >
+<div class="modal" id="modalCategories" tabindex="-1" aria-labelledby="modalCategoriesLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="text-center mb-2">Nueva Categoría</h3>
                 <p type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></p>
             </div>
             <div class="modal-body">
-                
+
                 <form id="form" novalidate [formGroup]="newCategoryForm">
                     <div class="form-group">
                         <div class="row g-0">
@@ -44,21 +46,22 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="newCategoria()">Guardar</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                    (click)="newCategoria()">Guardar</button>
             </div>
         </div>
     </div>
 </div>
 
-<div class="modal" id="modalTerminos2" tabindex="-1" aria-labelledby="modalTerminosLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" >
+<div class="modal" id="modalCategories2" tabindex="-1" aria-labelledby="modalCategoriesLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="text-center mb-2">Actualizar categoria: {{nombre}}</h3>
                 <p type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></p>
             </div>
             <div class="modal-body">
-                
+
                 <form id="form" novalidate [formGroup]="newCategoryForm">
                     <div class="form-group">
                         <div class="row g-0">
@@ -71,7 +74,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="updateCategoria()">Guardar</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                    (click)="updateCategoria()">Guardar</button>
             </div>
         </div>
     </div>
